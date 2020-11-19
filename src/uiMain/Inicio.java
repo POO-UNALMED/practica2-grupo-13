@@ -72,15 +72,15 @@ public class Inicio extends Application{
 		icultivos3.setOnMouseExited(mouseHandler);
 		icultivos4.setOnMouseExited(mouseHandler);
 		icultivos5.setOnMouseExited(mouseHandler);
-		icultivos1.setFitHeight(200);
+		icultivos1.setFitHeight(220);
 		icultivos1.setPreserveRatio(true);
-		icultivos2.setFitHeight(200);
+		icultivos2.setFitHeight(220);
 		icultivos2.setPreserveRatio(true);
-		icultivos3.setFitHeight(200);
+		icultivos3.setFitHeight(220);
 		icultivos3.setPreserveRatio(true);
-		icultivos4.setFitHeight(200);
+		icultivos4.setFitHeight(220);
 		icultivos4.setPreserveRatio(true);
-		icultivos5.setFitHeight(200);
+		icultivos5.setFitHeight(220);
 		icultivos5.setPreserveRatio(true);
 		
 		
@@ -116,6 +116,10 @@ public class Inicio extends Application{
 		p4.setBottom(sigVentana);
 		p4.setAlignment(sigVentana, Pos.CENTER);
 		p4.setAlignment(icultivos1, Pos.CENTER);
+		p4.setAlignment(icultivos2, Pos.CENTER);
+		p4.setAlignment(icultivos3, Pos.CENTER);
+		p4.setAlignment(icultivos4, Pos.CENTER);
+		p4.setAlignment(icultivos5, Pos.CENTER);
 		p4.setPadding(new Insets (10,10,10,10));
 		p4.setTop(icultivos1);
 		p6.setPadding(new Insets(20,20,20,20));
