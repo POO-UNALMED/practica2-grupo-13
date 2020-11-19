@@ -2,7 +2,7 @@ package gestorAplicacion.terreno;
 
 import java.util.*;
 import java.io.Serializable;
-
+import manejoErrores.*;
 import gestorAplicacion.Amenaza;
 
 /**
@@ -381,6 +381,23 @@ public class Cultivo implements Serializable {
 	 */
 	public static LinkedList<Cultivo> getCultivos() {
 		return (cultivos);
+	}
+	public static void verificacionCultivos() throws Verificacion {
+		if(cultivos.isEmpty()) {
+			throw new Verificacion();
+		}
+	}
+	public static void verificacionProduccion() throws Verificacion{
+		int producido = 0;
+		producido = papaProducida + fresaProducida + sandiaProducida + bananoProducido + mangoProducido;
+		if(producido == 0) {
+			throw new Verificacion();
+		}
+	}
+	public void verificacionAmenaza() throws Verificacion{
+		if(this.amenaza != null) {
+			throw new Verificacion();
+		}
 	}
 
 	public Terreno getTerreno() {

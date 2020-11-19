@@ -1,6 +1,6 @@
 package gestorAplicacion.empleado;
 import gestorAplicacion.terreno.*;
-
+import manejoErrores.*;
 import java.io.Serializable;
 import java.util.*;
 /**
@@ -56,6 +56,11 @@ public class Campesino extends Empleado implements Serializable{
 	public void renunciar(int opcionElegida, int opcionElegida2) {
 		Terreno.getTerrenos().get(opcionElegida).getCampesinos().remove(opcionElegida2);
 	}
+	public static void verificarCampesinos(int opcionElegida) throws Varios {
+		if(Terreno.getTerrenos().get(opcionElegida).getCampesinos().size() == 0) {
+			throw new Varios();
+		}
+	}
 	/**
 	 * Metodo que muestra todas las instancias de Campesino creadas
 	 * @return devuleve un String con las cedulas de cada uno de los Campesinos en todos
@@ -77,6 +82,7 @@ public class Campesino extends Empleado implements Serializable{
 		return("\n" + "El campesino con:" + "\n" + "Nombre: " + this.getNombre() + "\n" + "Cedula: " + this.getCedula() + "\n" +
 				"Sueldo: " + this.getSueldo() + "\n" + "Vinculado a terreno: " + this.getTerreno().getId());
 	}
+	
 	/**
 	 * Metodo recolectar, que recoge toda la cantidad sembrada en cultivo, aumentando el tamano
 	 * disponible en el terreno que estaba, luego eliminando el cultivo para que pueda

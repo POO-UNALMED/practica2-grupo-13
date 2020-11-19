@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import gestorAplicacion.terreno.*;
 import gestorAplicacion.*;
-
+import manejoErrores.*;
 /**
  * Esta clase define objetos de tipo Agronomo, que hereda de la clase Empleado
  * contienen todos los atributos que posee la clase Empleado Las instancias de
@@ -74,6 +74,11 @@ public class Agronomo extends Empleado implements Serializable {
 			contador++;
 		}
 		return (muestra);
+	}
+	public static void verificarAgronomos() throws Varios{
+		if(agronomos.isEmpty()) {
+			throw new Varios();
+		}
 	}
 
 	/**

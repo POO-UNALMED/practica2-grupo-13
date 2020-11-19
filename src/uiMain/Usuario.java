@@ -6,6 +6,7 @@ import BaseDatos.SerializacionG;
 import gestorAplicacion.empleado.*;
 import gestorAplicacion.terreno.*;
 import gestorAplicacion.*;
+import manejoErrores.*;
 /**
  *La clase Usuario define el compartamiento de la aplicacion, la forma en que el usario se mueve 
  *a traves de las funcionalidades que se ofrecen
@@ -45,38 +46,43 @@ public class Usuario {
 		System.out.println("2. Agronomo");
 		System.out.println("3. Volver");
 		opcionElegida = readInt();
-		if (((opcionElegida == 1) || (opcionElegida == 2)) && (Terreno.getTerrenos().size() > 0)) {
-			String nombre;
-			int sueldo;
-			int cedula;
-			int terreno;
-			System.out.println("Ingrese el nombre:");
-			nombre = readLine();
-			System.out.println("Ingrese el sueldo:");
-			sueldo = readInt();
-			System.out.println("Ingrese el numero de cedula");
-			cedula = readInt();
-			System.out.println("Seleccione un terreno para vincular al trabajador");
-			System.out.println(Terreno.mostrarTerrenos());
-			terreno = readInt() - 1;
-			if (opcionElegida == 1) {
-				Campesino campe = new Campesino(nombre, sueldo, cedula, Terreno.getTerrenos().get(terreno));
-				System.out.println("Se ha contratado un campesino.");
-				System.out.println(campe);
-			} else if (opcionElegida == 2) {
-				if (Terreno.getTerrenos().get(terreno).getAgronomo() == (null)) {
-					Agronomo agro = new Agronomo(nombre, sueldo, cedula, Terreno.getTerrenos().get(terreno));
-					System.out.println("Se ha contratado un agronomo.");
-					System.out.println(agro);
-
-				} else {
-					System.out.println("Este terreno ya tiene un agronomo vinculado");
-				}
+		if ((opcionElegida == 1) || (opcionElegida == 2)) {
+			String nombre; 
+			int sueldo, cedula, terreno;
+			try {
+				Terreno.verificacionTerrenos();
+				System.out.println("Ingrese el nombre:");
+				nombre = readLine();
+				System.out.println("Ingrese el sueldo:");
+				sueldo = readInt();
+				System.out.println("Ingrese el numero de cedula");
+				cedula = readInt();
+				System.out.println("Seleccione un terreno para vincular al trabajador");
+				System.out.println(Terreno.mostrarTerrenos());
+				terreno = readInt() - 1;
+				if (opcionElegida == 1) {
+					Campesino campe = new Campesino(nombre, sueldo, cedula, Terreno.getTerrenos().get(terreno));
+					System.out.println("Se ha contratado un campesino.");
+					System.out.println(campe);
+				} else if (opcionElegida == 2) {
+					try {
+						Terreno.verificacionAgronomo(terreno);
+						Agronomo agro = new Agronomo(nombre, sueldo, cedula, Terreno.getTerrenos().get(terreno));
+						System.out.println("Se ha contratado un agronomo.");
+						System.out.println(agro);
+					}
+					catch(Varios e) {
+						System.out.println("Este terreno ya tiene un agronomo vinculado");
+					}
+				} else {}
 			}
-		} else if ((opcionElegida == 1) || (opcionElegida == 2) && (Terreno.getTerrenos().size() == 0)) {
-			System.out.println("Debe agregar primero un terreno para vincular trabajadores");
-		} else {
-		}
+			catch(Verificacion e) {
+				System.out.println("No tiene terrenos, por favor, asigne uno");
+			}
+			catch(InputMismatchException e) {
+				System.out.println("Se ha ingresado un tipo de dato no valido");
+			}
+		}	
 	}
 	/**
 	 * Metedo encargado de despedir a los Empleados
@@ -93,7 +99,8 @@ public class Usuario {
 
 	public static void despedir() {
 		int opcionElegida, opcionElegida2;
-		if (Terreno.getTerrenos().size() > 0) {
+		try {
+			Terreno.verificacionTerrenos();
 			System.out.println("¿Qué trabajador desea despedir?");
 			System.out.println("1. Campesino");
 			System.out.println("2. Agronomo");
@@ -103,43 +110,49 @@ public class Usuario {
 				System.out.println("Seleccione un terreno para mirar los campesinos que laboran en el");
 				System.out.println(Terreno.mostrarTerrenos());
 				opcionElegida = readInt() - 1;
-				if (Terreno.getTerrenos().get(opcionElegida).getCampesinos().size() > 0) {
-					System.out.println("Seleccione un campesino para despedir");
-					System.out.println(Campesino.mostrarCampesinos(Terreno.getTerrenos().get(opcionElegida)));
-					opcionElegida2 = readInt() - 1;
-					System.out.println("Se ha despedio a: ");
-					System.out.println(Terreno.getTerrenos().get(opcionElegida).getCampesinos().get(opcionElegida2));
-					Terreno.getTerrenos().get(opcionElegida).getCampesinos().get(opcionElegida2).renunciar(opcionElegida,
-							opcionElegida2);
-				} else {
-					System.out.println("No hay campesinos vinculados a este terreno");
-				}
+				Campesino.verificarCampesinos(opcionElegida);
+				System.out.println("Seleccione un campesino para despedir");
+				System.out.println(Campesino.mostrarCampesinos(Terreno.getTerrenos().get(opcionElegida)));
+				opcionElegida2 = readInt() - 1;
+				System.out.println("Se ha despedio a: ");
+				System.out.println(Terreno.getTerrenos().get(opcionElegida).getCampesinos().get(opcionElegida2));
+				Terreno.getTerrenos().get(opcionElegida).getCampesinos().get(opcionElegida2).renunciar(opcionElegida,
+						opcionElegida2);
 			} else if (opcionElegida == 2) {
-				if (Agronomo.getAgronomos().size() > 0) {
+					Agronomo.verificarAgronomos();
 					System.out.println("Seleccione un agronomo para despedir");
 					System.out.println(Agronomo.mostrarAgronomos());
 					opcionElegida = readInt() - 1;
 					Agronomo.getAgronomos().get(opcionElegida).renunciar(opcionElegida);
-				} else {
-					System.out.println("No ha contratado agronomos");
-				}
 			}
-		} else {
-			System.out.println("Debe asignar primero terrenos, para así tener trabajadores y despedirlos.");
 		}
-
+		catch(Verificacion e) {
+			System.out.println("No tiene terrenos, por favor, asigne uno");
+		}
+		catch(Varios e) {
+			System.out.println("No ha contratado este tipo de empleado");
+		}
+		catch(InputMismatchException e) {
+			System.out.println("Se ha ingresado un tipo de dato no valido");
+		}
 	}
 	/**
 	 * Metodo que imprime por pantalla la cantidad producida de todos los tipos de cultivos en hectareas recogidas
 	 * tipos: Papa, Sandia, Banano, Mango, Fresa
 	 */
 	public static void produccion() {
-		System.out.println("Cantidad producida de cada tipo de cultivo");
-		System.out.println("Cantidad de papas: " + Cultivo.getPapaProducida() + " hectareas");
-		System.out.println("Cantidad de sandias: " + Cultivo.getSandiaProducida() + " hectareas");
-		System.out.println("Cantidad de bananos: " + Cultivo.getBananoProducido() + " hectareas");
-		System.out.println("Cantidad de mangos: " + Cultivo.getMangoProducido() + " hectareas");
-		System.out.println("Cantidad de fresas: " + Cultivo.getFresaProducida() + " hectareas");
+		try{
+			Cultivo.verificacionProduccion();
+			System.out.println("Cantidad producida de cada tipo de cultivo");
+			System.out.println("Cantidad de papas: " + Cultivo.getPapaProducida() + " hectareas");
+			System.out.println("Cantidad de sandias: " + Cultivo.getSandiaProducida() + " hectareas");
+			System.out.println("Cantidad de bananos: " + Cultivo.getBananoProducido() + " hectareas");
+			System.out.println("Cantidad de mangos: " + Cultivo.getMangoProducido() + " hectareas");
+			System.out.println("Cantidad de fresas: " + Cultivo.getFresaProducida() + " hectareas");
+		}
+		catch(Verificacion e){
+			System.out.println("¡No has recolectado nada de tus cultivos!");
+		}
 	}
 	/**
 	 * Metodo que imprime todos los cultivos existentes en todos los terrenos
@@ -147,9 +160,8 @@ public class Usuario {
 	 * en el cual se encuentra dicho cultivo
 	 */
 	public static void examinarCultivo() {
-		if (Cultivo.getCultivos().isEmpty()) {
-			System.out.println("Debe cultivar primero");
-		} else {
+		try {
+			Cultivo.verificacionCultivos();
 			int opcionElegida, opcionElegida2;
 			System.out.println("Seleccione un cultivo:");
 			System.out.println(Cultivo.mostrarCultivos());
@@ -164,9 +176,14 @@ public class Usuario {
 					Amenaza amenaza = Cultivo.getCultivos().get(opcionElegida).getAmenaza();
 					Cultivo cultivo = Cultivo.getCultivos().get(opcionElegida);
 					Agronomo.erradicarAmenaza(amenaza, cultivo);
-				} else {
-				}
+				} else {}
 			}
+		}
+		catch(Verificacion e) {
+			System.out.println("Debe cultivar primero");
+		}
+		catch(InputMismatchException e) {
+			System.out.println("Se ha ingresado un tipo de dato no valido");
 		}
 	}
 	/**
@@ -177,15 +194,16 @@ public class Usuario {
 	public static void agregarTerreno() {
 		System.out.println("Indique el Id que le desea poner: ");
 		String id = readLine();
-		if (Terreno.buscarTerreno(id) == null) {
+		try {
+			Terreno.verificacionIdTerrenos(id);
 			System.out.println("Ahora indique el tamano deseado: ");
 			int tamano = readInt();
 			Terreno terrenoCreado = new Terreno(id, tamano);
 			System.out.println("El terreno ha sido agregado exitosamente");
 			System.out.println(terrenoCreado.toString());
-
-		} else {
-			System.out.println("Lo siento, este terreno ya existe");
+		}
+		catch(Verificacion e){
+			System.out.println("Un terreno ya tiene este id, por favor, indique otro");
 		}
 	}
 	/**
@@ -195,25 +213,25 @@ public class Usuario {
 	 * Verifica que existan Terrenos para ser fertilizados
 	 */
 	public static void ferrigar() {
-		if (Terreno.getTerrenos().size() > 0) {
+		try {
+			Terreno.verificacionTerrenos();
 			System.out.println("Escoja el terreno que desea fertilizar e irrigar: " + "\n");
 			System.out.println(Terreno.mostrarTerrenos());
 			int id = readInt() - 1;
-			if (Terreno.getTerrenos().get(id).getCampesinos().size() > 0) {
-				int trabajador = (int) Math.random() * (Terreno.getTerrenos().get(id).getCampesinos().size() - 1);
-				Campesino campesinoFertiliza = Terreno.getTerrenos().get(id).getCampesinos().get(trabajador);
-				campesinoFertiliza.fertilizar(Terreno.getTerrenos().get(id));
-				Terreno.getTerrenos().get(id).getCultivoPermitido();
-				System.out.println("Terreno fertilizado ");
-				System.out.println(Terreno.getTerrenos().get(id).cultivosPermitidos());
-			} else {
-				System.out.println(
-						"No ha contratado campesinos para este terreno.\nDebe contratar al menos uno para realizar este trabajo");
-			}
-		} else {
-			System.out.println("No dispone de terrenos, por favor cree uno");
+			Terreno.verificacionCampesino(id);
+			int trabajador = (int) Math.random() * (Terreno.getTerrenos().get(id).getCampesinos().size() - 1);
+			Campesino campesinoFertiliza = Terreno.getTerrenos().get(id).getCampesinos().get(trabajador);
+			campesinoFertiliza.fertilizar(Terreno.getTerrenos().get(id));
+			Terreno.getTerrenos().get(id).getCultivoPermitido();
+			System.out.println("Terreno fertilizado");
+			System.out.println(Terreno.getTerrenos().get(id).cultivosPermitidos());
 		}
-
+		catch(Verificacion e) {
+			System.out.println("No posee terrenos para fertilizar e irrigar");
+		}
+		catch(Varios e) {
+			System.out.println("No posee campesinos vinculados a ese terreno para realizar la labor");
+		}
 	}
 	/**
 	 * Metodo encargado de crear cultivos en un Terreno seleccionado y de recoger los que se sembro
@@ -227,72 +245,70 @@ public class Usuario {
 	public static void cultivoyCosecha() {
 		System.out.println(
 				"Escoja la funcion a realizar:\nPara crear un cultivo ingrese 1\nPara recolectar un cultivo ingrese 2");
-		int opcion = readInt();
-		if (opcion == 1) {
-			if (Terreno.getTerrenos().size() != 0) {
-				System.out.println("Escoja la opcion del terreno en el que quiere sembrar: ");
-				System.out.println(Terreno.mostrarTerrenos());
-				int entrada = readInt();
-				Terreno terreno = Terreno.getTerrenos().get(entrada - 1);
-				if (terreno.getCampesinos().size() != 0) {
+		try {
+			int opcion = readInt();
+			if (opcion == 1) {
+					Terreno.verificacionTerrenos();
+					System.out.println("Escoja la opcion del terreno en el que quiere sembrar: ");
+					System.out.println(Terreno.mostrarTerrenos());
+					int entrada = readInt();
+					Terreno terreno = Terreno.getTerrenos().get(entrada - 1);
+					Terreno.verificacionCampesino(entrada - 1);
 					terreno.getCultivoPermitido();
 					if (terreno.getCultivoPermitido().size() != 0) {
-						System.out.println(terreno.cultivosPermitidos());
-						System.out.println("Escriba el tipo que quiere sembrar: ");
-						String tipo = readLine();
-						System.out.println("Escriba el tamaño que desea que tenga el cultivo: ");
-						int tamaño = readInt();
-						if (tamaño <= terreno.getTamanoDisponible()) {
+						try {
+							System.out.println(terreno.cultivosPermitidos());
+							System.out.println("Escriba el tipo que quiere sembrar: ");
+							String tipo = readLine();
+							System.out.println("Escriba el tamaño que desea que tenga el cultivo: ");
+							int tamaño = readInt();
+							terreno.verificarTamano(tamaño);
 							System.out.println(Cultivo.crearCultivo(tipo, tamaño, terreno));
-						} else {
-							System.out.println(
-									"Se ha cancelado la operacion, el tamaño del cultivo no concuerda con el tamano disponible del terreno");
+						}
+						catch(Varios e) {
+							System.out.println("Error, el tamano del cultivo supera al terreno por: ");
+							System.out.println(Varios.getTamanoExcedente());
 						}
 					} else {
 						System.out.println(
 								"No dispone con los requerimientos suficientes para sembrar en este terreno, por favor irrigue o fertilice");
 					}
-				} else {
-					System.out.println("Debe contratar al menos un campesino para el terreno");
-				}
-			} else {
-				System.out.println("No dispone de terrenos, por favor cree uno");
-			}
-		} else if (opcion == 2) {
-			if (Terreno.getTerrenos().size() != 0) {
-				System.out.println("Escoja la opcion del terreno en el que quiere recolectar: ");
-				System.out.println(Terreno.mostrarTerrenos());
-				int entrada = readInt();
-				Terreno terreno = Terreno.getTerrenos().get(entrada - 1);
-				if (terreno.getCampesinos().isEmpty() == false) {
-					if (terreno.getCultivos().isEmpty() == false) {
-						System.out.println("Ingrese la opcion que corresponde al tipo ");
-						System.out.println(terreno.mostrarCultivos());
-						int eleccion = readInt();
-						Cultivo cultivo = terreno.getCultivos().get(eleccion - 1);
-						if (cultivo.getAmenaza() == null) {
-							Campesino campesino = terreno.getCampesinos().peek();
-							System.out.println("Se ha recolectado del cultivo de tipo " + cultivo.getTipoCultivo() + " "
-									+ cultivo.getTamano() + " hectareas.");
-							campesino.recolectar(cultivo);
+			} else if (opcion == 2) {
+					System.out.println("Escoja la opcion del terreno en el que quiere recolectar: ");
+					System.out.println(Terreno.mostrarTerrenos());
+					int entrada = readInt();
+					Terreno terreno = Terreno.getTerrenos().get(entrada - 1);
+					Terreno.verificacionCampesino(entrada - 1);
+						if (terreno.getCultivos().isEmpty() == false) {
+							System.out.println("Ingrese la opcion que corresponde al tipo ");
+							System.out.println(terreno.mostrarCultivos());
+							int eleccion = readInt();
+							Cultivo cultivo = terreno.getCultivos().get(eleccion - 1);
+							try {
+								cultivo.verificacionAmenaza();
+								Campesino campesino = terreno.getCampesinos().peek();
+								System.out.println("Se ha recolectado del cultivo de tipo " + cultivo.getTipoCultivo() + " "
+										+ cultivo.getTamano() + " hectareas.");
+								campesino.recolectar(cultivo);
+							}
+							catch(Verificacion e) {
+								System.out.println("El cultivo se encuentra bajo una amenaza, por favor, exterminela para recolectar");
+							}
 						} else {
-							System.out.println(
-									"El cultivo se encuentra bajo una amenaza, por favor, exterminela para cosecharlo");
+							System.out.println("El terreno no tiene cultivos, por favor cree uno");
 						}
-
-					} else {
-						System.out.println("El terreno no tiene cultivos, por favor cree uno");
-					}
-
-				} else {
-					System.out.println(
-							"El terreno no tiene campesinos que puedan recolectar, por favor asigne al menos 1");
-				}
-
-			} else {
-				System.out.println("No dispone de terrenos, por favor cree uno");
 			}
 		}
+		catch(Verificacion e) {
+			System.out.println("No posee terrenos para cultivar, por favor, asigne al menos uno");
+		}
+		catch(Varios e){
+			System.out.println("No dispone de campesinos en este terreno para relizar las labores");
+		}
+		catch(InputMismatchException e) {
+			System.out.println("Se ha ingresado un tipo de dato no valido");
+		}
+		
 	}
 	/**
 	 * Metodo que ejecuta la accion de una renuncia aleatoria para un campesino 

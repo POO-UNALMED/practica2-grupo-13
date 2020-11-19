@@ -1,7 +1,6 @@
 package gestorAplicacion.terreno;
-
+import manejoErrores.*;
 import gestorAplicacion.empleado.*;
-
 import java.io.Serializable;
 import java.util.*;
 
@@ -224,6 +223,31 @@ public class Terreno implements Serializable {
 	 */
 	public static LinkedList<Terreno> getTerrenos() {
 		return terrenosTotales;
+	}
+	public static void verificacionTerrenos() throws Verificacion {
+		if(terrenosTotales.isEmpty()) {
+			throw new Verificacion();
+		}
+	}
+	public static void verificacionIdTerrenos(String id) throws Verificacion {
+		if(buscarTerreno(id) != null) {
+			throw new Verificacion();
+		}
+	}
+	public static void verificacionAgronomo(int index) throws Varios{
+		if(terrenosTotales.get(index).getAgronomo() != null) {
+			throw new Varios();
+		}
+	}
+	public static void verificacionCampesino(int index) throws Varios{
+		if(terrenosTotales.get(index).campesinos.size() == 0) {
+			throw new Varios();
+		}
+	}
+	public void verificarTamano(int tamano) throws Varios {
+		if(this.tamano < tamano) {
+			throw new Varios(tamano - this.tamano);
+		}
 	}
 
 	/**
