@@ -15,8 +15,9 @@ import javafx.event.EventHandler;
 public class Inicio extends Application {
 
 	Label bienvenida = new Label("Welcome");
-	Label vida = new Label("HOjass de vida");
+//	Label vida = new Label("HOjass de vida");
 	BorderPane p4 = new BorderPane();
+	TextArea Hdescripcion = new TextArea("El es Jose, nacio el 20 de diciembre del 2000 en Itagui. Alias Cachucha. Integrante de los Pokemones");
 	Image cultivos1;
 	Image cultivos2;
 	Image cultivos3;
@@ -27,7 +28,7 @@ public class Inicio extends Application {
 	ImageView icultivos3;
 	ImageView icultivos4;
 	ImageView icultivos5;
-
+	
 	public void start(Stage primaryStage) {
 
 		// Nodo raiz de la escena
@@ -41,7 +42,7 @@ public class Inicio extends Application {
 		FlowPane p5 = new FlowPane();
 		GridPane p6 = new GridPane();
 		Button sigVentana = new Button("Pasar ventana");
-
+		
 		// Menu
 		MenuBar menuPrincipal = new MenuBar();
 		Menu barraPrincipal = new Menu("Inicio");
@@ -118,12 +119,12 @@ public class Inicio extends Application {
 
 		contenedor.getChildren().addAll(p1, p2);
 
-		// Label
-		vida.setPadding(new Insets(10, 10, 10, 10));
+		// Label and TextArea
+		Hdescripcion.setPadding(new Insets(10, 10, 10, 10));
 		bienvenida.setPadding(new Insets(10, 10, 10, 10));
 
 		p3.getChildren().add(bienvenida);
-		p5.getChildren().add(vida);
+
 
 		// Pane P4
 		p4.setBottom(sigVentana);
@@ -147,41 +148,81 @@ public class Inicio extends Application {
 		p6.setAlignment(Pos.CENTER);
 
 		primaryStage.setTitle("Inicio");
-		Scene scene = new Scene(root, 860, 350);
+		Scene scene = new Scene(root, 954, 493);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		// Pane P5
+		p5.getChildren().add(Hdescripcion);
+		Hdescripcion.setOnMouseClicked(mouseHandler);
+		Hdescripcion.setEditable(false); //No se edita la descripción 
+		Hdescripcion.setWrapText(true); //Acoplar texto al FlowPane
+		
 
+		
 	}
 
 	EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
 		int cont = 2;
-
+		int contH = 2;
 		@Override
 		public void handle(MouseEvent mouseEvent) {
-			String direction = "";
-			if (cont == 6) {
-				cont = 1;
+			
+			if((mouseEvent.getEventType().toString()).equals("MOUSE_EXITED")) {
+				if (cont == 6) {
+					cont = 1;
+				}
+				// Controla el orden en el cambio de las imagenes
+				if (cont == 1) {
+					p4.setTop(null);
+					p4.setTop(icultivos1);
+				} else if (cont == 2) {
+					p4.setTop(null);
+					p4.setTop(icultivos2);
+				} else if (cont == 3) {
+					p4.setTop(null);
+					p4.setTop(icultivos3);
+				} else if (cont == 4) {
+					p4.setTop(null);
+					p4.setTop(icultivos4);
+				} else if (cont == 5) {
+					p4.setTop(null);
+					p4.setTop(icultivos5);
+				}
+				cont++;
 			}
-			// Controla el orden en el cambio de las imagenes
-			if (cont == 1) {
-				p4.setTop(null);
-				p4.setTop(icultivos1);
-			} else if (cont == 2) {
-				p4.setTop(null);
-				p4.setTop(icultivos2);
-			} else if (cont == 3) {
-				p4.setTop(null);
-				p4.setTop(icultivos3);
-			} else if (cont == 4) {
-				p4.setTop(null);
-				p4.setTop(icultivos4);
-			} else if (cont == 5) {
-				p4.setTop(null);
-				p4.setTop(icultivos5);
+			else if((mouseEvent.getEventType().toString()).equals("MOUSE_CLICKED")) {
+				if (contH == 6) {
+					contH = 1;
+				}
+				// Controla el orden en el cambio de las descripciones
+				if (contH == 1) {
+					Hdescripcion.setText("El es Jose, nacio el 20 de diciembre del 2000 en Itagui. Alias Cachucha. Integrante de los Pokemones");
+//					Cambio foto
+					
+				} else if (contH == 2) {
+					Hdescripcion.setText("El es Michael, alias Splinter.  Integrante de los Pokemones");
+//					Cambio foto
+					
+				} else if (contH == 3) {
+					Hdescripcion.setText("El es Sergio, alias el putas. Integrante de los Pokemones");
+//					Cambio foto
+					
+				} else if (contH == 4) {
+				
+					Hdescripcion.setText("El es Bolkar, alias Snorlax. Integrante de los Pokemones");
+//					Cambio foto
+				}
+				else if (contH == 5) {
+					Hdescripcion.setText("El es Santiago, dejemoslo quieto mejor");
+//					Cambio foto
+					
+				}
+				
+				contH++;
 			}
-			System.out.println(cont);
-			cont++;
 		}
+		
 	};
 
 	public static void main(String[] args) {
