@@ -17,6 +17,7 @@ public class Inicio extends Application {
 	Label bienvenida = new Label("Welcome");
 //	Label vida = new Label("HOjass de vida");
 	BorderPane p4 = new BorderPane();
+	GridPane p6 = new GridPane();
 	TextArea Hdescripcion = new TextArea("El es Jose, nacio el 20 de diciembre del 2000 en Itagui. Alias Cachucha. Integrante de los Pokemones");
 	Image cultivos1;
 	Image cultivos2;
@@ -28,6 +29,10 @@ public class Inicio extends Application {
 	ImageView icultivos3;
 	ImageView icultivos4;
 	ImageView icultivos5;
+	ImageView ifotoHojaVida1 = new ImageView();
+	ImageView ifotoHojaVida2 = new ImageView();
+	ImageView ifotoHojaVida3 = new ImageView();
+	ImageView ifotoHojaVida4 = new ImageView();
 	
 	public void start(Stage primaryStage) {
 
@@ -40,7 +45,6 @@ public class Inicio extends Application {
 		BorderPane p2 = new BorderPane();
 		FlowPane p3 = new FlowPane();
 		FlowPane p5 = new FlowPane();
-		GridPane p6 = new GridPane();
 		Button sigVentana = new Button("Pasar ventana");
 		
 		// Menu
@@ -89,14 +93,14 @@ public class Inicio extends Application {
 		 * Variables que guardan cada una de las imagenes de los integrantes del grupo
 		 * que se ubican en el P6
 		 */
-		cultivos1 = new Image(getClass().getResourceAsStream("./imagenes/cultivos1.jpg"));
-		cultivos2 = new Image(getClass().getResourceAsStream("./imagenes/cultivos2.jpg"));
-		cultivos3 = new Image(getClass().getResourceAsStream("./imagenes/cultivos3.jpg"));
-		cultivos4 = new Image(getClass().getResourceAsStream("./imagenes/cultivos4.jpg"));
-		ImageView ifotoHojaVida1 = new ImageView(cultivos1);
-		ImageView ifotoHojaVida2 = new ImageView(cultivos1);
-		ImageView ifotoHojaVida3 = new ImageView(cultivos1);
-		ImageView ifotoHojaVida4 = new ImageView(cultivos1);
+		Image jose1 = new Image(getClass().getResourceAsStream("./imagenes/jose1.jpg"));
+		Image jose2 = new Image(getClass().getResourceAsStream("./imagenes/jose2.jpg"));
+		Image jose3 = new Image(getClass().getResourceAsStream("./imagenes/jose3.jpg"));
+		Image jose4 = new Image(getClass().getResourceAsStream("./imagenes/jose4.jpg"));
+        ifotoHojaVida1.setImage(jose1);
+        ifotoHojaVida2.setImage(jose2);
+        ifotoHojaVida3.setImage(jose3);
+        ifotoHojaVida4.setImage(jose4);
 
 		// Modifica el tamano la imagen
 		ifotoHojaVida1.setFitHeight(100);
@@ -198,24 +202,128 @@ public class Inicio extends Application {
 				// Controla el orden en el cambio de las descripciones
 				if (contH == 1) {
 					Hdescripcion.setText("El es Jose, nacio el 20 de diciembre del 2000 en Itagui. Alias Cachucha. Integrante de los Pokemones");
-//					Cambio foto
+					
+					
+					Image jose1 = new Image(getClass().getResourceAsStream("./imagenes/jose1.jpg"));
+					Image jose2 = new Image(getClass().getResourceAsStream("./imagenes/jose2.jpg"));
+					Image jose3 = new Image(getClass().getResourceAsStream("./imagenes/jose3.jpg"));
+					Image jose4 = new Image(getClass().getResourceAsStream("./imagenes/jose4.jpg"));
+					
+					ifotoHojaVida1.setImage(jose1);
+			        ifotoHojaVida2.setImage(jose2);
+			        ifotoHojaVida3.setImage(jose3);
+			        ifotoHojaVida4.setImage(jose4);
+					
+				    ifotoHojaVida1.setFitHeight(100);
+					ifotoHojaVida1.setPreserveRatio(true);
+					ifotoHojaVida2.setFitHeight(100);
+					ifotoHojaVida2.setPreserveRatio(true);
+					ifotoHojaVida3.setFitHeight(100);
+					ifotoHojaVida3.setPreserveRatio(true);
+					ifotoHojaVida4.setFitHeight(100);
+					ifotoHojaVida4.setPreserveRatio(true);
+					
+					
+/*					p6.add(ifotoHojaVida1, 0, 0);
+					p6.add(ifotoHojaVida2, 0, 1);
+					p6.add(ifotoHojaVida3, 1, 0);
+					p6.add(ifotoHojaVida4, 1, 1);*/
 					
 				} else if (contH == 2) {
 					Hdescripcion.setText("El es Michael, alias Splinter.  Integrante de los Pokemones");
-//					Cambio foto
+					
+					
+					Image michael1 = new Image(getClass().getResourceAsStream("./imagenes/michael1.jpg"));
+					Image michael2 = new Image(getClass().getResourceAsStream("./imagenes/michael2.jpg"));
+					Image michael3 = new Image(getClass().getResourceAsStream("./imagenes/michael3.jpg"));
+					Image michael4 = new Image(getClass().getResourceAsStream("./imagenes/michael4.jpg"));
+					
+					ifotoHojaVida1.setImage(michael1);
+			        ifotoHojaVida2.setImage(michael2);
+			        ifotoHojaVida3.setImage(michael3);
+			        ifotoHojaVida4.setImage(michael4);
+			        
+				    ifotoHojaVida1.setFitHeight(100);
+					ifotoHojaVida1.setPreserveRatio(true);
+					ifotoHojaVida2.setFitHeight(100);
+					ifotoHojaVida2.setPreserveRatio(true);
+					ifotoHojaVida3.setFitHeight(100);
+					ifotoHojaVida3.setPreserveRatio(true);
+					ifotoHojaVida4.setFitHeight(100);
+					ifotoHojaVida4.setPreserveRatio(true);
+					
+		/*			p6.add(ifotoHojaVida1, 0, 0);
+					p6.add(ifotoHojaVida2, 0, 1);
+					p6.add(ifotoHojaVida3, 1, 0);
+					p6.add(ifotoHojaVida4, 1, 1);*/
 					
 				} else if (contH == 3) {
 					Hdescripcion.setText("El es Sergio, alias el putas. Integrante de los Pokemones");
-//					Cambio foto
+					
+					Image sergio1 = new Image(getClass().getResourceAsStream("./imagenes/sergio1.jpg"));
+					Image sergio2 = new Image(getClass().getResourceAsStream("./imagenes/sergio2.jpg"));
+					Image sergio3 = new Image(getClass().getResourceAsStream("./imagenes/sergio3.jpg"));
+					Image sergio4 = new Image(getClass().getResourceAsStream("./imagenes/sergio4jpg.jpg"));
+					
+					ifotoHojaVida1.setImage(sergio1);
+			        ifotoHojaVida2.setImage(sergio2);
+			        ifotoHojaVida3.setImage(sergio3);
+			        ifotoHojaVida4.setImage(sergio4);
+			        
+				    ifotoHojaVida1.setFitHeight(100);
+					ifotoHojaVida1.setPreserveRatio(true);
+					ifotoHojaVida2.setFitHeight(100);
+					ifotoHojaVida2.setPreserveRatio(true);
+					ifotoHojaVida3.setFitHeight(100);
+					ifotoHojaVida3.setPreserveRatio(true);
+					ifotoHojaVida4.setFitHeight(100);
+					ifotoHojaVida4.setPreserveRatio(true);
 					
 				} else if (contH == 4) {
 				
 					Hdescripcion.setText("El es Bolkar, alias Snorlax. Integrante de los Pokemones");
-//					Cambio foto
+					
+					Image bolkar1 = new Image(getClass().getResourceAsStream("./imagenes/bolkar1.jpg"));
+					Image bolkar2 = new Image(getClass().getResourceAsStream("./imagenes/bolkar2.jpg"));
+					Image bolkar3 = new Image(getClass().getResourceAsStream("./imagenes/bolkar3.jpg"));
+					Image bolkar4 = new Image(getClass().getResourceAsStream("./imagenes/bolkar4.jpg"));
+					
+					ifotoHojaVida1.setImage(bolkar1);
+			        ifotoHojaVida2.setImage(bolkar2);
+			        ifotoHojaVida3.setImage(bolkar3);
+			        ifotoHojaVida4.setImage(bolkar4);
+			        
+				    ifotoHojaVida1.setFitHeight(100);
+					ifotoHojaVida1.setPreserveRatio(true);
+					ifotoHojaVida2.setFitHeight(100);
+					ifotoHojaVida2.setPreserveRatio(true);
+					ifotoHojaVida3.setFitHeight(100);
+					ifotoHojaVida3.setPreserveRatio(true);
+					ifotoHojaVida4.setFitHeight(100);
+					ifotoHojaVida4.setPreserveRatio(true);
+					
 				}
 				else if (contH == 5) {
-					Hdescripcion.setText("El es Santiago, dejemoslo quieto mejor");
-//					Cambio foto
+					Hdescripcion.setText("El es Santiago, dejemoslo quieto");
+					
+					Image santiago1 = new Image(getClass().getResourceAsStream("./imagenes/santiago1.jpg"));
+					Image santiago2 = new Image(getClass().getResourceAsStream("./imagenes/santiago2.jpg"));
+					Image santiago3 = new Image(getClass().getResourceAsStream("./imagenes/santiago3.jpg"));
+					Image santiago4 = new Image(getClass().getResourceAsStream("./imagenes/santiago4.jpg"));
+					
+					ifotoHojaVida1.setImage(santiago1);
+			        ifotoHojaVida2.setImage(santiago2);
+			        ifotoHojaVida3.setImage(santiago3);
+			        ifotoHojaVida4.setImage(santiago4);
+			        
+				    ifotoHojaVida1.setFitHeight(100);
+					ifotoHojaVida1.setPreserveRatio(true);
+					ifotoHojaVida2.setFitHeight(100);
+					ifotoHojaVida2.setPreserveRatio(true);
+					ifotoHojaVida3.setFitHeight(100);
+					ifotoHojaVida3.setPreserveRatio(true);
+					ifotoHojaVida4.setFitHeight(100);
+					ifotoHojaVida4.setPreserveRatio(true);
 					
 				}
 				
