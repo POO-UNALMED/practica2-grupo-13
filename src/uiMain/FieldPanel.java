@@ -2,6 +2,7 @@ package uiMain;
 import java.util.ArrayList;
 
 import gestorAplicacion.empleado.Agronomo;
+import gestorAplicacion.terreno.Terreno;
 import javafx.application.*;
 import javafx.collections.FXCollections;
 import javafx.geometry.*;
@@ -49,6 +50,34 @@ public class FieldPanel extends Pane{
 			formulario.add(valorCampo, 2, i+1, 3, 1);
 			datosUsuario[i] = valorCampo;
 		}	
+	}
+	FieldPanel (String tituloCriterios, String[] criterios, String tituloValores, String[] valores, boolean[] habilitado,ArrayList<String> Idterrenos) {
+		datosUsuario = new TextField[criterios.length];
+		formulario = new GridPane();
+		this.tituloCriterios = new Label(tituloCriterios);
+		this.tituloCriterios.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+		this.tituloValores = new Label(tituloValores);
+		this.tituloValores.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+		formulario.add(this.tituloCriterios, 0, 0, 2, 1);
+		formulario.add(this.tituloValores, 2, 0, 3, 1);
+		formulario.setVgap(13);
+		formulario.setHgap(35);
+		
+		int count = 1;
+		for (String campo : criterios) {
+			Label nombreCampo = new Label(campo);
+			formulario.add(nombreCampo, 0, count, 2, 1);
+			count++;
+		}
+		
+		for (int i = 0; i < habilitado.length-1; i++) {
+			TextField valorCampo = new TextField(valores[i]);
+			valorCampo.setEditable(habilitado[i]);
+			formulario.add(valorCampo, 2, i+1, 3, 1);
+			datosUsuario[i] = valorCampo;
+		}
+		ComboBox terrenosCombo = new ComboBox(FXCollections.observableArrayList(Idterrenos));
+		formulario.add(terrenosCombo, 2, habilitado.length, 3, 1);
 	}
 	public String getValue(int indice) {
 		System.out.println(datosUsuario[indice].getText());

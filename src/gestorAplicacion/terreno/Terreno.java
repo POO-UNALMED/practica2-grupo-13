@@ -392,5 +392,12 @@ public class Terreno implements Serializable {
 				+ (Math.round(this.fosforoDisponible * 100.0) / 100.0) + "\n" + "Nivel de irrigacion: "
 				+ (Math.round(this.irrigacionActual * 100.0) / 100.0);
 	}
+	public static ArrayList<String> mostrarTerrenosGUI() {
+		ArrayList<String>terrenosId=new ArrayList<String>();
+		for (Integer i = 0; i < terrenosTotales.size(); i++) {
+			  terrenosId.add(terrenosTotales.get(i).getId());
+		}
+		return (terrenosId);
+	}
 
 }

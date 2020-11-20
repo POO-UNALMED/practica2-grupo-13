@@ -1,5 +1,6 @@
 package uiMain;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import gestorAplicacion.empleado.Agronomo;
@@ -36,6 +37,14 @@ public class Principal {
 	
 	MenuItem agronomo1;
 	MenuItem campesino1;
+	MenuItem agronomo2;
+	MenuItem campesino2;
+	MenuItem totalProduction;
+	MenuItem examinarCultivo; 
+	MenuItem cultivar;
+	MenuItem cosechar;
+	MenuItem addTerreno; 
+	MenuItem fertelizarIrrigar;
 	
 	Button aceptarAgronomo;
 	Button borrarAgronomo;
@@ -98,17 +107,17 @@ public class Principal {
 		// termina submenu de contratar
 		// Submenu de despedir
 		Menu subMenuDespedir = new Menu("Despedir");
-		MenuItem agronomo2 = new MenuItem("Agronomo");
-		MenuItem campesino2 = new MenuItem("Campesino");
+		agronomo2 = new MenuItem("Agronomo");
+		campesino2 = new MenuItem("Campesino");
 		subMenuDespedir.getItems().addAll(agronomo2, new SeparatorMenuItem(), campesino2);
 		// termina submenu de despedir
 
-		MenuItem totalProduction = new MenuItem("Produccion total");
-		MenuItem examinarCultivo = new MenuItem("Examinar cultivo");
-		MenuItem cultivar = new MenuItem("Cultivar");
-		MenuItem cosechar = new MenuItem("Cosechar");
-		MenuItem addTerreno = new MenuItem("Agregar terreno");
-		MenuItem fertelizarIrrigar = new MenuItem("Fertilizar e irrigar");
+		totalProduction = new MenuItem("Produccion total");
+		examinarCultivo = new MenuItem("Examinar cultivo");
+		cultivar = new MenuItem("Cultivar");
+		cosechar = new MenuItem("Cosechar");
+		addTerreno = new MenuItem("Agregar terreno");
+		fertelizarIrrigar = new MenuItem("Fertilizar e irrigar");
 
 		procesos_Consultas.getItems().addAll(subMenuContratar, new SeparatorMenuItem(), subMenuDespedir);
 		procesos_Consultas.getItems().addAll(new SeparatorMenuItem(), totalProduction);
@@ -135,11 +144,41 @@ public class Principal {
 			}
 		});
 		
-		//Handlers
+		//Handlers contratar
 		HandlerMenu handler = new HandlerMenu();
 		agronomo1.setOnAction(handler);
 		HandlerMenu handlerC = new HandlerMenu();
 		campesino1.setOnAction(handlerC);
+		
+		//Handlers despedir
+		HandlerMenu handlerDA = new HandlerMenu();
+		agronomo2.setOnAction(handlerDA);
+		HandlerMenu handlerDC = new HandlerMenu();
+		campesino2.setOnAction(handlerDC);
+		
+		//Handler produccion total
+		HandlerMenu handlerTP = new HandlerMenu();
+		totalProduction.setOnAction(handlerTP);
+		
+		//Handler examinarCultivo
+		HandlerMenu handlerEC = new HandlerMenu();
+		examinarCultivo.setOnAction(handlerEC);
+		
+		//Handler cultivar
+		HandlerMenu handlerCul = new HandlerMenu();
+		cultivar.setOnAction(handlerCul);
+		
+		//Handler cosechar
+		HandlerMenu handlerCos = new HandlerMenu();
+		cosechar.setOnAction(handlerCos);
+		
+		//Handler addTerreno
+		HandlerMenu handlerTer = new HandlerMenu();
+		addTerreno.setOnAction(handlerTer);
+		
+		//Handler fertilizarIrrigar
+		HandlerMenu handlerFer = new HandlerMenu();
+		fertelizarIrrigar.setOnAction(handlerFer);
 		
 		//Label
 		consulta.setPadding(new Insets(25));
@@ -161,13 +200,17 @@ public class Principal {
 			Object control=e.getSource();
 			if(control instanceof MenuItem){
 				if(control.equals(agronomo1)){
+					
 					vBox1.getChildren().addAll(consulta,descripcionConsulta);
 					consulta.setText("Contratar Agronomo");
-					descripcionConsulta.setText("Vincula un agronomo a la app");
+					descripcionConsulta.setText("Vincula un agronomo a un terreno");
 					String[] campos = {"Nombre", "Sueldo", "Cedula", "Terreno"};
 					String[] valores = {"", "", "", ""};
 					boolean[] editable = {true, true, true, true};
-					contratarAgronomo = new FieldPanel("Datos agronomo", campos, "Ingrese aqui", valores, editable); 
+					ArrayList<String>pepe=new ArrayList<String>();
+					pepe=Terreno.mostrarTerrenosGUI();
+					System.out.println(pepe);
+					contratarAgronomo = new FieldPanel("Datos agronomo", campos, "Ingrese aqui", valores, editable, Terreno.mostrarTerrenosGUI()); 
 					vBox1.getChildren().addAll(contratarAgronomo.formulario);
 					contratarAgronomo.formulario.setAlignment(Pos.CENTER);
 					
@@ -190,7 +233,7 @@ public class Principal {
 				}else if (control.equals(campesino1)) {
 					vBox1.getChildren().addAll(consulta,descripcionConsulta);
 					consulta.setText("Contratar Campesino");
-					descripcionConsulta.setText("Vincula un campesino a la app");
+					descripcionConsulta.setText("Vincula un campesino a un terreno");
 					String[] campos = {"Nombre", "Sueldo", "Cedula", "Terreno"};
 					String[] valores = {"", "", "", ""};
 					boolean[] editable = {true, true, true, true};
@@ -213,6 +256,31 @@ public class Principal {
 					campesinoHandlerClass hContratarCampesino = new campesinoHandlerClass();
 					aceptarCampesino.setOnAction(hContratarCampesino);
 					borrarCampesino.setOnAction(hContratarCampesino);
+				}else if(control.equals(agronomo2)) {//despedir
+					vBox1.getChildren().addAll(consulta,descripcionConsulta);
+					consulta.setText("Despedir Agronomo");
+					descripcionConsulta.setText("Desvincula un agronomo de un terreno");
+					String[] campos = {"Terreno", "Agronomo"};
+					String[] valores = {"", ""};
+					
+				}else if(control.equals(campesino2)) {//despedir
+					vBox1.getChildren().addAll(consulta,descripcionConsulta);
+					consulta.setText("Despedir Campesino");
+					descripcionConsulta.setText("Desvincula un campesino de un terreno");
+					String[] campos = {"Terreno", "Campesino"};
+					String[] valores = {"", ""};
+				}else if(control.equals(totalProduction)) {
+					
+				}else if(control.equals(examinarCultivo)) {
+					
+				}else if(control.equals(cultivar)) {
+					
+				}else if(control.equals(cosechar)) {
+					
+				}else if(control.equals(addTerreno)) {
+					
+				}else if(control.equals(fertelizarIrrigar)) {
+					
 				}
 			}
 		}	
