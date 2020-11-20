@@ -102,6 +102,21 @@ public class Principal {
 		// Termina menu de procesos y consultas
 
 		Menu ayuda = new Menu("Ayuda");
+		MenuItem acercaDe = new MenuItem("Acerca de");
+		acercaDe.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				Alert a = new Alert(AlertType.INFORMATION);
+				
+				a.setTitle("Nombres de autores");
+				a.setHeaderText("Cultivatron");
+				// Definir el encabezado de la alerta
+				a.setContentText("Sergio \nJose \nJan \nLeimar \nSantiago");
+				a.show();
+			}
+		});
+		ayuda.getItems().add(acercaDe);
 		barraPrincipal.getMenus().addAll(archivo, procesos_Consultas, ayuda);
 		vBox1.getChildren().add(barraPrincipal);
 		vBox0.getChildren().add(vBox1);
