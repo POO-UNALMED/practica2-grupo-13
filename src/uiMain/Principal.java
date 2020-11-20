@@ -34,6 +34,9 @@ public class Principal {
 	VBox vBox1;
 	FieldPanel contratarAgronomo;
 	FieldPanel contratarCampesino;
+	FieldPanel despedirAgronomo;
+	FieldPanel despedirCampesino;
+	
 	
 	MenuItem agronomo1;
 	MenuItem campesino1;
@@ -207,9 +210,6 @@ public class Principal {
 					String[] campos = {"Nombre", "Sueldo", "Cedula", "Terreno"};
 					String[] valores = {"", "", "", ""};
 					boolean[] editable = {true, true, true, true};
-					ArrayList<String>pepe=new ArrayList<String>();
-					pepe=Terreno.mostrarTerrenosGUI();
-					System.out.println(pepe);
 					contratarAgronomo = new FieldPanel("Datos agronomo", campos, "Ingrese aqui", valores, editable, Terreno.mostrarTerrenosGUI()); 
 					vBox1.getChildren().addAll(contratarAgronomo.formulario);
 					contratarAgronomo.formulario.setAlignment(Pos.CENTER);
@@ -237,7 +237,7 @@ public class Principal {
 					String[] campos = {"Nombre", "Sueldo", "Cedula", "Terreno"};
 					String[] valores = {"", "", "", ""};
 					boolean[] editable = {true, true, true, true};
-					contratarCampesino = new FieldPanel("Datos campesino", campos, "Ingrese aqui", valores, editable); 
+					contratarCampesino = new FieldPanel("Datos campesino", campos, "Ingrese aqui", valores, editable,Terreno.mostrarTerrenosGUI()); 
 					vBox1.getChildren().addAll(contratarCampesino.formulario);
 					contratarCampesino.formulario.setAlignment(Pos.CENTER);
 										
@@ -260,15 +260,20 @@ public class Principal {
 					vBox1.getChildren().addAll(consulta,descripcionConsulta);
 					consulta.setText("Despedir Agronomo");
 					descripcionConsulta.setText("Desvincula un agronomo de un terreno");
-					String[] campos = {"Terreno", "Agronomo"};
-					String[] valores = {"", ""};
+					String[] campos = {"Agronomo"};
+					String[] valores = {""};
+					boolean[] editable = {true};
 					
+					despedirAgronomo = new FieldPanel("Datos Agronomo", campos, "Ingrese aqui", valores, editable,Agronomo.mostrarAgronomosGUI()); 
+					vBox1.getChildren().addAll(despedirAgronomo.formulario);
+					despedirAgronomo.formulario.setAlignment(Pos.CENTER);
 				}else if(control.equals(campesino2)) {//despedir
 					vBox1.getChildren().addAll(consulta,descripcionConsulta);
 					consulta.setText("Despedir Campesino");
 					descripcionConsulta.setText("Desvincula un campesino de un terreno");
 					String[] campos = {"Terreno", "Campesino"};
 					String[] valores = {"", ""};
+					boolean[] editable = {true, true};
 				}else if(control.equals(totalProduction)) {
 					
 				}else if(control.equals(examinarCultivo)) {

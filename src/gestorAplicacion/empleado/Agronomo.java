@@ -1,6 +1,7 @@
 package gestorAplicacion.empleado;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import gestorAplicacion.terreno.*;
 import gestorAplicacion.*;
@@ -133,5 +134,12 @@ public class Agronomo extends Empleado implements Serializable {
 	 */
 	public static LinkedList<Agronomo> getAgronomos() {
 		return agronomos;
+	}
+	public static ArrayList<String> mostrarAgronomosGUI() {
+		ArrayList<String>Agronomos=new ArrayList<String>();
+		for (Integer i = 0; i < agronomos.size(); i++) {
+			 Agronomos.add(Integer.toString(agronomos.get(i).getCedula()));
+		}
+		return (Agronomos);
 	}
 }
