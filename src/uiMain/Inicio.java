@@ -3,6 +3,8 @@ package uiMain;
 import javafx.application.*;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -14,11 +16,11 @@ import javafx.event.EventHandler;
 
 public class Inicio extends Application {
 
-	Label bienvenida = new Label("Welcome");
-//	Label vida = new Label("HOjass de vida");
+	Label bienvenida = new Label("  Bienvenidos a Cultivatron, tu simulador de cultivos preferido !!  ");
 	BorderPane p4 = new BorderPane();
 	GridPane p6 = new GridPane();
 	TextArea Hdescripcion = new TextArea("El es Jose, nacio el 20 de diciembre del 2000 en Itagui. Alias Cachucha. Integrante de los Pokemones");
+	TextArea Sdescripcion;
 	Image cultivos1;
 	Image cultivos2;
 	Image cultivos3;
@@ -33,8 +35,12 @@ public class Inicio extends Application {
 	ImageView ifotoHojaVida2 = new ImageView();
 	ImageView ifotoHojaVida3 = new ImageView();
 	ImageView ifotoHojaVida4 = new ImageView();
+	Button sigVentana;
+	Stage primaryStage;
+	Principal ventanaPrincipal = new Principal();
 	
 	public void start(Stage primaryStage) {
+		this.primaryStage = primaryStage;
 
 		// Nodo raiz de la escena
 		VBox root = new VBox(5);
@@ -45,7 +51,7 @@ public class Inicio extends Application {
 		BorderPane p2 = new BorderPane();
 		FlowPane p3 = new FlowPane();
 		FlowPane p5 = new FlowPane();
-		Button sigVentana = new Button("Pasar ventana");
+		sigVentana = new Button("Pasar ventana");
 		
 		// Menu
 		MenuBar menuPrincipal = new MenuBar();
@@ -55,7 +61,12 @@ public class Inicio extends Application {
 		SeparatorMenuItem separador = new SeparatorMenuItem();
 		menuPrincipal.getMenus().addAll(barraPrincipal);
 		barraPrincipal.getItems().addAll(salir, separador, descripcion);
-
+		bienvenida.setAlignment(Pos.CENTER);
+		bienvenida.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+		
+		salirHandlerClass salirH = new salirHandlerClass();
+		salir.setOnAction(salirH);
+		
 		root.getChildren().add(menuPrincipal);
 		root.getChildren().add(contenedor);
 
@@ -128,7 +139,8 @@ public class Inicio extends Application {
 		bienvenida.setPadding(new Insets(10, 10, 10, 10));
 
 		p3.getChildren().add(bienvenida);
-
+		SdescripcionHandlerClass SdescripcionHandler = new SdescripcionHandlerClass();
+		descripcion.setOnAction(SdescripcionHandler);
 
 		// Pane P4
 		p4.setBottom(sigVentana);
@@ -152,29 +164,30 @@ public class Inicio extends Application {
 		p6.setAlignment(Pos.CENTER);
 
 		primaryStage.setTitle("Inicio");
-		Scene scene = new Scene(root, 954, 493);
-		primaryStage.setScene(scene);
+		Scene inicio = new Scene(root, 1240, 580);
+		primaryStage.setScene(inicio);
 		primaryStage.show();
+		
+		SigVentanaHandlerClass sigVentanaHandler = new SigVentanaHandlerClass();
+		sigVentana.setOnAction(sigVentanaHandler);
 		
 		// Pane P5
 		p5.getChildren().add(Hdescripcion);
 		Hdescripcion.setOnMouseClicked(mouseHandler);
 		Hdescripcion.setEditable(false); //No se edita la descripción 
 		Hdescripcion.setWrapText(true); //Acoplar texto al FlowPane
-		
-
+		p2.setPadding(new Insets(15,15,15,15));
 		
 	}
 
-	EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
+	EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() { 
 		int cont = 2;
 		int contH = 2;
 		@Override
 		public void handle(MouseEvent mouseEvent) {
-			
 			if((mouseEvent.getEventType().toString()).equals("MOUSE_EXITED")) {
 				if (cont == 6) {
-					cont = 1;
+					cont = 1; 
 				}
 				// Controla el orden en el cambio de las imagenes
 				if (cont == 1) {
@@ -223,12 +236,6 @@ public class Inicio extends Application {
 					ifotoHojaVida4.setFitHeight(100);
 					ifotoHojaVida4.setPreserveRatio(true);
 					
-					
-/*					p6.add(ifotoHojaVida1, 0, 0);
-					p6.add(ifotoHojaVida2, 0, 1);
-					p6.add(ifotoHojaVida3, 1, 0);
-					p6.add(ifotoHojaVida4, 1, 1);*/
-					
 				} else if (contH == 2) {
 					Hdescripcion.setText("El es Michael, alias Splinter.  Integrante de los Pokemones");
 					
@@ -252,10 +259,6 @@ public class Inicio extends Application {
 					ifotoHojaVida4.setFitHeight(100);
 					ifotoHojaVida4.setPreserveRatio(true);
 					
-		/*			p6.add(ifotoHojaVida1, 0, 0);
-					p6.add(ifotoHojaVida2, 0, 1);
-					p6.add(ifotoHojaVida3, 1, 0);
-					p6.add(ifotoHojaVida4, 1, 1);*/
 					
 				} else if (contH == 3) {
 					Hdescripcion.setText("El es Sergio, alias el putas. Integrante de los Pokemones");
@@ -326,13 +329,39 @@ public class Inicio extends Application {
 					ifotoHojaVida4.setPreserveRatio(true);
 					
 				}
-				
 				contH++;
 			}
 		}
-		
-	};
 
+	};
+	
+	// Clase que cierra la ventana
+
+	class salirHandlerClass implements EventHandler<ActionEvent>{
+		public void handle(ActionEvent e) {
+			Platform.exit();
+			System.exit(0);
+		}
+	}
+	
+	// Clase que genera un nuevo texto con la descripcion del proyecto
+	class SdescripcionHandlerClass implements EventHandler<ActionEvent>{
+		public void handle(ActionEvent e) {
+			Sdescripcion = new TextArea("El programa tiene la capacidad de simular cómo se comportan algunos tipos de cultivos en ciertos terrenos, siendo atacados por plagas, maleza u hongos; y estos a su vez son exterminados por su respectivo tipo de pesticida. Existen empleados que se derivan en campesinos y administradores; siendo los primeros los trabajadores que siembran y recolectan los cultivos; y a su vez, los encargados de usar los pesticidas. Los administradores se encargan de contratar, despedir y dirigir a los campesinos para realizar las labores en los cultivos, también son los que investigan el tipo de amenaza bajo la que se encuentra la cosecha");
+			Sdescripcion.setWrapText(true);
+			Sdescripcion.setEditable(false);
+			p4.setCenter(Sdescripcion);
+			p4.setMargin(Sdescripcion, new Insets(13,13,13,13));
+		}
+	}
+	
+	// Clase que cambia la ventana de inicio por la principal
+	class SigVentanaHandlerClass implements EventHandler<ActionEvent>{
+		public void handle(ActionEvent e) {
+			primaryStage.setScene(ventanaPrincipal.principal);
+		}
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
