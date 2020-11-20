@@ -359,8 +359,7 @@ public class Inicio extends Application {
 	class SigVentanaHandlerClass implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
 			System.out.println("dasda");
-			primaryStage.setScene(ventanaPrincipal.getStage().getScene());
-			//primaryStage.show();
+			primaryStage.setScene(ventanaPrincipal.crearPrincipal());
 		}
 	}
 	

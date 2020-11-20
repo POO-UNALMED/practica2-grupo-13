@@ -14,12 +14,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class Principal extends Application{
-	VBox vBox0=new VBox();
-	public Scene principal = new Scene(vBox0, 1240, 580);
-	Stage stagePrincipal;
-	public void start(Stage primaryStage) {
-		stagePrincipal=primaryStage;
+public class Principal{
+	
+	public Scene crearPrincipal() {
+		VBox vBox0=new VBox();
+		Scene principal;
+		principal = new Scene(vBox0, 1240, 580);
+		
 		Label nombrePrograma=new Label("Cultivatron");
 		
 		vBox0.getChildren().add(nombrePrograma);
@@ -33,13 +34,8 @@ public class Principal extends Application{
 		
 		vBox1.getChildren().add(barraPrincipal);
 		vBox0.getChildren().add(vBox1);
-		
-		primaryStage.setTitle("Principal");
-		primaryStage.setScene(principal);
-		primaryStage.show();
+		return principal;
+
 	}
-	public Stage getStage() {
-		return stagePrincipal;
-	}
-	
+
 }
