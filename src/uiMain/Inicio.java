@@ -358,7 +358,9 @@ public class Inicio extends Application {
 	// Clase que cambia la ventana de inicio por la principal
 	class SigVentanaHandlerClass implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
-			primaryStage.setScene(ventanaPrincipal.principal);
+			System.out.println("dasda");
+			primaryStage.setScene(ventanaPrincipal.getStage().getScene());
+			//primaryStage.show();
 		}
 	}
 	
