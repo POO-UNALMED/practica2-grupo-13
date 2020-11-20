@@ -151,9 +151,15 @@ public class Principal {
 			if(control instanceof MenuItem){
 				if(control.equals(agronomo1)){
 					vBox1.getChildren().addAll(consulta,descripcionConsulta);
-					consulta.setText("Contratar campesino");
-					descripcionConsulta.setText("Vincula un campesino a la app");
+					consulta.setText("Contratar Agronomo");
+					descripcionConsulta.setText("Vincula un agronomo a la app");
+					String[] campos = {"Nombre", "Sueldo", "Cedula", "Terrenio"};
+					String[] valores = {"Nombre", "Sueldo", "Cedula", "Terrenio"};
+					boolean[] editable = {true, true, true, true};
+					FieldPanel contratarAgronomo = new FieldPanel("Datos agronomo", campos, "Ingrese aqui", valores, editable); 
+					vBox1.getChildren().addAll(contratarAgronomo.formulario);
 				}
+				
 			}
 		}	
 	}
