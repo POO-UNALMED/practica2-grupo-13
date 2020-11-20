@@ -28,17 +28,24 @@ public class Principal {
 	Label consulta = new Label();
 	Label descripcionConsulta = new Label();
 	GridPane formulario = new GridPane();
+	VBox vBox1;
+	
+	MenuItem agronomo1;
+	MenuItem campesino1;
 
 	public Scene crearPrincipal() {
 		VBox vBox0 = new VBox();
-
+		vBox1 = new VBox();
+		vBox1.setAlignment(Pos.CENTER);
+		
+		
 		principal = new Scene(vBox0, 1240, 580);
 
 		Label nombrePrograma = new Label("Cultivatron");
 
 		// VBox0
 		vBox0.getChildren().add(nombrePrograma);
-		VBox vBox1 = new VBox();
+		
 		// MenuBar
 		MenuBar barraPrincipal = new MenuBar();
 
@@ -76,8 +83,8 @@ public class Principal {
 		Menu procesos_Consultas = new Menu("Procesos y consultas");
 		// Submenu de contratar
 		Menu subMenuContratar = new Menu("Contratar");
-		MenuItem agronomo1 = new MenuItem("Agronomo");
-		MenuItem campesino1 = new MenuItem("Campesino");
+		agronomo1 = new MenuItem("Agronomo");
+		campesino1 = new MenuItem("Campesino");
 		subMenuContratar.getItems().addAll(agronomo1, new SeparatorMenuItem(), campesino1);
 		// termina submenu de contratar
 		// Submenu de despedir
@@ -118,23 +125,17 @@ public class Principal {
 				a.show();
 			}
 		});
-		class contratarCampesinoHandlerClass implements EventHandler<ActionEvent>{
-			public void handle(ActionEvent e) {
-				Object control=e.getSource();
-				if(control instanceof MenuItem){
-	                if(control.equals(agronomo1)){
-	                	vBox1.getChildren().addAll(consulta,descripcionConsulta);
-	                	consulta.setText("Contratar campesino");
-	                      consulta.setText("Click en Menu Opcion1");
-	                      root.setStyle("-fx-background-color: BLUE;");
-	                      }
-	                  else if((((MenuItem) control).getText()).equals("Opcion2")){
-	                      lbd.setText("Click en Menu Opcion2");
-	                      root.setStyle("-fx-background-color: RED;");
-	                      }
-	            }
-			}
-		}
+		
+		//Handlers
+		HandlerMenu handler = new HandlerMenu();
+		agronomo1.setOnAction(handler);
+		
+		//Label
+		consulta.setPadding(new Insets(25));
+		descripcionConsulta.setPadding(new Insets(25));
+		consulta.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+		descripcionConsulta.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+		
 		
 		ayuda.getItems().add(acercaDe);
 		barraPrincipal.getMenus().addAll(archivo, procesos_Consultas, ayuda);
@@ -143,6 +144,18 @@ public class Principal {
 		vBox0.getChildren().add(vBox1);
 		return principal;
 
+	}
+	class HandlerMenu implements EventHandler<ActionEvent>{
+		public void handle(ActionEvent e) {
+			Object control=e.getSource();
+			if(control instanceof MenuItem){
+				if(control.equals(agronomo1)){
+					vBox1.getChildren().addAll(consulta,descripcionConsulta);
+					consulta.setText("Contratar campesino");
+					descripcionConsulta.setText("Vincula un campesino a la app");
+				}
+			}
+		}	
 	}
 
 }
