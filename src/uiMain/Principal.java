@@ -3,6 +3,8 @@ package uiMain;
 import java.util.LinkedList;
 
 import gestorAplicacion.empleado.Agronomo;
+import gestorAplicacion.empleado.Campesino;
+import gestorAplicacion.terreno.Terreno;
 import javafx.application.*;
 import javafx.collections.FXCollections;
 import javafx.geometry.*;
@@ -29,9 +31,16 @@ public class Principal {
 	Label descripcionConsulta = new Label();
 	GridPane formulario = new GridPane();
 	VBox vBox1;
+	FieldPanel contratarAgronomo;
+	FieldPanel contratarCampesino;
 	
 	MenuItem agronomo1;
 	MenuItem campesino1;
+	
+	Button aceptarAgronomo;
+	Button borrarAgronomo;
+	Button aceptarCampesino;
+	Button borrarCampesino;
 
 	public Scene crearPrincipal() {
 		VBox vBox0 = new VBox();
@@ -129,6 +138,8 @@ public class Principal {
 		//Handlers
 		HandlerMenu handler = new HandlerMenu();
 		agronomo1.setOnAction(handler);
+		HandlerMenu handlerC = new HandlerMenu();
+		campesino1.setOnAction(handlerC);
 		
 		//Label
 		consulta.setPadding(new Insets(25));
@@ -153,17 +164,81 @@ public class Principal {
 					vBox1.getChildren().addAll(consulta,descripcionConsulta);
 					consulta.setText("Contratar Agronomo");
 					descripcionConsulta.setText("Vincula un agronomo a la app");
-					String[] campos = {"Nombre", "Sueldo", "Cedula", "Terrenio"};
-					String[] valores = {"Nombre", "Sueldo", "Cedula", "Terrenio"};
+					String[] campos = {"Nombre", "Sueldo", "Cedula", "Terreno"};
+					String[] valores = {"", "", "", ""};
 					boolean[] editable = {true, true, true, true};
-					FieldPanel contratarAgronomo = new FieldPanel("Datos agronomo", campos, "Ingrese aqui", valores, editable); 
+					contratarAgronomo = new FieldPanel("Datos agronomo", campos, "Ingrese aqui", valores, editable); 
 					vBox1.getChildren().addAll(contratarAgronomo.formulario);
 					contratarAgronomo.formulario.setAlignment(Pos.CENTER);
 					
+					HBox botonesContratarAgronomo = new HBox();
+					aceptarAgronomo = new Button(" Aceptar ");
+					borrarAgronomo = new Button(" Borrar ");
+					botonesContratarAgronomo.getChildren().addAll(aceptarAgronomo,borrarAgronomo);
+					aceptarAgronomo.setAlignment(Pos.CENTER);
+					borrarAgronomo.setAlignment(Pos.CENTER);
+					botonesContratarAgronomo.setAlignment(Pos.CENTER);
+					botonesContratarAgronomo.setPadding(new Insets(20));
+					botonesContratarAgronomo.setMargin(aceptarAgronomo, new Insets(20));
+					botonesContratarAgronomo.setMargin(borrarAgronomo, new Insets(20));
+					vBox1.getChildren().add(botonesContratarAgronomo);
+					
+					agronomoHandlerClass hContratarAgronomo = new agronomoHandlerClass();
+					aceptarAgronomo.setOnAction(hContratarAgronomo);
+					borrarAgronomo.setOnAction(hContratarAgronomo);
+					
+				}else if (control.equals(campesino1)) {
+					vBox1.getChildren().addAll(consulta,descripcionConsulta);
+					consulta.setText("Contratar Campesino");
+					descripcionConsulta.setText("Vincula un campesino a la app");
+					String[] campos = {"Nombre", "Sueldo", "Cedula", "Terreno"};
+					String[] valores = {"", "", "", ""};
+					boolean[] editable = {true, true, true, true};
+					contratarCampesino = new FieldPanel("Datos campesino", campos, "Ingrese aqui", valores, editable); 
+					vBox1.getChildren().addAll(contratarCampesino.formulario);
+					contratarCampesino.formulario.setAlignment(Pos.CENTER);
+										
+					HBox botonesContratarCampesino = new HBox();
+					aceptarCampesino = new Button(" Aceptar ");
+					borrarCampesino = new Button(" Borrar ");
+					botonesContratarCampesino.getChildren().addAll(aceptarCampesino,borrarCampesino);
+					aceptarCampesino.setAlignment(Pos.CENTER);
+					borrarCampesino.setAlignment(Pos.CENTER);
+					botonesContratarCampesino.setAlignment(Pos.CENTER);
+					botonesContratarCampesino.setPadding(new Insets(20));
+					botonesContratarCampesino.setMargin(aceptarCampesino, new Insets(20));
+					botonesContratarCampesino.setMargin(borrarCampesino, new Insets(20));
+					vBox1.getChildren().add(botonesContratarCampesino);
+					
+					campesinoHandlerClass hContratarCampesino = new campesinoHandlerClass();
+					aceptarCampesino.setOnAction(hContratarCampesino);
+					borrarCampesino.setOnAction(hContratarCampesino);
 				}
-				
 			}
 		}	
+	}
+	
+	class agronomoHandlerClass implements EventHandler<ActionEvent>{
+		public void handle(ActionEvent e) {
+			Object control = e.getSource();	
+			if (control.equals(aceptarAgronomo)) { // Verificiar con un catch que si exista un terreno
+				Agronomo agro = new Agronomo(contratarAgronomo.getValue(0), Integer.parseInt(contratarAgronomo.getValue(1)), Integer.parseInt(contratarAgronomo.getValue(2)), new Terreno("12", 0));
+			}
+			else if (control.equals(borrarAgronomo)) {
+				contratarAgronomo.borrarValue();
+			}
+		}
+	}
+	class campesinoHandlerClass implements EventHandler<ActionEvent>{
+		public void handle(ActionEvent e) {
+			Object control = e.getSource();	
+			if (control.equals(aceptarCampesino)) { // Verificiar con un catch que si exista un terreno
+				Campesino campe = new Campesino(contratarCampesino.getValue(0), Integer.parseInt(contratarCampesino.getValue(1)), Integer.parseInt(contratarCampesino.getValue(2)), new Terreno("666", 0));
+			}
+			else if (control.equals(borrarCampesino)) {
+				contratarCampesino.borrarValue();
+			}
+		}
 	}
 
 }
