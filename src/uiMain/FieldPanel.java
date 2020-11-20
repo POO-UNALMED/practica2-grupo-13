@@ -24,23 +24,25 @@ public class FieldPanel extends Pane{
 	FieldPanel (String tituloCriterios, String[] criterios, String tituloValores, String[] valores, boolean[] habilitado) {
 		formulario = new GridPane();
 		this.tituloCriterios = new Label(tituloCriterios);
+		this.tituloCriterios.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 		this.tituloValores = new Label(tituloValores);
-		formulario.setConstraints(this.tituloCriterios, 0, 0, 2, 1);
-		formulario.setConstraints(this.tituloValores, 2, 0, 3, 1);
+		this.tituloValores.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+		formulario.add(this.tituloCriterios, 0, 0, 2, 1);
+		formulario.add(this.tituloValores, 2, 0, 3, 1);
 		formulario.setVgap(13);
-		formulario.setHgap(26);
+		formulario.setHgap(35);
 		
 		int count = 1;
 		for (String campo : criterios) {
 			Label nombreCampo = new Label(campo);
-			formulario.setConstraints(nombreCampo, 0, count, 2, 1);
+			formulario.add(nombreCampo, 0, count, 2, 1);
 			count++;
 		}
 		
 		for (int i = 0; i < habilitado.length; i++) {
 			TextField  valorCampo = new TextField(valores[i]);
 			valorCampo.setEditable(habilitado[i]);
-			formulario.setConstraints(valorCampo, 2, i+1, 3, 1);
+			formulario.add(valorCampo, 2, i+1, 3, 1);
 		}
 		
 	}

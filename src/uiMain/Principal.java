@@ -158,6 +158,8 @@ public class Principal {
 					boolean[] editable = {true, true, true, true};
 					FieldPanel contratarAgronomo = new FieldPanel("Datos agronomo", campos, "Ingrese aqui", valores, editable); 
 					vBox1.getChildren().addAll(contratarAgronomo.formulario);
+					contratarAgronomo.formulario.setAlignment(Pos.CENTER);
+					
 				}
 				
 			}
