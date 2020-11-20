@@ -36,11 +36,13 @@ public class Inicio extends Application {
 	ImageView ifotoHojaVida3 = new ImageView();
 	ImageView ifotoHojaVida4 = new ImageView();
 	Button sigVentana;
-	Stage primaryStage;
+	Stage windowInicio;
+	Scene inicio;
 	Principal ventanaPrincipal = new Principal();
+	Inicio iniAux = this;
 	
 	public void start(Stage primaryStage) {
-		this.primaryStage = primaryStage;
+		this.windowInicio = primaryStage;
 
 		// Nodo raiz de la escena
 		VBox root = new VBox(5);
@@ -164,7 +166,7 @@ public class Inicio extends Application {
 		p6.setAlignment(Pos.CENTER);
 
 		primaryStage.setTitle("Inicio");
-		Scene inicio = new Scene(root, 1240, 580);
+		inicio = new Scene(root, 1240, 580);
 		primaryStage.setScene(inicio);
 		primaryStage.show();
 		
@@ -358,8 +360,8 @@ public class Inicio extends Application {
 	// Clase que cambia la ventana de inicio por la principal
 	class SigVentanaHandlerClass implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
-			System.out.println("dasda");
-			primaryStage.setScene(ventanaPrincipal.crearPrincipal());
+			ventanaPrincipal.linkInicio = iniAux;
+			windowInicio.setScene(ventanaPrincipal.crearPrincipal());
 		}
 	}
 	
