@@ -136,7 +136,7 @@ public class Inicio extends Application {
 
 		contenedor.getChildren().addAll(p1, p2);
 
-		// Label and TextArea
+		// Label y TextArea
 		Hdescripcion.setPadding(new Insets(10, 10, 10, 10));
 		bienvenida.setPadding(new Insets(10, 10, 10, 10));
 

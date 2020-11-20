@@ -25,6 +25,9 @@ public class Principal {
 	 * Instancia de la clase Inicio con la que esta asociado la ventana Principal
 	 */
 	Inicio linkInicio;
+	Label consulta = new Label();
+	Label descripcionConsulta = new Label();
+	GridPane formulario = new GridPane();
 
 	public Scene crearPrincipal() {
 		VBox vBox0 = new VBox();
@@ -36,7 +39,6 @@ public class Principal {
 		// VBox0
 		vBox0.getChildren().add(nombrePrograma);
 		VBox vBox1 = new VBox();
-
 		// MenuBar
 		MenuBar barraPrincipal = new MenuBar();
 
@@ -116,8 +118,27 @@ public class Principal {
 				a.show();
 			}
 		});
+		class contratarCampesinoHandlerClass implements EventHandler<ActionEvent>{
+			public void handle(ActionEvent e) {
+				Object control=e.getSource();
+				if(control instanceof MenuItem){
+	                if(control.equals(agronomo1)){
+	                	vBox1.getChildren().addAll(consulta,descripcionConsulta);
+	                	consulta.setText("Contratar campesino");
+	                      consulta.setText("Click en Menu Opcion1");
+	                      root.setStyle("-fx-background-color: BLUE;");
+	                      }
+	                  else if((((MenuItem) control).getText()).equals("Opcion2")){
+	                      lbd.setText("Click en Menu Opcion2");
+	                      root.setStyle("-fx-background-color: RED;");
+	                      }
+	            }
+			}
+		}
+		
 		ayuda.getItems().add(acercaDe);
 		barraPrincipal.getMenus().addAll(archivo, procesos_Consultas, ayuda);
+		vBox1.setMargin(barraPrincipal, new Insets(15));
 		vBox1.getChildren().add(barraPrincipal);
 		vBox0.getChildren().add(vBox1);
 		return principal;
