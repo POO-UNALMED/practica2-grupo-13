@@ -1,5 +1,6 @@
 package uiMain;
 
+import BaseDatos.SerializacionC;
 import javafx.application.*;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
@@ -366,6 +367,7 @@ public class Inicio extends Application {
 	}
 	
 	public static void main(String[] args) {
+		SerializacionC.Load();
 		launch(args);
 	}
 
