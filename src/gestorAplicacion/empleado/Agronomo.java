@@ -2,6 +2,7 @@ package gestorAplicacion.empleado;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import gestorAplicacion.terreno.*;
 import gestorAplicacion.*;
@@ -110,8 +111,8 @@ public class Agronomo extends Empleado implements Serializable {
 	 *                      renunciar
 	 */
 	public void renunciar(int opcionElegida) {
-		System.out.println(agronomos.get(opcionElegida));
-		System.out.println("Ha sido despedido.");
+//		System.out.println(agronomos.get(opcionElegida));
+//		System.out.println("Ha sido despedido.");
 		agronomos.get(opcionElegida).getTerreno().setAgronomo(null);
 		agronomos.remove(opcionElegida);
 	}
@@ -135,11 +136,25 @@ public class Agronomo extends Empleado implements Serializable {
 	public static LinkedList<Agronomo> getAgronomos() {
 		return agronomos;
 	}
-	public static ArrayList<String> mostrarAgronomosGUI() {
-		ArrayList<String>Agronomos=new ArrayList<String>();
-		for (Integer i = 0; i < agronomos.size(); i++) {
+	
+	
+	public static LinkedList<String> mostrarAgronomosGUI() {
+		LinkedList<String> Agronomos = new LinkedList<String>();
+		for (int i = 0; i < agronomos.size(); i++) {
 			 Agronomos.add(Integer.toString(agronomos.get(i).getCedula()));
 		}
 		return (Agronomos);
+	}
+	
+	public static Agronomo getAgronomo(int cedula) {
+		Iterator<Agronomo> agronomo = agronomos.iterator();
+		Agronomo aExistente = null;
+		while (agronomo.hasNext()) {
+			Agronomo a = (Agronomo) agronomo.next();
+			if (a.getCedula() == cedula) {
+				aExistente = a;
+			}
+		}
+		return aExistente;
 	}
 }

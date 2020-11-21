@@ -52,7 +52,7 @@ public class FieldPanel extends Pane{
 			datosUsuario[i] = valorCampo;
 		}	
 	}
-	FieldPanel (String tituloCriterios, String[] criterios, String tituloValores, String[] valores, boolean[] habilitado,ArrayList<String> Idterrenos) {
+	FieldPanel (String tituloCriterios, String[] criterios, String tituloValores, String[] valores, boolean[] habilitado,ArrayList<String> Idterrenos) {//Contratar Agrónomos y Campesinos
 		datosUsuario = new TextField[criterios.length-1];
 		formulario = new GridPane();
 		this.tituloCriterios = new Label(tituloCriterios);
@@ -80,8 +80,8 @@ public class FieldPanel extends Pane{
 		ComboBox terrenosCombo = new ComboBox(FXCollections.observableArrayList(Idterrenos));
 		formulario.add(terrenosCombo, 2, habilitado.length, 3, 1);
 	}
-	FieldPanel (String tituloCriterios, String[] criterios, String tituloValores,ArrayList<String> Idterrenos) {
-		datosUsuario = new TextField[criterios.length];
+	FieldPanel (String tituloCriterios, String[] criterios, String tituloValores, ArrayList<String> Idterrenos) { //Despedir Campesinos
+		
 		formulario = new GridPane();
 		this.tituloCriterios = new Label(tituloCriterios);
 		this.tituloCriterios.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
@@ -105,8 +105,30 @@ public class FieldPanel extends Pane{
 		formulario.add(terrenosCombo, 2, 1, 3, 1);
 		formulario.add(campesinosCombo, 2, 2, 3, 1);
 	}
+	FieldPanel (String tituloCriterios, String[] criterios, String tituloValores, LinkedList<String> cedulaAgronomo) { //Despedir Agrónomos
+		formulario = new GridPane();
+		this.tituloCriterios = new Label(tituloCriterios);
+		this.tituloCriterios.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+		this.tituloValores = new Label(tituloValores);
+		this.tituloValores.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+		formulario.add(this.tituloCriterios, 0, 0, 2, 1);
+		formulario.add(this.tituloValores, 2, 0, 3, 1);
+		formulario.setVgap(13);
+		formulario.setHgap(35);
+		
+		int count = 1;
+		for (String campo : criterios) {
+			Label nombreCampo = new Label(campo);
+			formulario.add(nombreCampo, 0, count, 2, 1);
+			count++;
+		}
+		
+		ComboBox cedulaCombo = new ComboBox(FXCollections.observableArrayList(cedulaAgronomo));
+		cedulaCombo.setEditable(false);
+		formulario.add(cedulaCombo, 2, 1, 3, 1);
+	}
+	
 	public String getValue(int indice) {
-		System.out.println(datosUsuario[indice].getText());
 		return (datosUsuario[indice].getText());
 	}
 	public void borrarValue() {
