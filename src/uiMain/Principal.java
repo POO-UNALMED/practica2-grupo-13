@@ -263,10 +263,11 @@ public class Principal {
 					String[] campos = {"Agronomo"};
 					String[] valores = {""};
 					boolean[] editable = {true};
-					
 					despedirAgronomo = new FieldPanel("Datos Agronomo", campos, "Ingrese aqui", valores, editable,Agronomo.mostrarAgronomosGUI()); 
 					vBox1.getChildren().addAll(despedirAgronomo.formulario);
 					despedirAgronomo.formulario.setAlignment(Pos.CENTER);
+					
+					
 				}else if(control.equals(campesino2)) {//despedir
 					vBox1.getChildren().addAll(consulta,descripcionConsulta);
 					consulta.setText("Despedir Campesino");
