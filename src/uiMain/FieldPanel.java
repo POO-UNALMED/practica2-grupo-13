@@ -53,7 +53,7 @@ public class FieldPanel extends Pane{
 		}	
 	}
 	FieldPanel (String tituloCriterios, String[] criterios, String tituloValores, String[] valores, boolean[] habilitado,ArrayList<String> Idterrenos) {
-		datosUsuario = new TextField[criterios.length];
+		datosUsuario = new TextField[criterios.length-1];
 		formulario = new GridPane();
 		this.tituloCriterios = new Label(tituloCriterios);
 		this.tituloCriterios.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
@@ -80,7 +80,7 @@ public class FieldPanel extends Pane{
 		ComboBox terrenosCombo = new ComboBox(FXCollections.observableArrayList(Idterrenos));
 		formulario.add(terrenosCombo, 2, habilitado.length, 3, 1);
 	}
-	FieldPanel (String tituloCriterios, String[] criterios, String tituloValores, String[] valores, boolean[] habilitado,LinkedList<Terreno> terrenos) {
+	FieldPanel (String tituloCriterios, String[] criterios, String tituloValores,ArrayList<String> Idterrenos) {
 		datosUsuario = new TextField[criterios.length];
 		formulario = new GridPane();
 		this.tituloCriterios = new Label(tituloCriterios);
@@ -99,20 +99,11 @@ public class FieldPanel extends Pane{
 			count++;
 		}
 		
-		for (int i = 0; i < habilitado.length-1; i++) {
-			TextField valorCampo = new TextField(valores[i]);
-			valorCampo.setEditable(habilitado[i]);
-			formulario.add(valorCampo, 2, i+1, 3, 1);
-			datosUsuario[i] = valorCampo;
-		}
-		ComboBox terrenosCombo = new ComboBox(FXCollections.observableArrayList(terrenos));
-		formulario.add(terrenosCombo, 2, habilitado.length, 3, 1);
-		for (int i = 0; i < terrenos.size(); i++) {
-			for (int j = 0; j < habilitado.length; j++) {
-				
-			}
-		}
-		
+		ComboBox terrenosCombo = new ComboBox(FXCollections.observableArrayList(Idterrenos));
+		ComboBox campesinosCombo = new ComboBox();
+		campesinosCombo.setEditable(false);
+		formulario.add(terrenosCombo, 2, 1, 3, 1);
+		formulario.add(campesinosCombo, 2, 2, 3, 1);
 	}
 	public String getValue(int indice) {
 		System.out.println(datosUsuario[indice].getText());

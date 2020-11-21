@@ -53,9 +53,15 @@ public class Campesino extends Empleado implements Serializable{
 	 * @param opcionElegida
 	 * @param opcionElegida2
 	 */
+	//delete soon
 	public void renunciar(int opcionElegida, int opcionElegida2) {
 		Terreno.getTerrenos().get(opcionElegida).getCampesinos().remove(opcionElegida2);
 	}
+	
+	public void renunciar2(Terreno terrrenoRenuncia, Campesino campsinoDespedido) {
+		terrrenoRenuncia.getCampesinos().remove(campsinoDespedido);
+	}
+
 	public static void verificarCampesinos(int opcionElegida) throws Varios {
 		if(Terreno.getTerrenos().get(opcionElegida).getCampesinos().size() == 0) {
 			throw new Varios();
@@ -117,5 +123,18 @@ public class Campesino extends Empleado implements Serializable{
 	public void fertilizar(Terreno terreno) {
 		terreno.fertilizarTerreno();
 	}
+	
+	public static Campesino buscarCampesino(Terreno terreno,int cedula) {
+		Iterator<Campesino> campesino = terreno.getCampesinos().iterator();
+		Campesino cExistente = null;
+		while (campesino.hasNext()) {
+			Campesino c = (Campesino) campesino.next();
+			if (c.getCedula() == cedula) {
+				cExistente = c;
+			}
+		}
+		return cExistente;
+	}
+
 }
  

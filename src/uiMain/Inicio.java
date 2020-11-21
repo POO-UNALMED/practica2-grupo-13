@@ -1,6 +1,7 @@
 package uiMain;
 
 import BaseDatos.SerializacionC;
+import BaseDatos.SerializacionG;
 import javafx.application.*;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
@@ -342,6 +343,7 @@ public class Inicio extends Application {
 
 	class salirHandlerClass implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
+			SerializacionG.Save();
 			Platform.exit();
 			System.exit(0);
 		}
