@@ -34,14 +34,18 @@ public class Principal {
 	 * Instancia de la clase Inicio con la que esta asociado la ventana Principal
 	 */
 	Inicio linkInicio;
-	Label consulta = new Label();
-	Label descripcionConsulta = new Label();
+
+	BorderPane vBox0;
+	
 	GridPane formulario = new GridPane();
-	VBox vBox1;
-	FieldPanel contratarAgronomo;
-	FieldPanel contratarCampesino;
+	
+	
+	BuildContrartarAgronomo iContratarAgronomo;
+	BuildContrartarCampesino iContratarCampesino;
+	BuildDespedirCampesino iDespedirCampesino;
+	BuildDespedirAgronomo iDespedirAgronomo;
+	
 	FieldPanel despedirAgronomo;
-	FieldPanel despedirCampesino;
 	
 	
 	MenuItem agronomo1;
@@ -55,29 +59,15 @@ public class Principal {
 	MenuItem addTerreno; 
 	MenuItem fertelizarIrrigar;
 	
-	Button aceptarAgronomo;
-	Button borrarAgronomo;
-	Button aceptarCampesino;
-	Button borrarCampesino;
-	Button aceptarDespedirAgronomo;
-	Button aceptarDespedirCampesino;
-	Button borrarDespedirCampesino;
-	
-	
 	ArrayList<String> cedulasCampesinos;
 	String idTerrenoSeleccionado;
 	String cedulaSeleccionada;
 	String cedulaAgronomo;
 	
 	ComboBox comboBoxAddTerreno;
-	ComboBox comboBoxCampesinos;
 	ComboBox comboBoxAddTerrenoC;
-	ComboBox comboBoxCedulaA;
 	public Scene crearPrincipal() {
-		VBox vBox0 = new VBox();
-		vBox1 = new VBox();
-		vBox1.setAlignment(Pos.CENTER);
-		
+		vBox0 = new BorderPane();
 		
 		principal = new Scene(vBox0, 1240, 580);
 
@@ -202,18 +192,11 @@ public class Principal {
 		HandlerMenu handlerFer = new HandlerMenu();
 		fertelizarIrrigar.setOnAction(handlerFer);
 		
-		//Label
-		consulta.setPadding(new Insets(25));
-		descripcionConsulta.setPadding(new Insets(25));
-		consulta.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-		descripcionConsulta.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-		
 		
 		ayuda.getItems().add(acercaDe);
 		barraPrincipal.getMenus().addAll(archivo, procesos_Consultas, ayuda);
+		vBox0.setTop(barraPrincipal);
 		vBox0.setMargin(barraPrincipal, new Insets(15));
-		vBox0.getChildren().add(barraPrincipal);
-		vBox0.getChildren().add(vBox1);
 		return principal;
 
 	}
@@ -222,100 +205,45 @@ public class Principal {
 			Object control=e.getSource();
 			if(control instanceof MenuItem){
 				if(control.equals(agronomo1)){
-					
-					
-					vBox1.getChildren().addAll(consulta,descripcionConsulta);
-					consulta.setText("Contratar Agronomo");
-					descripcionConsulta.setText("Vincula un agronomo a un terreno");
-					
-					String[] campos = {"Nombre", "Sueldo", "Cedula", "Terreno"};
-					String[] valores = {"", "", "", ""};
-					boolean[] editable = {true, true, true, true};
-					contratarAgronomo = new FieldPanel("Datos agronomo", campos, "Ingrese aqui", valores, editable, Terreno.mostrarTerrenosGUI()); 
-					
-					comboBoxAddTerreno = (ComboBox) getComboBox(4, 2, contratarAgronomo.formulario);
-					comboBoxAddTerreno.valueProperty().addListener(new ChangeListener<String>() {
+					iContratarAgronomo = new BuildContrartarAgronomo();
+					VBox vBoxBase = iContratarAgronomo.vBoxBase();
+					vBox0.setCenter(vBoxBase);
+					iContratarAgronomo.terrenosCombo.valueProperty().addListener(new ChangeListener<String>() {
 						@Override
 						public void changed(ObservableValue ov, String t, String idTerreno) {
 							idTerrenoSeleccionado = idTerreno;
 						}
 					});
-					
-					vBox1.getChildren().addAll(contratarAgronomo.formulario);
-					contratarAgronomo.formulario.setAlignment(Pos.CENTER);
-					
-					HBox botonesContratarAgronomo = new HBox();
-					aceptarAgronomo = new Button(" Aceptar ");
-					borrarAgronomo = new Button(" Borrar ");
-					botonesContratarAgronomo.getChildren().addAll(aceptarAgronomo,borrarAgronomo);
-					aceptarAgronomo.setAlignment(Pos.CENTER);
-					borrarAgronomo.setAlignment(Pos.CENTER);
-					botonesContratarAgronomo.setAlignment(Pos.CENTER);
-					botonesContratarAgronomo.setPadding(new Insets(20));
-					botonesContratarAgronomo.setMargin(aceptarAgronomo, new Insets(20));
-					botonesContratarAgronomo.setMargin(borrarAgronomo, new Insets(20));
-					vBox1.getChildren().add(botonesContratarAgronomo);
-					
+
 					agronomoHandlerClass hContratarAgronomo = new agronomoHandlerClass();
-					aceptarAgronomo.setOnAction(hContratarAgronomo);
-					borrarAgronomo.setOnAction(hContratarAgronomo);
-					
-		
-					
+					iContratarAgronomo.aceptarAgronomo.setOnAction(hContratarAgronomo);
+					iContratarAgronomo.borrarAgronomo.setOnAction(hContratarAgronomo);	
 					
 				}else if (control.equals(campesino1)) {
 					
-					
-					
-					vBox1.getChildren().addAll(consulta,descripcionConsulta);
-					consulta.setText("Contratar Campesino");
-					descripcionConsulta.setText("Vincula un campesino a un terreno");
-					String[] campos = {"Nombre", "Sueldo", "Cedula", "Terreno"};
-					String[] valores = {"", "", "", ""};
-					boolean[] editable = {true, true, true, true};
-					contratarCampesino = new FieldPanel("Datos campesino", campos, "Ingrese aqui", valores, editable,Terreno.mostrarTerrenosGUI()); 
-					vBox1.getChildren().addAll(contratarCampesino.formulario);
-					contratarCampesino.formulario.setAlignment(Pos.CENTER);
-					
-					comboBoxAddTerrenoC	= (ComboBox) getComboBox(4, 2, contratarCampesino.formulario);
-					comboBoxAddTerrenoC.valueProperty().addListener(new ChangeListener<String>() {
+					iContratarCampesino = new BuildContrartarCampesino();
+					VBox vBoxBase = iContratarCampesino.vBoxBase();
+					vBox0.setCenter(vBoxBase);
+				
+					iContratarCampesino.terrenosCombo.valueProperty().addListener(new ChangeListener<String>() {
 						@Override
 						public void changed(ObservableValue ov, String t, String idTerreno) {
 							idTerrenoSeleccionado = idTerreno;
 						}
 					});				
 					
-					
-					HBox botonesContratarCampesino = new HBox();
-					aceptarCampesino = new Button(" Aceptar ");
-					borrarCampesino = new Button(" Borrar ");
-					botonesContratarCampesino.getChildren().addAll(aceptarCampesino,borrarCampesino);
-					aceptarCampesino.setAlignment(Pos.CENTER);
-					borrarCampesino.setAlignment(Pos.CENTER);
-					botonesContratarCampesino.setAlignment(Pos.CENTER);
-					botonesContratarCampesino.setPadding(new Insets(20));
-					botonesContratarCampesino.setMargin(aceptarCampesino, new Insets(20));
-					botonesContratarCampesino.setMargin(borrarCampesino, new Insets(20));
-					vBox1.getChildren().add(botonesContratarCampesino);
-					
 					campesinoHandlerClass hContratarCampesino = new campesinoHandlerClass();
-					aceptarCampesino.setOnAction(hContratarCampesino);
-					borrarCampesino.setOnAction(hContratarCampesino);
+					iContratarCampesino.aceptarCampesino.setOnAction(hContratarCampesino);
+					iContratarCampesino.borrarCampesino.setOnAction(hContratarCampesino);
 					
 					
 					
 				}else if(control.equals(campesino2)) {//despedir // Debemos revisar esta !!!!!!
 					
-					vBox1.getChildren().addAll(consulta,descripcionConsulta);
-					consulta.setText("Despedir Campesino");
-					descripcionConsulta.setText("Desvincula un campesino de un terreno");
-					String[] campos = {"Terreno","Campesino"};
-					despedirCampesino = new FieldPanel("Datos Campesino", campos, "Ingrese aqui",Terreno.mostrarTerrenosGUI());
-					ComboBox comboBoxTerrenos = (ComboBox) getComboBox(1, 2, despedirCampesino.formulario);
-					vBox1.getChildren().addAll(despedirCampesino.formulario);
-					despedirCampesino.formulario.setAlignment(Pos.CENTER);
-					comboBoxCampesinos = (ComboBox) getComboBox(2, 2, despedirCampesino.formulario);
-					comboBoxTerrenos.valueProperty().addListener(new ChangeListener<String>() {
+					iDespedirCampesino = new BuildDespedirCampesino();
+					VBox vBoxBase = iDespedirCampesino.vBoxBase();
+					vBox0.setCenter(vBoxBase);
+					iDespedirCampesino.comboBoxTerrenos.valueProperty().addListener(new ChangeListener<String>() {
 						@Override
 						public void changed(ObservableValue ov, String t, String idTerreno) {
 							ArrayList<String> cedulasCampesinos = new ArrayList<String>();
@@ -325,62 +253,39 @@ public class Principal {
 								cedulasCampesinos.add(Integer.toString(i.getCedula()));
 							}
 							
-							for (int j = 0; j < comboBoxCampesinos.getItems().size(); j++) {
-								comboBoxCampesinos.getItems().remove(j);
+							for (int j = 0; j < iDespedirCampesino.comboBoxCampesinos.getItems().size(); j++) {
+								iDespedirCampesino.comboBoxCampesinos.getItems().remove(j);
 							}
-							comboBoxCampesinos.getItems().addAll(cedulasCampesinos);
+							iDespedirCampesino.comboBoxCampesinos.getItems().addAll(cedulasCampesinos);
 							idTerrenoSeleccionado = idTerreno;
 						}
 					});
-					comboBoxCampesinos.valueProperty().addListener(new ChangeListener<String>() {
+					iDespedirCampesino.comboBoxCampesinos.valueProperty().addListener(new ChangeListener<String>() {
 						@Override
 						public void changed(ObservableValue ov, String t, String cedula) {
 							if (cedula!=null) { //                      Tal vez aquí haya un erros. OJO!!!!!!
-								cedulaSeleccionada = cedula;
 							}
+							cedulaSeleccionada = cedula;
 						}
 					});
-					
-					HBox botonesDespedirCampesino = new HBox();
-					aceptarDespedirCampesino = new Button(" Aceptar ");
-					botonesDespedirCampesino.getChildren().add(aceptarDespedirCampesino);
 					campesinoHandlerClass hDespedirCampesino = new campesinoHandlerClass();
-					aceptarDespedirCampesino.setOnAction(hDespedirCampesino);
-					aceptarDespedirCampesino.setAlignment(Pos.CENTER);
-					botonesDespedirCampesino.setAlignment(Pos.CENTER);
-					botonesDespedirCampesino.setMargin(aceptarDespedirCampesino, new Insets(20));
-					botonesDespedirCampesino.setPadding(new Insets(20));
-					vBox1.getChildren().add(botonesDespedirCampesino);
+					iDespedirCampesino.aceptarDespedirCampesino.setOnAction(hDespedirCampesino);
 					
 				}else if(control.equals(agronomo2)) {//despedir
-					
-					vBox1.getChildren().addAll(consulta,descripcionConsulta);
-					consulta.setText("Despedir Agronomo");
-					descripcionConsulta.setText("Desvincula un agronomo del terreno en que esta");
-					String[] campos = {"Agronomos"};
-					
-					despedirAgronomo = new FieldPanel("Datos agronomo", campos, "Selecciones un agronomo", Agronomo.mostrarAgronomosGUI());
-					vBox1.getChildren().addAll(despedirAgronomo.formulario);
-					despedirAgronomo.formulario.setAlignment(Pos.CENTER);
-					
-					comboBoxCedulaA = (ComboBox) getComboBox(1, 2, despedirAgronomo.formulario);
-					comboBoxCedulaA.valueProperty().addListener(new ChangeListener<String>() {
+					iDespedirAgronomo = new BuildDespedirAgronomo();
+					VBox vBoxBase = iDespedirAgronomo.vBoxBase();
+					vBox0.setCenter(vBoxBase);
+					iDespedirAgronomo.comboBoxCedulaA.valueProperty().addListener(new ChangeListener<String>() {
 						@Override
 						public void changed(ObservableValue ov, String t, String cedulaA) {
 							cedulaAgronomo = cedulaA; 
 						}
 					});
 					
-					HBox botonesDespedirAgronomo = new HBox();
-					aceptarDespedirAgronomo = new Button(" Aceptar ");
-					botonesDespedirAgronomo.getChildren().add(aceptarDespedirAgronomo);
+				
 					agronomoHandlerClass hDespedirAgronomo = new agronomoHandlerClass();
-					aceptarDespedirAgronomo.setOnAction(hDespedirAgronomo);
-					aceptarDespedirAgronomo.setAlignment(Pos.CENTER);
-					botonesDespedirAgronomo.setAlignment(Pos.CENTER);
-					botonesDespedirAgronomo.setMargin(aceptarDespedirAgronomo, new Insets(20));
-					botonesDespedirAgronomo.setPadding(new Insets(20));
-					vBox1.getChildren().add(botonesDespedirAgronomo);
+					iDespedirAgronomo.aceptarDespedirAgronomo.setOnAction(hDespedirAgronomo);
+				
 					
 				}else if(control.equals(totalProduction)) {
 					
@@ -415,17 +320,17 @@ public class Principal {
 	class agronomoHandlerClass implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
 			Object control = e.getSource();	
-			if (control.equals(aceptarAgronomo)) { // Verificiar con un catch que si exista un terreno
+			if (iContratarAgronomo!=null && control.equals(iContratarAgronomo.aceptarAgronomo)) { // Verificiar con un catch que si exista un terreno
 				Terreno terrenoSeleccionadoAgronomo = Terreno.buscarTerreno(idTerrenoSeleccionado);
-				Agronomo agro = new Agronomo(contratarAgronomo.getValue(0), Integer.parseInt(contratarAgronomo.getValue(1)), Integer.parseInt(contratarAgronomo.getValue(2)), terrenoSeleccionadoAgronomo);
+				Agronomo agro = new Agronomo(iContratarAgronomo.contratarAgronomo.getValue(0), Integer.parseInt(iContratarAgronomo.contratarAgronomo.getValue(1)), Integer.parseInt(iContratarAgronomo.contratarAgronomo.getValue(2)), terrenoSeleccionadoAgronomo);
 				
 			}
-			else if (control.equals(borrarAgronomo)) {
-				contratarAgronomo.borrarValue();
-			}else if(control.equals(aceptarDespedirAgronomo)) {
+			else if (iContratarAgronomo!=null && control.equals(iContratarAgronomo.borrarAgronomo)) {
+				iContratarAgronomo.contratarAgronomo.borrarValue();
+			}else if(iDespedirAgronomo!=null && control.equals(iDespedirAgronomo.aceptarDespedirAgronomo)) {
 				Agronomo  agronomoOut = Agronomo.getAgronomo(Integer.parseInt(cedulaAgronomo));
 				agronomoOut.renunciar(Agronomo.getAgronomos().indexOf(agronomoOut));
-			    comboBoxCedulaA.getItems().remove(cedulaAgronomo);
+			    iDespedirAgronomo.comboBoxCedulaA.getItems().remove(cedulaAgronomo);
 				
 			}
 		}
@@ -433,19 +338,19 @@ public class Principal {
 	class campesinoHandlerClass implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
 			Object control = e.getSource();	
-			if (control.equals(aceptarCampesino)) { // Verificiar con un catch que si exista un terreno
+			if (iContratarCampesino!=null && control.equals(iContratarCampesino.aceptarCampesino)) { // Verificiar con un catch que si exista un terreno
 				Terreno terrenoSeleccionadoCampesino = Terreno.buscarTerreno(idTerrenoSeleccionado);
-				Campesino campe = new Campesino(contratarCampesino.getValue(0), Integer.parseInt(contratarCampesino.getValue(1)), Integer.parseInt(contratarCampesino.getValue(2)), terrenoSeleccionadoCampesino);
+				Campesino campe = new Campesino(iContratarCampesino.contratarCampesino.getValue(0), Integer.parseInt(iContratarCampesino.contratarCampesino.getValue(1)), Integer.parseInt(iContratarCampesino.contratarCampesino.getValue(2)), terrenoSeleccionadoCampesino);
 				
 			}
-			else if (control.equals(borrarCampesino)) {
-				contratarCampesino.borrarValue();
-			}else if(control.equals(aceptarDespedirCampesino)) {				
+			else if (iContratarCampesino!=null && control.equals(iContratarCampesino.borrarCampesino)) {
+				iContratarCampesino.contratarCampesino.borrarValue();
+			}else if(iDespedirCampesino!=null && control.equals(iDespedirCampesino.aceptarDespedirCampesino)) {				
 				Terreno terrenoCampesino = Terreno.buscarTerreno(idTerrenoSeleccionado);
 				Campesino campesinoDespedido = new Campesino();
 				campesinoDespedido = Campesino.buscarCampesino(terrenoCampesino,Integer.parseInt(cedulaSeleccionada));
 				campesinoDespedido.renunciar2(terrenoCampesino, campesinoDespedido);
-				comboBoxCampesinos.getItems().remove(cedulaSeleccionada);
+				iDespedirCampesino.comboBoxCampesinos.getItems().remove(cedulaSeleccionada);
 			}
 
 		}
