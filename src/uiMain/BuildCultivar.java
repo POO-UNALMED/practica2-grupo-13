@@ -28,7 +28,7 @@ public class BuildCultivar {
 		consulta.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
 		descripcionConsulta.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
 		vBoxCultivar.getChildren().addAll(consulta,descripcionConsulta);
-		consulta.setText("Cultiva");
+		consulta.setText("Cultivar");
 		descripcionConsulta.setText("Agrega un tipo de cultivo a el terreno seleccionado");
 		vBoxCultivar.setAlignment(Pos.CENTER);
 		

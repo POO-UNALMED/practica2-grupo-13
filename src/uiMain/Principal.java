@@ -51,6 +51,7 @@ public class Principal {
 	BuildProduccionTotal iProduccionTotal;
 	BuildExaminarCultivo iExaminarCultivo;
 	BuildCultivar iCultivar;
+	BuildCosechar iCosechar;
 	
 	FieldPanel despedirAgronomo;
 	
@@ -326,7 +327,18 @@ public class Principal {
 					iCultivar.borrarCultivar.setOnAction(cultivarHandler);
 					
 				}else if(control.equals(cosechar)) {
-					
+					iCosechar = new BuildCosechar();
+					VBox vBoxBase = iCosechar.vBoxBase();
+					vBox0.setCenter(vBoxBase);
+					iCosechar.terrenosCombo.valueProperty().addListener(new ChangeListener<String>() {
+						@Override
+						public void changed(ObservableValue ov, String t, String terreno) {
+							idTerrenoSeleccionado = terreno; 
+						}
+					});
+					CultivoHandlerClass cosecharHandler = new CultivoHandlerClass();
+					iCosechar.aceptarCosechar.setOnAction(cosecharHandler);
+					iCosechar.borrarCosechar.setOnAction(cosecharHandler);
 				}else if(control.equals(addTerreno)) {
 					
 				}else if(control.equals(fertelizarIrrigar)) {
@@ -435,6 +447,15 @@ public class Principal {
 		      	System.out.println(resultado);
 			}else if (iCultivar != null && control.equals(iCultivar.borrarCultivar)) {
 				iCultivar.cultivar.borrarValue();
+			}
+			else if(iCosechar != null && control.equals(iCosechar.aceptarCosechar)) {
+				Terreno terrenoUsuario;
+				terrenoUsuario = Terreno.buscarTerreno(idTerrenoSeleccionado);
+				ChoiceDialog tipoCultivos = new ChoiceDialog(terrenoUsuario.getCultivos().get(0),terrenoUsuario.getCultivos());				
+		       	tipoCultivos.setHeaderText("Cultivos"); 
+		      	tipoCultivos.setContentText("Seleccione un cultivo para recolectar"); 
+		      	tipoCultivos.showAndWait(); 
+		      	String tipoSeleccionado = (String) tipoCultivos.getSelectedItem();
 			}
 		} 
 	}
