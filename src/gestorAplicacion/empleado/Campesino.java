@@ -100,6 +100,8 @@ public class Campesino extends Empleado implements Serializable{
 		//Modificar el size disponible del terreno que contiene el cultivo que se esta recolectando
 		int tempSize = cultivo.getTamano();
 		cultivo.getTerreno().setTamanoDisponible(tempSize);
+		LinkedList<Cultivo> tempCultivos = new LinkedList<Cultivo>();
+	
 		
 		//Sumar la candidad producida por tipo 
 		String tempTypeCrop = cultivo.getTipoCultivo();
@@ -113,8 +115,18 @@ public class Campesino extends Empleado implements Serializable{
 		//Remove del cultivo en la lista de los cultivos estan en el terreno
 		this.getTerreno().getCultivos().remove(cultivo);
 		this.getTerreno().getTipos().remove(cultivo.getTipoCultivo());
-		Cultivo.getCultivos().remove(cultivo);
-	}	
+		tempCultivos = Cultivo.getCultivos();
+		int indicet = tempCultivos.indexOf(cultivo);
+		//tempCultivos.remove(indicet);
+		//Cultivo.getCultivos().remove(cultivo);
+		
+		for (Cultivo temp : Cultivo.getCultivos()) {
+			if ((temp.getTerreno().getId().equals(cultivo.getTerreno().getId())) && temp.getTipoCultivo().equals(cultivo.getTipoCultivo()) ){
+				Cultivo.getCultivos().remove(temp);
+			}
+		}
+		
+	}
 	/**
 	 * Metodo que recibe el terreno que se quiere fertilizar para poder sembrar cultivos
 	 * en el
