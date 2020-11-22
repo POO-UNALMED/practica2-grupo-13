@@ -35,6 +35,7 @@ public class BuildContrartarAgronomo {
 		boolean[] editable = {true, true, true};
 		contratarAgronomo = new FieldPanel("Datos agronomo", campos, "Ingrese aqui", valores, editable);
 		terrenosCombo = new ComboBox(FXCollections.observableArrayList(Terreno.mostrarTerrenosGUI()));
+		terrenosCombo.setPrefWidth(150);
 		contratarAgronomo.formulario.add(new Label("Terreno"), 0, 4, 2, 1);
 		contratarAgronomo.formulario.add(terrenosCombo, 2, 4, 3, 1);
 		

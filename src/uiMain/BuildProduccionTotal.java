@@ -19,7 +19,6 @@ public class BuildProduccionTotal {
 	Label descripcionConsulta = new Label();
 	VBox vBoxProduccionTotal = new VBox();
 	FieldPanel produccionTotal;
-	ComboBox terrenosCombo;
 	Button aceptarCampesino;
 	Button borrarCampesino;
 	

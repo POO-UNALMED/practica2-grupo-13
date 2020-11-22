@@ -36,6 +36,7 @@ public class BuildFertilizarIrrigar {
 		boolean[] editable = {};
 		FertilizarIrrigar = new FieldPanel("", campos, "Seleccionar terreno", valores, editable);
 		terrenosCombo = new ComboBox(FXCollections.observableArrayList(Terreno.mostrarTerrenosGUI()));
+		terrenosCombo.setPrefWidth(150);
 		FertilizarIrrigar.formulario.add(terrenosCombo, 2, 1, 3, 1);
 		
 		vBoxFertilizarIrrigar.getChildren().add(FertilizarIrrigar.formulario);

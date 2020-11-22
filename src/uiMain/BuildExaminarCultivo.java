@@ -48,6 +48,7 @@ public class BuildExaminarCultivo {
 		formulario.add(this.tituloValores, 2, 0, 3, 1);
 		formulario.add(new Label("Cultivos"), 0, 1, 2, 1);
 		comboBoxCultivos = new ComboBox(FXCollections.observableArrayList(Cultivo.mostrarCultivosGUI()));
+		comboBoxCultivos.setPrefWidth(200);
 		formulario.add(comboBoxCultivos, 2, 1, 3, 1);
 	
 		vBoxExaminarCultivo.getChildren().add(formulario);

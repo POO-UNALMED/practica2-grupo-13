@@ -37,6 +37,7 @@ public class BuildCultivar {
 		boolean[] editable = {true};
 		cultivar = new FieldPanel("Datos cultivo", campos, "Ingrese aqui", valores, editable);
 		terrenosCombo = new ComboBox(FXCollections.observableArrayList(Terreno.mostrarTerrenosGUI()));
+		terrenosCombo.setPrefWidth(150);
 		cultivar.formulario.add(new Label("Terreno"), 0, 2, 2, 1);
 		cultivar.formulario.add(terrenosCombo, 2, 2, 3, 1);
 		

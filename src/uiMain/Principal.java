@@ -247,8 +247,6 @@ public class Principal {
 					iContratarCampesino.aceptarCampesino.setOnAction(hContratarCampesino);
 					iContratarCampesino.borrarCampesino.setOnAction(hContratarCampesino);
 					
-					
-					
 				}else if(control.equals(campesino2)) {//despedir // Debemos revisar esta !!!!!!
 					
 					iDespedirCampesino = new BuildDespedirCampesino();
@@ -257,17 +255,13 @@ public class Principal {
 					iDespedirCampesino.comboBoxTerrenos.valueProperty().addListener(new ChangeListener<String>() {
 						@Override
 						public void changed(ObservableValue ov, String t, String idTerreno) {
-							ArrayList<String> cedulasCampesinos = new ArrayList<String>();
 							Terreno terrenoToDespedir = Terreno.buscarTerreno(idTerreno);
-							
-							for (Campesino i : terrenoToDespedir.getCampesinos()) {
-								cedulasCampesinos.add(Integer.toString(i.getCedula()));
+							int sizeComboBoxCampesinos = iDespedirCampesino.comboBoxCampesinos.getItems().size();
+							for (int j = 0; j < sizeComboBoxCampesinos; j++) {
+								iDespedirCampesino.comboBoxCampesinos.getItems().remove(0);
 							}
 							
-							for (int j = 0; j < iDespedirCampesino.comboBoxCampesinos.getItems().size(); j++) {
-								iDespedirCampesino.comboBoxCampesinos.getItems().remove(j);
-							}
-							iDespedirCampesino.comboBoxCampesinos.getItems().addAll(cedulasCampesinos);
+							iDespedirCampesino.comboBoxCampesinos.getItems().addAll(terrenoToDespedir.getCedulasCampesinos());
 							idTerrenoSeleccionado = idTerreno;
 						}
 					});

@@ -45,8 +45,10 @@ public class BuildDespedirCampesino {
 		formulario.add(new Label("Terreno"), 0, 1, 2, 1);
 		formulario.add(new Label("Campesino"), 0, 2, 2, 1);
 		comboBoxTerrenos = new ComboBox(FXCollections.observableArrayList(Terreno.mostrarTerrenosGUI()));
+		comboBoxTerrenos.setPrefWidth(150);
 		comboBoxCampesinos = new ComboBox();
 		comboBoxCampesinos.setEditable(false);
+		comboBoxCampesinos.setPrefWidth(150);
 		formulario.add(comboBoxTerrenos, 2, 1, 3, 1);
 		formulario.add(comboBoxCampesinos, 2, 2, 3, 1);
 		

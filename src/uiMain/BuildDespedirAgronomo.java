@@ -45,6 +45,7 @@ public class BuildDespedirAgronomo {
 		formulario.add(this.tituloValores, 2, 0, 3, 1);
 		formulario.add(new Label("Agronomos"), 0, 1, 2, 1);
 		comboBoxCedulaA = new ComboBox(FXCollections.observableArrayList(Agronomo.mostrarAgronomosGUI()));
+		comboBoxCedulaA.setPrefWidth(150);
 		formulario.add(comboBoxCedulaA, 2, 1, 3, 1);
 		
 		vBoxDespedirAgronomo.getChildren().add(formulario);

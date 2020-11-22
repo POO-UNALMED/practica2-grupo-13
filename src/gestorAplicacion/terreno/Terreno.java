@@ -411,5 +411,15 @@ public class Terreno implements Serializable {
 		}
 		return (terrenosId);
 	}
+	
+	public ArrayList<String> getCedulasCampesinos(){
+		Iterator<Campesino> campesino = this.getCampesinos().iterator();
+		ArrayList<String> cedulasCampesinos = new ArrayList<String>();
+		while (campesino.hasNext()) {
+			Campesino c = (Campesino) campesino.next();
+			cedulasCampesinos.add(String.valueOf(c.getCedula()));
+		}
+		return cedulasCampesinos;
+	}
 
 }

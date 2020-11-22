@@ -36,6 +36,7 @@ public class BuildCosechar {
 		boolean[] editable = {};
 		Cosechar = new FieldPanel("", campos, "Seleccionar terreno", valores, editable);
 		terrenosCombo = new ComboBox(FXCollections.observableArrayList(Terreno.mostrarTerrenosGUI()));
+		terrenosCombo.setPrefWidth(150);
 		Cosechar.formulario.add(terrenosCombo, 2, 1, 3, 1);
 		
 		vBoxCosechar.getChildren().add(Cosechar.formulario);
