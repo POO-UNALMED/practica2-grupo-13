@@ -17,7 +17,6 @@ public class BuildAddTerreno {
 	Label descripcionConsulta = new Label();
 	VBox vBoxAddTerreno = new VBox();
 	FieldPanel AddTerreno;
-	ComboBox terrenosCombo;
 	Button aceptarAddTerreno;
 	Button borrarAddTerreno;
 	

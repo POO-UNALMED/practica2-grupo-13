@@ -340,10 +340,16 @@ public class Principal {
 					});
 					CultivoHandlerClass cosecharHandler = new CultivoHandlerClass();
 					iCosechar.aceptarCosechar.setOnAction(cosecharHandler);
+					
 				}else if(control.equals(addTerreno)) {
 					iAddTerreno = new BuildAddTerreno();
 					VBox vBoxBase = iAddTerreno.vBoxBase();
 					vBox0.setCenter(vBoxBase);
+					
+					TerrenoHandlerClass terrenoHandler = new TerrenoHandlerClass();
+					iAddTerreno.aceptarAddTerreno.setOnAction(terrenoHandler);
+					iAddTerreno.borrarAddTerreno.setOnAction(terrenoHandler);
+					
 				}else if(control.equals(fertelizarIrrigar)) {
 					iFertilizarIrrigar = new BuildFertilizarIrrigar();
 					VBox vBoxBase = iFertilizarIrrigar.vBoxBase();
@@ -395,10 +401,10 @@ public class Principal {
 				campesinoDespedido.renunciar2(terrenoCampesino, campesinoDespedido);
 				iDespedirCampesino.comboBoxCampesinos.getItems().remove(cedulaSeleccionada);
 			}else if(iFertilizarIrrigar!=null && control.equals(iFertilizarIrrigar.aceptarFertilizarIrrigar)) {
-				System.out.println("fertiliceeee");
-				//ACABAR XDXDXDX
+				Terreno tierraMala = Terreno.buscarTerreno(idTerrenoSeleccionado);
+				Campesino irrigador = tierraMala.getCampesinos().getLast();
+				irrigador.fertilizar(tierraMala);
 			}
-
 		}
 	}
 	
@@ -464,21 +470,35 @@ public class Principal {
 			}else if (iCultivar != null && control.equals(iCultivar.borrarCultivar)) {
 				iCultivar.cultivar.borrarValue();
 			}
+			
 			else if(iCosechar != null && control.equals(iCosechar.aceptarCosechar)) {
 				Terreno terrenoUsuario;
 				terrenoUsuario = Terreno.buscarTerreno(idTerrenoSeleccionado);
-				ArrayList<String>cultivos=new ArrayList<String>();
-				for (int j = 0; j < terrenoUsuario.getCultivos().size(); j++) {
-					cultivos.add(terrenoUsuario.getCultivos().get(j).getTipoCultivo());
-				}
-				ChoiceDialog tipoCultivos = new ChoiceDialog(cultivos.get(0),cultivos);				
+				ChoiceDialog tipoCultivos = new ChoiceDialog(terrenoUsuario.getTipos().get(0),terrenoUsuario.getTipos());				
 		       	tipoCultivos.setHeaderText("Cultivos"); 
 		      	tipoCultivos.setContentText("Seleccione un cultivo para recolectar"); 
 		      	tipoCultivos.showAndWait(); 
 		      	String tipoSeleccionado = (String) tipoCultivos.getSelectedItem();
-		      	//acabar michael
-			}
+		      	Cultivo cultivoRecolectar = terrenoUsuario.buscarCultivo(tipoSeleccionado);
+		      	Campesino recolector = terrenoUsuario.getCampesinos().peek(); //Verificación de que haya campesinos, si no pailas 
+		      	recolector.recolectar(cultivoRecolectar);
+		      	
+			}		
+			
 		} 
+		
+	}
+	class TerrenoHandlerClass implements EventHandler<ActionEvent>{
+		
+		public void handle(ActionEvent evento) {
+			Object control = evento.getSource();
+			if(iAddTerreno != null && control.equals(iAddTerreno.aceptarAddTerreno)) {
+				Terreno terrenoCreado = new Terreno(iAddTerreno.AddTerreno.getValue(0), Integer.parseInt(iAddTerreno.AddTerreno.getValue(1)));
+				System.out.println(terrenoCreado.toString());
+			}else if(iAddTerreno != null && control.equals(iAddTerreno.borrarAddTerreno)){
+				iAddTerreno.AddTerreno.borrarValue();
+			}
+		}
 	}
 
 }

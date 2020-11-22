@@ -117,8 +117,7 @@ public class Campesino extends Empleado implements Serializable{
 		this.getTerreno().getTipos().remove(cultivo.getTipoCultivo());
 		tempCultivos = Cultivo.getCultivos();
 		int indicet = tempCultivos.indexOf(cultivo);
-		//tempCultivos.remove(indicet);
-		//Cultivo.getCultivos().remove(cultivo);
+
 		
 		for (Cultivo temp : Cultivo.getCultivos()) {
 			if ((temp.getTerreno().getId().equals(cultivo.getTerreno().getId())) && temp.getTipoCultivo().equals(cultivo.getTipoCultivo()) ){
