@@ -453,4 +453,12 @@ public class Cultivo implements Serializable {
 	public boolean tieneTamano() {
 		return this.getTamano() > 0;
 	}
+	
+	public static ArrayList<String> mostrarCultivosGUI() {
+		ArrayList<String>cultivosId = new ArrayList<String>();
+		for (Integer i = 0; i < cultivos.size(); i++) {
+			  cultivosId.add(cultivos.get(i).tipoCultivo + "-" + cultivos.get(i).getTerreno().getId());
+		}
+		return (cultivosId);
+	}
 }

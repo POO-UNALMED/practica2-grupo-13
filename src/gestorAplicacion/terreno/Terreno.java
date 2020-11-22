@@ -268,6 +268,18 @@ public class Terreno implements Serializable {
 		}
 		return tExistente;
 	}
+	
+	public Cultivo buscarCultivo(String tipo) {
+		Iterator<Cultivo> cultivo = this.getCultivos().iterator();
+		Cultivo cExistente = null;
+		while (cultivo.hasNext()) {
+			Cultivo c = (Cultivo) cultivo.next();
+			if (c.getTipoCultivo().equals(tipo)) {
+				cExistente = c;
+			}
+		}
+		return cExistente;
+	}
 
 	/**
 	 * Metodo que informa al usuario los cultivos que pueden ser sembrados en el
