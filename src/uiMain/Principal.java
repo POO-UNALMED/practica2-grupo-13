@@ -87,8 +87,16 @@ public class Principal {
 		vBoxRoot.getChildren().add(vBox0);
 		principal = new Scene(vBoxRoot, 1240, 580);
 
-		TextArea instructions = new TextArea("Hola");
-		instructions.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+		TextArea instructions = new TextArea(
+				"El aplicativo creado simula el comportamiento de procesos agrícolas básicos como asignación de terrenos, creación de cultivos, recolección, sembrado, ataque de pestes y contratación de personal.\r\n" + "\n"
+						+ "Se permite al usuario tener un manejo y visión generales de los componentes básicos presentes para la administración adecuada de los mismos. Al registrar terrenos el usuario tiene la libertad de sembrar en ellos cultivos de los siguientes tipos: banano, papa, sandía, mango y fresa pero en cada terreno solo se permite un tipo, quiere decir que si en un terreno ya hay un cultivo de papa no puede haber otro de papa, pero sí puede haber de otros tipos. Dichos cultivos tienen ciertas especificaciones de elementos que requieren para poder cultivarse; niveles de nitrógeno, potasio, fósforo y además una adecuada irrigación, estas propiedades deben estar presentes en el terreno donde se desean plantar. El usuario podrá observar dicha información en el programa. \r\n"
+				   +"\n"+ "Los empleados que el usuario puede contratar se derivan en campesinos y agrónomos, donde los campesinos se asignan a un solo terreno y allí se encargan de labores como sembrado y recolección de cultivos. Además cuando se requiera fertilizar un terreno para que este sea apto para la siembra de todos los tipos de cultivos el campesino será el encargado de llevar a cabo dicha tarea. Por otro lado, los agrónomos, de los cuales habrá uno por cada terreno, se encargan de orientar a los campesinos y de aplicar los pesticidas adecuados para cada amenaza cuando un cultivo esté bajo ataque de alguna, pues existen tres tipos de pestes que atacan a los cultivos: maleza, hongo y plagas, para las cuales se tiene sus respectivos pesticidas.\r\n"
+						+ "");
+		instructions.setFont(Font.font("Bahnschrift", FontWeight.THIN, 16));
+		instructions.setWrapText(true);
+		instructions.setPrefHeight(400);
+		instructions.setEditable(false);
+		vBox0.setMargin(instructions, new Insets(30));
 		vBox0.setCenter(instructions);
 		// MenuBar
 		MenuBar barraPrincipal = new MenuBar();
