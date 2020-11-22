@@ -36,14 +36,20 @@ public class BuildDespedirCampesino {
 		tituloCriterios = new Label("Datos Campesino");
 		tituloCriterios.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 		tituloValores = new Label("Ingrese aqui");
-		tituloValores.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+		tituloValores.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 		
 		formulario.setVgap(13);
 		formulario.setHgap(35);	
 		formulario.add(this.tituloCriterios, 0, 0, 2, 1);
 		formulario.add(this.tituloValores, 2, 0, 3, 1);
-		formulario.add(new Label("Terreno"), 0, 1, 2, 1);
-		formulario.add(new Label("Campesino"), 0, 2, 2, 1);
+		Label tituloAux = new Label();
+		tituloAux.setText("Terreno");
+		tituloAux.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+		Label tituloAux2 = new Label();
+		tituloAux2.setText("Campesino");
+		tituloAux2.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+		formulario.add(tituloAux, 0, 1, 2, 1);
+		formulario.add(tituloAux2, 0, 2, 2, 1);
 		comboBoxTerrenos = new ComboBox(FXCollections.observableArrayList(Terreno.mostrarTerrenosGUI()));
 		comboBoxTerrenos.setPrefWidth(150);
 		comboBoxCampesinos = new ComboBox();
@@ -57,6 +63,7 @@ public class BuildDespedirCampesino {
 		
 		HBox botonesDespedirCampesino = new HBox();
 		aceptarDespedirCampesino = new Button(" Aceptar ");
+		aceptarDespedirCampesino.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		botonesDespedirCampesino.getChildren().add(aceptarDespedirCampesino);
 		aceptarDespedirCampesino.setAlignment(Pos.CENTER);
 		botonesDespedirCampesino.setAlignment(Pos.CENTER);

@@ -19,7 +19,6 @@ public class BuildFertilizarIrrigar {
 	FieldPanel FertilizarIrrigar;
 	ComboBox terrenosCombo;
 	Button aceptarFertilizarIrrigar;
-	Button borrarFertilizarIrrigar;
 	
 	public VBox vBoxBase() {
 		consulta.setPadding(new Insets(25));
@@ -44,6 +43,7 @@ public class BuildFertilizarIrrigar {
 		
 		HBox botonesFertilizarIrrigar = new HBox();
 		aceptarFertilizarIrrigar = new Button(" Aceptar ");
+		aceptarFertilizarIrrigar.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		botonesFertilizarIrrigar.getChildren().addAll(aceptarFertilizarIrrigar);
 		aceptarFertilizarIrrigar.setAlignment(Pos.CENTER);
 		botonesFertilizarIrrigar.setAlignment(Pos.CENTER);

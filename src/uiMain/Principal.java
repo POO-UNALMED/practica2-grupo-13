@@ -78,15 +78,18 @@ public class Principal {
 	ComboBox comboBoxAddTerreno;
 	ComboBox comboBoxAddTerrenoC;
 	public Scene crearPrincipal() {
-		vBox0 = new BorderPane();
-		
-		principal = new Scene(vBox0, 1240, 580);
-
+		VBox vBoxRoot = new VBox();
 		Label nombrePrograma = new Label("Cultivatron");
+		nombrePrograma.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+		nombrePrograma.setPadding(new Insets(15));
+		vBoxRoot.getChildren().add(nombrePrograma);
+		vBox0 = new BorderPane();
+		vBoxRoot.getChildren().add(vBox0);
+		principal = new Scene(vBoxRoot, 1240, 580);
 
-		// VBox0
-		vBox0.getChildren().add(nombrePrograma);
-		
+		TextArea instructions = new TextArea("Hola");
+		instructions.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+		vBox0.setCenter(instructions);
 		// MenuBar
 		MenuBar barraPrincipal = new MenuBar();
 
@@ -268,8 +271,6 @@ public class Principal {
 					iDespedirCampesino.comboBoxCampesinos.valueProperty().addListener(new ChangeListener<String>() {
 						@Override
 						public void changed(ObservableValue ov, String t, String cedula) {
-							if (cedula!=null) { //                      Tal vez aquí haya un erros. OJO!!!!!!
-							}
 							cedulaSeleccionada = cedula;
 						}
 					});

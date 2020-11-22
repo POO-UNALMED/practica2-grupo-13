@@ -19,7 +19,6 @@ public class BuildCosechar {
 	FieldPanel Cosechar;
 	ComboBox terrenosCombo;
 	Button aceptarCosechar;
-	Button borrarCosechar;
 	
 	public VBox vBoxBase() {
 		consulta.setPadding(new Insets(25));
@@ -44,6 +43,7 @@ public class BuildCosechar {
 		
 		HBox botonesCosechar = new HBox();
 		aceptarCosechar = new Button(" Aceptar ");
+		aceptarCosechar.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		botonesCosechar.getChildren().addAll(aceptarCosechar);
 		aceptarCosechar.setAlignment(Pos.CENTER);
 		botonesCosechar.setAlignment(Pos.CENTER);

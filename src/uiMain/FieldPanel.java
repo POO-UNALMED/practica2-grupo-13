@@ -32,15 +32,15 @@ public class FieldPanel extends Pane{
 		this.tituloCriterios = new Label(tituloCriterios);
 		this.tituloCriterios.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 		this.tituloValores = new Label(tituloValores);
-		this.tituloValores.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+		this.tituloValores.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 		formulario.add(this.tituloCriterios, 0, 0, 2, 1);
 		formulario.add(this.tituloValores, 2, 0, 3, 1);
 		formulario.setVgap(13);
 		formulario.setHgap(35);
-		
 		int count = 1;
 		for (String campo : criterios) {
 			Label nombreCampo = new Label(campo);
+			nombreCampo.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 			formulario.add(nombreCampo, 0, count, 2, 1);
 			count++;
 		}

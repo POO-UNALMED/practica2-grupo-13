@@ -40,10 +40,12 @@ public class BuildAddTerreno {
 		
 		HBox botonesAddTerreno = new HBox();
 		aceptarAddTerreno = new Button(" Aceptar ");
+		aceptarAddTerreno.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		borrarAddTerreno = new Button(" Borrar ");
 		botonesAddTerreno.getChildren().addAll(aceptarAddTerreno,borrarAddTerreno);
 		aceptarAddTerreno.setAlignment(Pos.CENTER);
 		borrarAddTerreno.setAlignment(Pos.CENTER);
+		borrarAddTerreno.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		botonesAddTerreno.setAlignment(Pos.CENTER);
 		botonesAddTerreno.setPadding(new Insets(20));
 		botonesAddTerreno.setMargin(aceptarAddTerreno, new Insets(20));

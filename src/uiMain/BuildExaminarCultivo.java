@@ -40,15 +40,18 @@ public class BuildExaminarCultivo {
 		tituloCriterios = new Label("Cultivos");
 		tituloCriterios.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 		tituloValores = new Label("Tipo de cultivo - id de su terreno");
-		tituloValores.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+		tituloValores.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 			
 		formulario.setVgap(13);
 		formulario.setHgap(35);	
 		formulario.add(this.tituloCriterios, 0, 0, 2, 1);
 		formulario.add(this.tituloValores, 2, 0, 3, 1);
-		formulario.add(new Label("Cultivos"), 0, 1, 2, 1);
+		Label tituloAux = new Label();
+		tituloAux.setText("Cultivos");
+		tituloAux.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+		formulario.add(tituloAux, 0, 1, 2, 1);
 		comboBoxCultivos = new ComboBox(FXCollections.observableArrayList(Cultivo.mostrarCultivosGUI()));
-		comboBoxCultivos.setPrefWidth(200);
+		comboBoxCultivos.setPrefWidth(220);
 		formulario.add(comboBoxCultivos, 2, 1, 3, 1);
 	
 		vBoxExaminarCultivo.getChildren().add(formulario);
@@ -57,6 +60,7 @@ public class BuildExaminarCultivo {
 		
 		HBox botonesExaminarCultivo = new HBox();
 		aceptarExaminarCultivo = new Button(" Examinar ");
+		aceptarExaminarCultivo.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		botonesExaminarCultivo.getChildren().add(aceptarExaminarCultivo);
 		aceptarExaminarCultivo.setAlignment(Pos.CENTER);
 		botonesExaminarCultivo.setAlignment(Pos.CENTER);

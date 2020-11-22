@@ -36,7 +36,10 @@ public class BuildContrartarCampesino {
 		contratarCampesino = new FieldPanel("Datos campesino", campos, "Ingrese aqui", valores, editable); 
 		terrenosCombo = new ComboBox(FXCollections.observableArrayList(Terreno.mostrarTerrenosGUI()));
 		terrenosCombo.setPrefWidth(150);
-		contratarCampesino.formulario.add(new Label("Terreno"), 0, 4, 2, 1);
+		Label tituloAux = new Label();
+		tituloAux.setText("Terreno");
+		tituloAux.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+		contratarCampesino.formulario.add(tituloAux, 0, 4, 2, 1);
 		contratarCampesino.formulario.add(terrenosCombo, 2, 4, 3, 1);
 		
 		vBoxContratarCampesino.getChildren().add(contratarCampesino.formulario);
@@ -44,7 +47,9 @@ public class BuildContrartarCampesino {
 		
 		HBox botonesContratarCampesino = new HBox();
 		aceptarCampesino = new Button(" Aceptar ");
+		aceptarCampesino.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		borrarCampesino = new Button(" Borrar ");
+		borrarCampesino.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		botonesContratarCampesino.getChildren().addAll(aceptarCampesino,borrarCampesino);
 		aceptarCampesino.setAlignment(Pos.CENTER);
 		borrarCampesino.setAlignment(Pos.CENTER);

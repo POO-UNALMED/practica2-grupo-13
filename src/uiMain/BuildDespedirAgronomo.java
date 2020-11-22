@@ -37,13 +37,16 @@ public class BuildDespedirAgronomo {
 		tituloCriterios = new Label("Datos Agronomo");
 		tituloCriterios.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 		tituloValores = new Label("Ingrese aqui");
-		tituloValores.setFont(Font.font("Verdana", FontWeight.BOLD, 11));
+		tituloValores.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
 		
 		formulario.setVgap(13);
 		formulario.setHgap(35);	
 		formulario.add(this.tituloCriterios, 0, 0, 2, 1);
 		formulario.add(this.tituloValores, 2, 0, 3, 1);
-		formulario.add(new Label("Agronomos"), 0, 1, 2, 1);
+		Label tituloAux = new Label();
+		tituloAux.setText("Agronomos");
+		tituloAux.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+		formulario.add(tituloAux, 0, 1, 2, 1);
 		comboBoxCedulaA = new ComboBox(FXCollections.observableArrayList(Agronomo.mostrarAgronomosGUI()));
 		comboBoxCedulaA.setPrefWidth(150);
 		formulario.add(comboBoxCedulaA, 2, 1, 3, 1);
@@ -55,6 +58,7 @@ public class BuildDespedirAgronomo {
 		
 		HBox botonesDespedirAgronomo = new HBox();
 		aceptarDespedirAgronomo = new Button(" Aceptar ");
+		aceptarDespedirAgronomo.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		botonesDespedirAgronomo.getChildren().add(aceptarDespedirAgronomo);
 		aceptarDespedirAgronomo.setAlignment(Pos.CENTER);
 		botonesDespedirAgronomo.setAlignment(Pos.CENTER);

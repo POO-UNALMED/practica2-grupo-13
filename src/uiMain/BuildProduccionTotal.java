@@ -19,8 +19,6 @@ public class BuildProduccionTotal {
 	Label descripcionConsulta = new Label();
 	VBox vBoxProduccionTotal = new VBox();
 	FieldPanel produccionTotal;
-	Button aceptarCampesino;
-	Button borrarCampesino;
 	
 	public VBox vBoxBase() {
 		consulta.setPadding(new Insets(25));

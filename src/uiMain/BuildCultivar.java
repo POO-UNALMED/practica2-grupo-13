@@ -38,7 +38,10 @@ public class BuildCultivar {
 		cultivar = new FieldPanel("Datos cultivo", campos, "Ingrese aqui", valores, editable);
 		terrenosCombo = new ComboBox(FXCollections.observableArrayList(Terreno.mostrarTerrenosGUI()));
 		terrenosCombo.setPrefWidth(150);
-		cultivar.formulario.add(new Label("Terreno"), 0, 2, 2, 1);
+		Label tituloAux = new Label();
+		tituloAux.setText("Terreno");
+		tituloAux.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
+		cultivar.formulario.add(tituloAux, 0, 2, 2, 1);
 		cultivar.formulario.add(terrenosCombo, 2, 2, 3, 1);
 		
 		vBoxCultivar.getChildren().add(cultivar.formulario);
@@ -46,7 +49,9 @@ public class BuildCultivar {
 		
 		HBox botonesCultivar = new HBox();
 		aceptarCultivar = new Button(" Aceptar ");
+		aceptarCultivar.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		borrarCultivar = new Button(" Borrar ");
+		borrarCultivar.setFont(Font.font("Verdana", FontWeight.NORMAL, 12));
 		botonesCultivar.getChildren().addAll(aceptarCultivar,borrarCultivar);
 		aceptarCultivar.setAlignment(Pos.CENTER);
 		borrarCultivar.setAlignment(Pos.CENTER);
