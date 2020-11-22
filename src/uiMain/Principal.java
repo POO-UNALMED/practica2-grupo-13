@@ -52,6 +52,8 @@ public class Principal {
 	BuildExaminarCultivo iExaminarCultivo;
 	BuildCultivar iCultivar;
 	BuildCosechar iCosechar;
+	BuildAddTerreno iAddTerreno;
+	BuildFertilizarIrrigar iFertilizarIrrigar;
 	
 	FieldPanel despedirAgronomo;
 	
@@ -338,11 +340,22 @@ public class Principal {
 					});
 					CultivoHandlerClass cosecharHandler = new CultivoHandlerClass();
 					iCosechar.aceptarCosechar.setOnAction(cosecharHandler);
-					iCosechar.borrarCosechar.setOnAction(cosecharHandler);
 				}else if(control.equals(addTerreno)) {
-					
+					iAddTerreno = new BuildAddTerreno();
+					VBox vBoxBase = iAddTerreno.vBoxBase();
+					vBox0.setCenter(vBoxBase);
 				}else if(control.equals(fertelizarIrrigar)) {
-					
+					iFertilizarIrrigar = new BuildFertilizarIrrigar();
+					VBox vBoxBase = iFertilizarIrrigar.vBoxBase();
+					vBox0.setCenter(vBoxBase);
+					iFertilizarIrrigar.terrenosCombo.valueProperty().addListener(new ChangeListener<String>() {
+						@Override
+						public void changed(ObservableValue ov, String t, String terreno) {
+							idTerrenoSeleccionado = terreno; 
+						}
+					});
+					campesinoHandlerClass hFertilizarIrrigar = new campesinoHandlerClass();
+					iFertilizarIrrigar.aceptarFertilizarIrrigar.setOnAction(hFertilizarIrrigar);
 				}
 			}
 		}	
@@ -381,6 +394,9 @@ public class Principal {
 				campesinoDespedido = Campesino.buscarCampesino(terrenoCampesino,Integer.parseInt(cedulaSeleccionada));
 				campesinoDespedido.renunciar2(terrenoCampesino, campesinoDespedido);
 				iDespedirCampesino.comboBoxCampesinos.getItems().remove(cedulaSeleccionada);
+			}else if(iFertilizarIrrigar!=null && control.equals(iFertilizarIrrigar.aceptarFertilizarIrrigar)) {
+				System.out.println("fertiliceeee");
+				//ACABAR XDXDXDX
 			}
 
 		}
@@ -407,7 +423,7 @@ public class Principal {
 				}
 				terrenoU = Terreno.buscarTerreno(terreno);
 				cultivoU = terrenoU.buscarCultivo(tipo);
-				
+				System.out.println(terrenoU.getCultivos());
 				if (cultivoU.getAmenaza() != null) {
 					Alert amenazaU = new Alert(AlertType.WARNING);
 					amenazaU.setTitle(" CUIDADO !! ");
@@ -451,11 +467,16 @@ public class Principal {
 			else if(iCosechar != null && control.equals(iCosechar.aceptarCosechar)) {
 				Terreno terrenoUsuario;
 				terrenoUsuario = Terreno.buscarTerreno(idTerrenoSeleccionado);
-				ChoiceDialog tipoCultivos = new ChoiceDialog(terrenoUsuario.getCultivos().get(0),terrenoUsuario.getCultivos());				
+				ArrayList<String>cultivos=new ArrayList<String>();
+				for (int j = 0; j < terrenoUsuario.getCultivos().size(); j++) {
+					cultivos.add(terrenoUsuario.getCultivos().get(j).getTipoCultivo());
+				}
+				ChoiceDialog tipoCultivos = new ChoiceDialog(cultivos.get(0),cultivos);				
 		       	tipoCultivos.setHeaderText("Cultivos"); 
 		      	tipoCultivos.setContentText("Seleccione un cultivo para recolectar"); 
 		      	tipoCultivos.showAndWait(); 
 		      	String tipoSeleccionado = (String) tipoCultivos.getSelectedItem();
+		      	//acabar michael
 			}
 		} 
 	}

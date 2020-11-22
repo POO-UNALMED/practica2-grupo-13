@@ -43,14 +43,11 @@ public class BuildCosechar {
 		
 		HBox botonesCosechar = new HBox();
 		aceptarCosechar = new Button(" Aceptar ");
-		borrarCosechar = new Button(" Borrar ");
-		botonesCosechar.getChildren().addAll(aceptarCosechar,borrarCosechar);
+		botonesCosechar.getChildren().addAll(aceptarCosechar);
 		aceptarCosechar.setAlignment(Pos.CENTER);
-		borrarCosechar.setAlignment(Pos.CENTER);
 		botonesCosechar.setAlignment(Pos.CENTER);
 		botonesCosechar.setPadding(new Insets(20));
 		botonesCosechar.setMargin(aceptarCosechar, new Insets(20));
-		botonesCosechar.setMargin(borrarCosechar, new Insets(20));
 		vBoxCosechar.getChildren().add(botonesCosechar);
 		
 		return vBoxCosechar;
