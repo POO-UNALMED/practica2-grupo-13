@@ -226,27 +226,37 @@ public class Terreno implements Serializable {
 	}
 	public static void verificacionTerrenos() throws NoHayTerrenosException {
 		if(terrenosTotales.isEmpty()) {
-			throw new NoHayTerrenosException("No hay terrenos");
+			throw new NoHayTerrenosException("No hay terrenos, por favor, asigne uno");
 		}
 	}
-	public static void verificacionIdTerrenos(String id) throws DominioException {
+	public static void verificacionIdTerrenos(String id) throws IdTerrenoException {
 		if(buscarTerreno(id) != null) {
-			throw new DominioException();
+			throw new IdTerrenoException("Ya existe un terreno con este ID");
 		}
 	}
-	public static void verificacionAgronomo(int index) throws PersonasException{
-		if(terrenosTotales.get(index).getAgronomo() != null) {
-			throw new PersonasException();
+	public static void verificacionContratarAgronomo(Terreno terreno) throws NoHayAgronomoException{
+		if(terreno.agronomo != null) {
+			throw new NoHayAgronomoException("Ya tiene un agronomo vinculado a este terreno");
 		}
 	}
-	public static void verificacionCampesino(int index) throws PersonasException{
+	public static void verificacionCampesino(int index) throws NoHayCampesinoException{
 		if(terrenosTotales.get(index).campesinos.size() == 0) {
-			throw new PersonasException();
+			throw new NoHayCampesinoException("No tiene un campesino contratado para realizar la labor");
 		}
 	}
-	public void verificarTamano(int tamano) throws PersonasException {
-		if(this.tamano < tamano) {
-			throw new PersonasException(tamano - this.tamano);
+	public static void verificacionCampesino(Terreno terreno) throws NoHayCampesinoException{
+		if(terreno.campesinos.isEmpty()) {
+			throw new NoHayCampesinoException("No tiene campesinos contratados para despedir");
+		}
+	}
+	public void verificarTamano(int tamano) throws TamanoExcedidoException {
+		if(this.tamanoDisponible < tamano) {
+			throw new TamanoExcedidoException("El tamaño ha sido excedido por: " + (tamano-this.tamanoDisponible) + " hectareas");
+		}
+	}
+	public static void verificacionAgronomoExterminar(Terreno terreno) throws NoAgronomoToExterminarException{
+		if(terreno.getAgronomo() == null) {
+			throw new NoAgronomoToExterminarException("No tiene un agronomo contratado para realizar la labor de exterminacion");
 		}
 	}
 

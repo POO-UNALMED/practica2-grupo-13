@@ -382,21 +382,14 @@ public class Cultivo implements Serializable {
 	public static LinkedList<Cultivo> getCultivos() {
 		return (cultivos);
 	}
-	public static void verificacionCultivos() throws DominioException {
+	public static void verificacionCultivos() throws NoHayCultivoException {
 		if(cultivos.isEmpty()) {
-			throw new DominioException();
+			throw new NoHayCultivoException("No tiene cultivos, por favor, cultive al menos uno");
 		}
 	}
-	public static void verificacionProduccion() throws DominioException{
-		int producido = 0;
-		producido = papaProducida + fresaProducida + sandiaProducida + bananoProducido + mangoProducido;
-		if(producido == 0) {
-			throw new DominioException();
-		}
-	}
-	public void verificacionAmenaza() throws DominioException{
+	public void verificacionAmenaza() throws CultivoAmenazaException{
 		if(this.amenaza != null) {
-			throw new DominioException();
+			throw new CultivoAmenazaException("El cultivo se encuentra bajo una amenaza, por favor, extermine para cosechar el cultivo");
 		}
 	}
 

@@ -77,9 +77,9 @@ public class Agronomo extends Empleado implements Serializable {
 		}
 		return (muestra);
 	}
-	public static void verificarAgronomos() throws PersonasException{
+	public static void verificarDespedirAgronomo() throws NoHayAgronomoException{
 		if(agronomos.isEmpty()) {
-			throw new PersonasException();
+			throw new NoHayAgronomoException("No tiene agronomos para despedir");
 		}
 	}
 

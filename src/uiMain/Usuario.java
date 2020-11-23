@@ -110,7 +110,6 @@ public class Usuario {
 				System.out.println("Seleccione un terreno para mirar los campesinos que laboran en el");
 				System.out.println(Terreno.mostrarTerrenos());
 				opcionElegida = readInt() - 1;
-				Campesino.verificarCampesinos(opcionElegida);
 				System.out.println("Seleccione un campesino para despedir");
 				System.out.println(Campesino.mostrarCampesinos(Terreno.getTerrenos().get(opcionElegida)));
 				opcionElegida2 = readInt() - 1;

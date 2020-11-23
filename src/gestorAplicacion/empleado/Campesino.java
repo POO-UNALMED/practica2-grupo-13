@@ -61,12 +61,6 @@ public class Campesino extends Empleado implements Serializable{
 	public void renunciar2(Terreno terrrenoRenuncia, Campesino campsinoDespedido) {
 		terrrenoRenuncia.getCampesinos().remove(campsinoDespedido);
 	}
-
-	public static void verificarCampesinos(int opcionElegida) throws PersonasException {
-		if(Terreno.getTerrenos().get(opcionElegida).getCampesinos().size() == 0) {
-			throw new PersonasException();
-		}
-	}
 	/**
 	 * Metodo que muestra todas las instancias de Campesino creadas
 	 * @return devuleve un String con las cedulas de cada uno de los Campesinos en todos
