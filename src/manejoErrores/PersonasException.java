@@ -1,12 +1,12 @@
 package manejoErrores;
 
 @SuppressWarnings("serial")
-public class Varios extends ErrorAplicacion {
+public class PersonasException extends ErrorAplicacion {
 
-	public Varios() {
+	public PersonasException() {
 		super();
 	}
-	public Varios(int tamano) {
+	public PersonasException(int tamano) {
 		super();
 		tamanoExcedente = tamano;
 	}

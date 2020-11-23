@@ -62,9 +62,9 @@ public class Campesino extends Empleado implements Serializable{
 		terrrenoRenuncia.getCampesinos().remove(campsinoDespedido);
 	}
 
-	public static void verificarCampesinos(int opcionElegida) throws Varios {
+	public static void verificarCampesinos(int opcionElegida) throws PersonasException {
 		if(Terreno.getTerrenos().get(opcionElegida).getCampesinos().size() == 0) {
-			throw new Varios();
+			throw new PersonasException();
 		}
 	}
 	/**

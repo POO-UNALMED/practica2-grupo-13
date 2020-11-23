@@ -49,7 +49,7 @@ public class Usuario {
 		if ((opcionElegida == 1) || (opcionElegida == 2)) {
 			String nombre; 
 			int sueldo, cedula, terreno;
-			try {
+			try {   //////fsgfd
 				Terreno.verificacionTerrenos();
 				System.out.println("Ingrese el nombre:");
 				nombre = readLine();
@@ -71,12 +71,12 @@ public class Usuario {
 						System.out.println("Se ha contratado un agronomo.");
 						System.out.println(agro);
 					}
-					catch(Varios e) {
+					catch(PersonasException e) {
 						System.out.println("Este terreno ya tiene un agronomo vinculado");
 					}
 				} else {}
 			}
-			catch(Verificacion e) {
+			catch(DominioException e) {
 				System.out.println("No tiene terrenos, por favor, asigne uno");
 			}
 			catch(InputMismatchException e) {
@@ -126,10 +126,10 @@ public class Usuario {
 					Agronomo.getAgronomos().get(opcionElegida).renunciar(opcionElegida);
 			}
 		}
-		catch(Verificacion e) {
+		catch(DominioException e) {
 			System.out.println("No tiene terrenos, por favor, asigne uno");
 		}
-		catch(Varios e) {
+		catch(PersonasException e) {
 			System.out.println("No ha contratado este tipo de empleado");
 		}
 		catch(InputMismatchException e) {
@@ -150,7 +150,7 @@ public class Usuario {
 			System.out.println("Cantidad de mangos: " + Cultivo.getMangoProducido() + " hectareas");
 			System.out.println("Cantidad de fresas: " + Cultivo.getFresaProducida() + " hectareas");
 		}
-		catch(Verificacion e){
+		catch(DominioException e){
 			System.out.println("¡No has recolectado nada de tus cultivos!");
 		}
 	}
@@ -179,7 +179,7 @@ public class Usuario {
 				} else {}
 			}
 		}
-		catch(Verificacion e) {
+		catch(DominioException e) {
 			System.out.println("Debe cultivar primero");
 		}
 		catch(InputMismatchException e) {
@@ -202,7 +202,7 @@ public class Usuario {
 			System.out.println("El terreno ha sido agregado exitosamente");
 			System.out.println(terrenoCreado.toString());
 		}
-		catch(Verificacion e){
+		catch(DominioException e){
 			System.out.println("Un terreno ya tiene este id, por favor, indique otro");
 		}
 	}
@@ -226,10 +226,10 @@ public class Usuario {
 			System.out.println("Terreno fertilizado");
 			System.out.println(Terreno.getTerrenos().get(id).cultivosPermitidos());
 		}
-		catch(Verificacion e) {
+		catch(DominioException e) {
 			System.out.println("No posee terrenos para fertilizar e irrigar");
 		}
-		catch(Varios e) {
+		catch(PersonasException e) {
 			System.out.println("No posee campesinos vinculados a ese terreno para realizar la labor");
 		}
 	}
@@ -265,9 +265,9 @@ public class Usuario {
 							terreno.verificarTamano(tamaño);
 							System.out.println(Cultivo.crearCultivo(tipo, tamaño, terreno));
 						}
-						catch(Varios e) {
+						catch(PersonasException e) {
 							System.out.println("Error, el tamano del cultivo supera al terreno por: ");
-							System.out.println(Varios.getTamanoExcedente());
+							System.out.println(PersonasException.getTamanoExcedente());
 						}
 					} else {
 						System.out.println(
@@ -291,7 +291,7 @@ public class Usuario {
 										+ cultivo.getTamano() + " hectareas.");
 								campesino.recolectar(cultivo);
 							}
-							catch(Verificacion e) {
+							catch(DominioException e) {
 								System.out.println("El cultivo se encuentra bajo una amenaza, por favor, exterminela para recolectar");
 							}
 						} else {
@@ -299,10 +299,10 @@ public class Usuario {
 						}
 			}
 		}
-		catch(Verificacion e) {
+		catch(DominioException e) {
 			System.out.println("No posee terrenos para cultivar, por favor, asigne al menos uno");
 		}
-		catch(Varios e){
+		catch(PersonasException e){
 			System.out.println("No dispone de campesinos en este terreno para relizar las labores");
 		}
 		catch(InputMismatchException e) {

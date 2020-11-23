@@ -224,29 +224,29 @@ public class Terreno implements Serializable {
 	public static LinkedList<Terreno> getTerrenos() {
 		return terrenosTotales;
 	}
-	public static void verificacionTerrenos() throws Verificacion {
+	public static void verificacionTerrenos() throws NoHayTerrenosException {
 		if(terrenosTotales.isEmpty()) {
-			throw new Verificacion();
+			throw new NoHayTerrenosException("No hay terrenos");
 		}
 	}
-	public static void verificacionIdTerrenos(String id) throws Verificacion {
+	public static void verificacionIdTerrenos(String id) throws DominioException {
 		if(buscarTerreno(id) != null) {
-			throw new Verificacion();
+			throw new DominioException();
 		}
 	}
-	public static void verificacionAgronomo(int index) throws Varios{
+	public static void verificacionAgronomo(int index) throws PersonasException{
 		if(terrenosTotales.get(index).getAgronomo() != null) {
-			throw new Varios();
+			throw new PersonasException();
 		}
 	}
-	public static void verificacionCampesino(int index) throws Varios{
+	public static void verificacionCampesino(int index) throws PersonasException{
 		if(terrenosTotales.get(index).campesinos.size() == 0) {
-			throw new Varios();
+			throw new PersonasException();
 		}
 	}
-	public void verificarTamano(int tamano) throws Varios {
+	public void verificarTamano(int tamano) throws PersonasException {
 		if(this.tamano < tamano) {
-			throw new Varios(tamano - this.tamano);
+			throw new PersonasException(tamano - this.tamano);
 		}
 	}
 

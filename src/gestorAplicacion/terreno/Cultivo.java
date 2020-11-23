@@ -382,21 +382,21 @@ public class Cultivo implements Serializable {
 	public static LinkedList<Cultivo> getCultivos() {
 		return (cultivos);
 	}
-	public static void verificacionCultivos() throws Verificacion {
+	public static void verificacionCultivos() throws DominioException {
 		if(cultivos.isEmpty()) {
-			throw new Verificacion();
+			throw new DominioException();
 		}
 	}
-	public static void verificacionProduccion() throws Verificacion{
+	public static void verificacionProduccion() throws DominioException{
 		int producido = 0;
 		producido = papaProducida + fresaProducida + sandiaProducida + bananoProducido + mangoProducido;
 		if(producido == 0) {
-			throw new Verificacion();
+			throw new DominioException();
 		}
 	}
-	public void verificacionAmenaza() throws Verificacion{
+	public void verificacionAmenaza() throws DominioException{
 		if(this.amenaza != null) {
-			throw new Verificacion();
+			throw new DominioException();
 		}
 	}
 

@@ -1,6 +1,7 @@
 package uiMain;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.*;
+import manejoErrores.*;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -226,79 +228,111 @@ public class Principal {
 		public void handle(ActionEvent e) {
 			Object control=e.getSource();
 			if(control instanceof MenuItem){
-				if(control.equals(agronomo1)){
-					iContratarAgronomo = new BuildContrartarAgronomo();
-					VBox vBoxBase = iContratarAgronomo.vBoxBase();
-					vBox0.setCenter(vBoxBase);
-					iContratarAgronomo.terrenosCombo.valueProperty().addListener(new ChangeListener<String>() {
-						@Override
-						public void changed(ObservableValue ov, String t, String idTerreno) {
-							idTerrenoSeleccionado = idTerreno;
-						}
-					});
-
-					agronomoHandlerClass hContratarAgronomo = new agronomoHandlerClass();
-					iContratarAgronomo.aceptarAgronomo.setOnAction(hContratarAgronomo);
-					iContratarAgronomo.borrarAgronomo.setOnAction(hContratarAgronomo);	
-					
-				}else if (control.equals(campesino1)) {
-					
-					iContratarCampesino = new BuildContrartarCampesino();
-					VBox vBoxBase = iContratarCampesino.vBoxBase();
-					vBox0.setCenter(vBoxBase);
-				
-					iContratarCampesino.terrenosCombo.valueProperty().addListener(new ChangeListener<String>() {
-						@Override
-						public void changed(ObservableValue ov, String t, String idTerreno) {
-							idTerrenoSeleccionado = idTerreno;
-						}
-					});				
-					
-					campesinoHandlerClass hContratarCampesino = new campesinoHandlerClass();
-					iContratarCampesino.aceptarCampesino.setOnAction(hContratarCampesino);
-					iContratarCampesino.borrarCampesino.setOnAction(hContratarCampesino);
-					
-				}else if(control.equals(campesino2)) {//despedir // Debemos revisar esta !!!!!!
-					
-					iDespedirCampesino = new BuildDespedirCampesino();
-					VBox vBoxBase = iDespedirCampesino.vBoxBase();
-					vBox0.setCenter(vBoxBase);
-					iDespedirCampesino.comboBoxTerrenos.valueProperty().addListener(new ChangeListener<String>() {
-						@Override
-						public void changed(ObservableValue ov, String t, String idTerreno) {
-							Terreno terrenoToDespedir = Terreno.buscarTerreno(idTerreno);
-							int sizeComboBoxCampesinos = iDespedirCampesino.comboBoxCampesinos.getItems().size();
-							for (int j = 0; j < sizeComboBoxCampesinos; j++) {
-								iDespedirCampesino.comboBoxCampesinos.getItems().remove(0);
-							}
+					if(control.equals(agronomo1)){						
+						try {
+							Terreno.verificacionTerrenos();
+							iContratarAgronomo = new BuildContrartarAgronomo();
+							VBox vBoxBase = iContratarAgronomo.vBoxBase();
+							vBox0.setCenter(vBoxBase);
+							iContratarAgronomo.terrenosCombo.valueProperty().addListener(new ChangeListener<String>() {
+								@Override
+								public void changed(ObservableValue ov, String t, String idTerreno) {
+									idTerrenoSeleccionado = idTerreno;
+								}
+							});
+							agronomoHandlerClass hContratarAgronomo = new agronomoHandlerClass();
+							iContratarAgronomo.aceptarAgronomo.setOnAction(hContratarAgronomo);
+							iContratarAgronomo.borrarAgronomo.setOnAction(hContratarAgronomo);
+						}catch(NoHayTerrenosException excep) {
+							Alert alertaTerreno = new Alert(AlertType.ERROR);
+							alertaTerreno.setHeaderText(excep.getMessage());
+							alertaTerreno.setContentText(excep.mensaje);
+							alertaTerreno.show();
+						}	
+					}else if (control.equals(campesino1)) {
+						try {
+							Terreno.verificacionTerrenos();
+							iContratarCampesino = new BuildContrartarCampesino();
+							VBox vBoxBase = iContratarCampesino.vBoxBase();
+							vBox0.setCenter(vBoxBase);
+						
+							iContratarCampesino.terrenosCombo.valueProperty().addListener(new ChangeListener<String>() {
+								@Override
+								public void changed(ObservableValue ov, String t, String idTerreno) {
+									idTerrenoSeleccionado = idTerreno;
+								}
+							});				
 							
-							iDespedirCampesino.comboBoxCampesinos.getItems().addAll(terrenoToDespedir.getCedulasCampesinos());
-							idTerrenoSeleccionado = idTerreno;
+							campesinoHandlerClass hContratarCampesino = new campesinoHandlerClass();
+							iContratarCampesino.aceptarCampesino.setOnAction(hContratarCampesino);
+							iContratarCampesino.borrarCampesino.setOnAction(hContratarCampesino);
+						}catch(DominioException excep) {
+							Alert alertaTerreno = new Alert(AlertType.ERROR);
+							alertaTerreno.setHeaderText(excep.getMessage());
+							alertaTerreno.setContentText("No dispone de terrenos, por favor cree uno");
+							alertaTerreno.show();
+						}							
+					}else if(control.equals(campesino2)) {
+						try {
+							Terreno.verificacionTerrenos();
+							iDespedirCampesino = new BuildDespedirCampesino();
+							VBox vBoxBase = iDespedirCampesino.vBoxBase();
+							vBox0.setCenter(vBoxBase);
+							iDespedirCampesino.comboBoxTerrenos.valueProperty().addListener(new ChangeListener<String>() {
+								@Override
+								public void changed(ObservableValue ov, String t, String idTerreno){
+									Terreno terrenoToDespedir = Terreno.buscarTerreno(idTerreno);
+									int sizeComboBoxCampesinos = iDespedirCampesino.comboBoxCampesinos.getItems().size();
+									for (int j = 0; j < sizeComboBoxCampesinos; j++) {
+										iDespedirCampesino.comboBoxCampesinos.getItems().remove(0);
+									}
+									try {
+										Campesino.verificarCampesinos(Terreno.getTerrenos().indexOf(terrenoToDespedir));
+										iDespedirCampesino.comboBoxCampesinos.getItems().addAll(terrenoToDespedir.getCedulasCampesinos());
+										idTerrenoSeleccionado = idTerreno;
+									}catch(PersonasException excep) {
+										Alert alertaTerreno = new Alert(AlertType.ERROR);
+										alertaTerreno.setHeaderText(excep.getMessage());
+										alertaTerreno.setContentText("No hay campesinos contratados");
+										alertaTerreno.show();
+									}							
+								}
+							});							
+						}catch(DominioException excep) {
+							Alert alertaTerreno = new Alert(AlertType.ERROR);
+							alertaTerreno.setHeaderText(excep.getMessage());
+							alertaTerreno.setContentText("No dispone de terrenos, por favor cree uno");
+							alertaTerreno.show();
 						}
-					});
-					iDespedirCampesino.comboBoxCampesinos.valueProperty().addListener(new ChangeListener<String>() {
-						@Override
-						public void changed(ObservableValue ov, String t, String cedula) {
-							cedulaSeleccionada = cedula;
-						}
-					});
-					campesinoHandlerClass hDespedirCampesino = new campesinoHandlerClass();
-					iDespedirCampesino.aceptarDespedirCampesino.setOnAction(hDespedirCampesino);
-					
+
+						iDespedirCampesino.comboBoxCampesinos.valueProperty().addListener(new ChangeListener<String>() {
+							@Override
+							public void changed(ObservableValue ov, String t, String cedula) {
+								cedulaSeleccionada = cedula;
+							}
+						});
+						campesinoHandlerClass hDespedirCampesino = new campesinoHandlerClass();
+						iDespedirCampesino.aceptarDespedirCampesino.setOnAction(hDespedirCampesino);	
 				}else if(control.equals(agronomo2)) {//despedir
-					iDespedirAgronomo = new BuildDespedirAgronomo();
-					VBox vBoxBase = iDespedirAgronomo.vBoxBase();
-					vBox0.setCenter(vBoxBase);
-					iDespedirAgronomo.comboBoxCedulaA.valueProperty().addListener(new ChangeListener<String>() {
-						@Override
-						public void changed(ObservableValue ov, String t, String cedulaA) {
-							cedulaAgronomo = cedulaA; 
-						}
-					});
-					agronomoHandlerClass hDespedirAgronomo = new agronomoHandlerClass();
-					iDespedirAgronomo.aceptarDespedirAgronomo.setOnAction(hDespedirAgronomo);
-				
-					
+					try {
+						Terreno.verificacionTerrenos();
+						iDespedirAgronomo = new BuildDespedirAgronomo();
+						VBox vBoxBase = iDespedirAgronomo.vBoxBase();
+						vBox0.setCenter(vBoxBase);
+						iDespedirAgronomo.comboBoxCedulaA.valueProperty().addListener(new ChangeListener<String>() {
+							@Override
+							public void changed(ObservableValue ov, String t, String cedulaA) {
+								cedulaAgronomo = cedulaA; 
+							}
+						});
+						agronomoHandlerClass hDespedirAgronomo = new agronomoHandlerClass();
+						iDespedirAgronomo.aceptarDespedirAgronomo.setOnAction(hDespedirAgronomo);
+					}catch(DominioException excep) {
+						Alert alertaTerreno = new Alert(AlertType.ERROR);
+						alertaTerreno.setHeaderText(excep.getMessage());
+						alertaTerreno.setContentText("No dispone de terrenos, por favor cree uno");
+						alertaTerreno.show();
+					}		
 				}else if(control.equals(totalProduction)) {
 					iProduccionTotal = new BuildProduccionTotal();
 					VBox vBoxBase = iProduccionTotal.vBoxBase();
@@ -374,9 +408,30 @@ public class Principal {
 		public void handle(ActionEvent e) {
 			Object control = e.getSource();	
 			if (iContratarAgronomo!=null && control.equals(iContratarAgronomo.aceptarAgronomo)) { // Verificiar con un catch que si exista un terreno
-				Terreno terrenoSeleccionadoAgronomo = Terreno.buscarTerreno(idTerrenoSeleccionado);
-				Agronomo agro = new Agronomo(iContratarAgronomo.contratarAgronomo.getValue(0), Integer.parseInt(iContratarAgronomo.contratarAgronomo.getValue(1)), Integer.parseInt(iContratarAgronomo.contratarAgronomo.getValue(2)), terrenoSeleccionadoAgronomo);
-				
+				try {
+					Terreno terrenoSeleccionadoAgronomo = Terreno.buscarTerreno(idTerrenoSeleccionado);
+					Terreno.verificacionAgronomo(Terreno.getTerrenos().indexOf(terrenoSeleccionadoAgronomo));
+					try {
+						int sueldo = Integer.parseInt(iContratarAgronomo.contratarAgronomo.getValue(1));
+						int cedula = Integer.parseInt(iContratarAgronomo.contratarAgronomo.getValue(2));
+						Agronomo agro = new Agronomo(iContratarAgronomo.contratarAgronomo.getValue(0), sueldo, cedula, terrenoSeleccionadoAgronomo);
+						System.out.println(agro);
+					}catch(NumberFormatException excep) {
+						Alert alertaDato= new Alert(AlertType.ERROR);
+						alertaDato.setHeaderText("Se ha ingresado un tipo de dato no valido");
+						alertaDato.show();
+					}	
+			
+				}catch(PersonasException excep) {
+					Alert alertaAgronomo = new Alert(AlertType.ERROR);
+					alertaAgronomo.setHeaderText(excep.getMessage());
+					alertaAgronomo.setContentText("El terreno seleccionado ya posee un agronomo");
+					alertaAgronomo.show();
+				}catch(IndexOutOfBoundsException excep) {
+					Alert alertaDato = new Alert(AlertType.ERROR);
+					alertaDato.setHeaderText("Ha dejado un campo vacio");
+					alertaDato.show();
+				}
 			}
 			else if (iContratarAgronomo!=null && control.equals(iContratarAgronomo.borrarAgronomo)) {
 				iContratarAgronomo.contratarAgronomo.borrarValue();
@@ -384,25 +439,40 @@ public class Principal {
 				Agronomo  agronomoOut = Agronomo.getAgronomo(Integer.parseInt(cedulaAgronomo));
 				agronomoOut.renunciar(Agronomo.getAgronomos().indexOf(agronomoOut));
 			    iDespedirAgronomo.comboBoxCedulaA.getItems().remove(cedulaAgronomo);
-				
+			
 			}
 		}
 	}
 	class campesinoHandlerClass implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
 			Object control = e.getSource();	
-			if (iContratarCampesino!=null && control.equals(iContratarCampesino.aceptarCampesino)) { // Verificiar con un catch que si exista un terreno
-				Terreno terrenoSeleccionadoCampesino = Terreno.buscarTerreno(idTerrenoSeleccionado);
-				Campesino campe = new Campesino(iContratarCampesino.contratarCampesino.getValue(0), Integer.parseInt(iContratarCampesino.contratarCampesino.getValue(1)), Integer.parseInt(iContratarCampesino.contratarCampesino.getValue(2)), terrenoSeleccionadoCampesino);
+			if (iContratarCampesino!=null && control.equals(iContratarCampesino.aceptarCampesino)) {
+				try {
+					Terreno terrenoSeleccionadoCampesino = Terreno.buscarTerreno(idTerrenoSeleccionado);
+					int sueldo = Integer.parseInt(iContratarCampesino.contratarCampesino.getValue(1));
+					int cedula = Integer.parseInt(iContratarCampesino.contratarCampesino.getValue(2));
+					Campesino campe = new Campesino(iContratarCampesino.contratarCampesino.getValue(0), sueldo, cedula, terrenoSeleccionadoCampesino);
+				}catch(NumberFormatException excep) {
+					Alert alertaDato= new Alert(AlertType.ERROR);
+					alertaDato.setHeaderText("Se ha ingresado un tipo de dato no valido");
+					alertaDato.show();
+				}	
+				
 			}
 			else if (iContratarCampesino!=null && control.equals(iContratarCampesino.borrarCampesino)) {
 				iContratarCampesino.contratarCampesino.borrarValue();
-			}else if(iDespedirCampesino!=null && control.equals(iDespedirCampesino.aceptarDespedirCampesino)) {				
-				Terreno terrenoCampesino = Terreno.buscarTerreno(idTerrenoSeleccionado);
-				Campesino campesinoDespedido = new Campesino();
-				campesinoDespedido = Campesino.buscarCampesino(terrenoCampesino,Integer.parseInt(cedulaSeleccionada));
-				campesinoDespedido.renunciar2(terrenoCampesino, campesinoDespedido);
-				iDespedirCampesino.comboBoxCampesinos.getItems().remove(cedulaSeleccionada);
+			}else if(iDespedirCampesino!=null && control.equals(iDespedirCampesino.aceptarDespedirCampesino)) {		
+				try {
+					Terreno terrenoCampesino = Terreno.buscarTerreno(idTerrenoSeleccionado);
+					Campesino campesinoDespedido = new Campesino();
+					campesinoDespedido = Campesino.buscarCampesino(terrenoCampesino,Integer.parseInt(cedulaSeleccionada));
+					campesinoDespedido.renunciar2(terrenoCampesino, campesinoDespedido);
+					iDespedirCampesino.comboBoxCampesinos.getItems().remove(cedulaSeleccionada);
+				}catch(NumberFormatException excep) {
+					Alert alertaDato= new Alert(AlertType.ERROR);
+					alertaDato.setHeaderText("Se ha ingresado un tipo de dato no valido");
+					alertaDato.show();
+				}	
 			}else if(iFertilizarIrrigar!=null && control.equals(iFertilizarIrrigar.aceptarFertilizarIrrigar)) {
 				Terreno tierraMala = Terreno.buscarTerreno(idTerrenoSeleccionado);
 				Campesino irrigador = tierraMala.getCampesinos().getLast();
