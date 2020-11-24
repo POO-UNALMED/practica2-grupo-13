@@ -14,7 +14,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import uiMain.Principal.agronomoHandlerClass;
-
+/**
+ * 
+ *Esta clase define elementos escenciales para la escena puesta en la ventana
+ *principal de usuario, su principal objetivo es crear un VBox base que será puesto 
+ *en la escena antes mencionada, en él se evidenciarán los componentes necesarios
+ *para el formulario específico de la funcionalidad *Despedir (agronomos)*, puesta
+ *en el menú de  funcionalidades proporcionadas por le programa
+ *
+ */
 public class BuildDespedirAgronomo {
 	Label consulta = new Label();
 	Label descripcionConsulta = new Label();

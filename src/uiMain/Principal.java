@@ -33,7 +33,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-
+/** 
+ * Esta clase define los elementos que tendrá la escena puesta en la ventana
+ * principal de usuario. Tiene como fin definir y crear la escena que reemplazará
+ * la escena inical del Stage. En dicha escena, generada por esta clase,
+ * se observarán todos los formularios dispuestos para las disferentes
+ * consultas y funcionalidades de las que dispone el programa. De igual forma,  
+ * esta clase realiza dichos procesos de consultas y funcionalidades del aplicativo
+ * ya que es quien recibe la información brindada por el usuario para tales fines.
+ *
+ */
 public class Principal {
 	Scene principal;
 	/**
@@ -79,6 +88,7 @@ public class Principal {
 	
 	ComboBox comboBoxAddTerreno;
 	ComboBox comboBoxAddTerrenoC;
+	
 	public static int amenazasFallidas = 0;
 	public Scene crearPrincipal() {
 		VBox vBoxRoot = new VBox();

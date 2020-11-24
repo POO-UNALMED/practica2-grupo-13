@@ -19,7 +19,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-
+/** 
+ * Esta clase es la encargada de definir los formularios de tipo criterio-valor
+ * utilizados por el usuario para digitar la información necesaria a la hora
+ * de realizar consultas o poner en marcha cualquier otra funcionalidad del programa.
+ *
+ */
 public class FieldPanel extends Pane{
 	GridPane formulario;
 	Label tituloCriterios;

@@ -11,7 +11,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
+/**
+ * 
+ *Esta clase define elementos escenciales para la escena puesta en la ventana
+ *principal de usuario, su principal objetivo es crear un VBox base que será puesto 
+ *en la escena antes mencionada, en él se evidenciarán los componentes necesarios
+ *para el formulario específico de la funcionalidad *Agregar terrenos*, puesta
+ *en el menú de  funcionalidades proporcionadas por le programa
+ *
+ */
 public class BuildAddTerreno {
 	Label consulta = new Label();
 	Label descripcionConsulta = new Label();

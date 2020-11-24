@@ -16,6 +16,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/** 
+ * Esta clase define la ventana de inicio del programa con sus respectivos componentes.
+ * Contiene el Stage y la escena inicial de la ejecución, será la encargada de dar la 
+ * bienvenida al usuario cuando se ponga en marcha el aplicativo.
+ *
+ */
 public class Inicio extends Application {
 
 	Label bienvenida = new Label("¡¡  Bienvenidos a Cultivatron, tu simulador de cultivos preferido  !!  ");
@@ -41,16 +47,18 @@ public class Inicio extends Application {
 	Button sigVentana;
 	Stage windowInicio;
 	Scene inicio;
-	Principal ventanaPrincipal = new Principal();
-	Inicio iniAux = this;
+	Principal ventanaPrincipal = new Principal(); /** Instancia que enlanza a la ventana de inicio con la ventana principal */
+	Inicio iniAux = this; /** 
+	                       * atributo que nos permite hacer enlace con la ventana principal del usiario 
+                           */
 	
 	public void start(Stage primaryStage) {
 		this.windowInicio = primaryStage;
 
-		// Nodo raiz de la escena
+		/** Nodo raiz de la escena */
 		VBox root = new VBox(5);
 
-		// Contiene todos los elementos de la venta Inicio
+		/** Contiene todos los elementos de la venta Inicio */
 		HBox contenedor = new HBox(30);
 		BorderPane p1 = new BorderPane();
 		BorderPane p2 = new BorderPane();
@@ -58,7 +66,7 @@ public class Inicio extends Application {
 		FlowPane p5 = new FlowPane();
 		sigVentana = new Button("Pasar ventana");
 		
-		// Menu
+		/** Menu principal */
 		MenuBar menuPrincipal = new MenuBar();
 		Menu barraPrincipal = new Menu("Inicio");
 		MenuItem salir = new MenuItem("Salir");
@@ -75,8 +83,8 @@ public class Inicio extends Application {
 		root.getChildren().add(menuPrincipal);
 		root.getChildren().add(contenedor);
 
-		// Variables que guardan cada una de las cinco imagenes que se ubican en el pane
-		// P4
+		/** Variables que guardan cada una de las cinco imagenes que se ubican en el pane */
+		/** P4 */
 		cultivos1 = new Image(getClass().getResourceAsStream("./imagenes/cultivos1.jpg"));
 		cultivos2 = new Image(getClass().getResourceAsStream("./imagenes/cultivos2.jpg"));
 		cultivos3 = new Image(getClass().getResourceAsStream("./imagenes/cultivos3.jpg"));
@@ -88,13 +96,13 @@ public class Inicio extends Application {
 		icultivos4 = new ImageView(cultivos4);
 		icultivos5 = new ImageView(cultivos5);
 
-		// Asignacion de los handler
+		/** Asignacion de los handler */
 		icultivos1.setOnMouseExited(mouseHandler);
 		icultivos2.setOnMouseExited(mouseHandler);
 		icultivos3.setOnMouseExited(mouseHandler);
 		icultivos4.setOnMouseExited(mouseHandler);
 		icultivos5.setOnMouseExited(mouseHandler);
-		// Modifica el tamano la imagen
+		/** Modifica el tamano la imagen*/
 		icultivos1.setFitHeight(220);
 		icultivos1.setPreserveRatio(true);
 		icultivos2.setFitHeight(220);
@@ -105,7 +113,7 @@ public class Inicio extends Application {
 		icultivos4.setPreserveRatio(true);
 		icultivos5.setFitHeight(220);
 		icultivos5.setPreserveRatio(true);
-		/*
+		/**
 		 * Variables que guardan cada una de las imagenes de los integrantes del grupo
 		 * que se ubican en el P6
 		 */
@@ -118,7 +126,7 @@ public class Inicio extends Application {
         ifotoHojaVida3.setImage(jose3);
         ifotoHojaVida4.setImage(jose4);
 
-		// Modifica el tamano la imagen
+		/**Modifica el tamano la imagen */
 		ifotoHojaVida1.setFitHeight(100);
 		ifotoHojaVida1.setPreserveRatio(true);
 		ifotoHojaVida2.setFitHeight(100);
@@ -128,18 +136,18 @@ public class Inicio extends Application {
 		ifotoHojaVida4.setFitHeight(100);
 		ifotoHojaVida4.setPreserveRatio(true);
 
-		// Pane P1
+		/** Pane P1 */
 		p1.setPrefSize(500, 400);
 		p1.setTop(p3);
 		p1.setCenter(p4);
-		// Pane P2
+		/** Pane P2 */
 		p2.setPrefSize(500, 400);
 		p2.setTop(p5);
 		p2.setCenter(p6);
 
 		contenedor.getChildren().addAll(p1, p2);
 
-		// Label y TextArea
+		/** Label y TextArea */
 		Hdescripcion.setPadding(new Insets(10, 10, 10, 10));
 		bienvenida.setPadding(new Insets(10, 10, 10, 10));
 
@@ -147,7 +155,7 @@ public class Inicio extends Application {
 		SdescripcionHandlerClass SdescripcionHandler = new SdescripcionHandlerClass();
 		descripcion.setOnAction(SdescripcionHandler);
 
-		// Pane P4
+		/** Pane P4 */
 		p4.setBottom(sigVentana);
 		p4.setAlignment(sigVentana, Pos.CENTER);
 		p4.setAlignment(icultivos1, Pos.CENTER);
@@ -158,7 +166,7 @@ public class Inicio extends Application {
 		p4.setPadding(new Insets(10, 10, 10, 10));
 		p4.setTop(icultivos1);
 
-		// Pane P6
+		/** Pane P6 */
 		p6.setPadding(new Insets(20, 20, 20, 20));
 		p6.setVgap(12);
 		p6.setHgap(12);
@@ -173,14 +181,15 @@ public class Inicio extends Application {
 		primaryStage.setScene(inicio);
 		primaryStage.show();
 		
+		/** Botón que lleva a la ventana principal del usuario */
 		SigVentanaHandlerClass sigVentanaHandler = new SigVentanaHandlerClass();
 		sigVentana.setOnAction(sigVentanaHandler);
 		
-		// Pane P5
+		/** Pane P5 */
 		p5.getChildren().add(Hdescripcion);
 		Hdescripcion.setOnMouseClicked(mouseHandler);
-		Hdescripcion.setEditable(false); //No se edita la descripción 
-		Hdescripcion.setWrapText(true); //Acoplar texto al FlowPane
+		Hdescripcion.setEditable(false); /**No se edita la descripción */
+		Hdescripcion.setWrapText(true); /**Acoplar texto al FlowPane */
 		p2.setPadding(new Insets(15,15,15,15));
 		
 	}
@@ -194,7 +203,7 @@ public class Inicio extends Application {
 				if (cont == 6) {
 					cont = 1; 
 				}
-				// Controla el orden en el cambio de las imagenes
+				/** Controla el orden en el cambio de las imagenes */
 				if (cont == 1) {
 					p4.setTop(null);
 					p4.setTop(icultivos1);
@@ -217,7 +226,7 @@ public class Inicio extends Application {
 				if (contH == 6) {
 					contH = 1;
 				}
-				// Controla el orden en el cambio de las descripciones
+				/** Controla el orden en el cambio de las descripciones */
 				if (contH == 1) {
 					Hdescripcion.setText("Mi nombre es José David Rueda, tengo 19 años, nací el 20 de diciembre del 2000. Estudio ingeniería de sistemas, estoy cursando " + 
 										 "el cuarto semestre y mi sueño es ser un maestro Pokemon");
@@ -341,7 +350,7 @@ public class Inicio extends Application {
 
 	};
 	
-	// Clase que cierra la ventana
+	/** Clase que permite salir de la ventana de inicio */
 
 	class salirHandlerClass implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
@@ -351,7 +360,7 @@ public class Inicio extends Application {
 		}
 	}
 	
-	// Clase que genera un nuevo texto con la descripcion del proyecto
+	/** Clase que genera un nuevo texto con la descripcion del proyecto */
 	class SdescripcionHandlerClass implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
 			Sdescripcion = new TextArea("El programa tiene la capacidad de simular cómo se comportan algunos tipos de cultivos en ciertos terrenos, siendo atacados por plagas, maleza u hongos; y estos a su vez son exterminados por su respectivo tipo de pesticida. Existen empleados que se derivan en campesinos y administradores; siendo los primeros los trabajadores que siembran y recolectan los cultivos; y a su vez, los encargados de usar los pesticidas. Los administradores se encargan de contratar, despedir y dirigir a los campesinos para realizar las labores en los cultivos, también son los que investigan el tipo de amenaza bajo la que se encuentra la cosecha");
@@ -362,7 +371,7 @@ public class Inicio extends Application {
 		}
 	}
 	
-	// Clase que cambia la ventana de inicio por la principal
+	/** Clase que permite cambiar de ventana, yendo a la ventana principal */
 	class SigVentanaHandlerClass implements EventHandler<ActionEvent>{
 		public void handle(ActionEvent e) {
 			ventanaPrincipal.linkInicio = iniAux;
