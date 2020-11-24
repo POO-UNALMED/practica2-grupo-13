@@ -53,7 +53,6 @@ public class Pesticida implements Serializable{
 	 */
 	public void matarAmenaza(Cultivo c) {
 		c.setAmenaza(null);
-		System.out.println("Se ha exterminado la amenaza!");
 	}
 	// Cierre del metodo matarAmenaza
 }

@@ -256,7 +256,7 @@ public class Terreno implements Serializable {
 	}
 	public static void verificacionAgronomoExterminar(Terreno terreno) throws NoAgronomoToExterminarException{
 		if(terreno.getAgronomo() == null) {
-			throw new NoAgronomoToExterminarException("No tiene un agronomo contratado para realizar la labor de exterminacion");
+			throw new NoAgronomoToExterminarException("No tiene un agronomo contratado para realizar la labor de examinación de cultivos o exterminacion de amenazas");
 		}
 	}
 
@@ -278,7 +278,7 @@ public class Terreno implements Serializable {
 		}
 		return tExistente;
 	}
-	
+
 	public Cultivo buscarCultivo(String tipo) {
 		Iterator<Cultivo> cultivo = this.getCultivos().iterator();
 		Cultivo cExistente = null;

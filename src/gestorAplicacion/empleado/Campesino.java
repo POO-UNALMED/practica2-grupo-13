@@ -39,13 +39,11 @@ public class Campesino extends Empleado implements Serializable{
 		boolean renuncia = false;
 		String campesino = "";
 		double x = Math.random();
-		if ((x < 0.15) && (Terreno.getTerrenos().size() > 0)) {
+		if ((x < 0.1) && (Terreno.getTerrenos().size() > 0)) {
 			for(int i = 0; i < Terreno.getTerrenos().size(); i++) {
 				if(Terreno.getTerrenos().get(i).getCampesinos().size() > 0) {
 					renuncia = true;
 					campesino = Terreno.getTerrenos().get(i).getCampesinos().get(0).toString();
-					System.out.println(Terreno.getTerrenos().get(i).getCampesinos().get(0));
-					System.out.println("Ha renunciado");
 					Terreno.getTerrenos().get(i).getCampesinos().remove(0);
 					break;
 				}
@@ -121,12 +119,14 @@ public class Campesino extends Empleado implements Serializable{
 		tempCultivos = Cultivo.getCultivos();
 		int indicet = tempCultivos.indexOf(cultivo);
 
-		
-		for (Cultivo temp : Cultivo.getCultivos()) {
-			if ((temp.getTerreno().getId().equals(cultivo.getTerreno().getId())) && temp.getTipoCultivo().equals(cultivo.getTipoCultivo()) ){
-				Cultivo.getCultivos().remove(temp);
+		try {
+			for (Cultivo temp : Cultivo.getCultivos()) {
+				if ((temp.getTerreno().getId().equals(cultivo.getTerreno().getId())) && temp.getTipoCultivo().equals(cultivo.getTipoCultivo()) ){
+					Cultivo.getCultivos().remove(temp);
+				}
 			}
-		}
+		}catch(ConcurrentModificationException e){}
+		
 		
 	}
 	/**

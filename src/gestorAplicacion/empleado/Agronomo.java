@@ -58,8 +58,6 @@ public class Agronomo extends Empleado implements Serializable {
 			Pesticida pesticida = new Pesticida(amenaza);
 			pesticida.matarAmenaza(cultivo);
 		} else {
-			System.out.println("No hay agronomo en el terreno con id " + cultivo.getTerreno().getId()
-					+ " por favor contrate uno para exterminar la amenaza");
 		}
 	}
 
@@ -95,11 +93,9 @@ public class Agronomo extends Empleado implements Serializable {
 		String agronomo = "";
 		double x = Math.random();
 		int y = (int) Math.random() * agronomos.size();
-		if ((x < 0.15) && (agronomos.size() > 0)) {
+		if ((x < 0.1) && (agronomos.size() > 0)) {
 			renuncia = true;
-			agronomo = agronomos.get(y).toString();
-			System.out.println(agronomos.get(y));
-			System.out.println("Ha renunciado");			
+			agronomo = agronomos.get(y).toString();		
 			agronomos.get(y).getTerreno().setAgronomo(null);
 			agronomos.remove(y);
 		}
@@ -120,8 +116,6 @@ public class Agronomo extends Empleado implements Serializable {
 	 *                      renunciar
 	 */
 	public void renunciar(int opcionElegida) {
-//		System.out.println(agronomos.get(opcionElegida));
-//		System.out.println("Ha sido despedido.");
 		agronomos.get(opcionElegida).getTerreno().setAgronomo(null);
 		agronomos.remove(opcionElegida);
 	}

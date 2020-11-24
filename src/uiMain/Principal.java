@@ -621,6 +621,7 @@ public class Principal {
 						}
 					}
 					terrenoU = Terreno.buscarTerreno(terreno);
+					terrenoU.verificacionAgronomoExterminar(terrenoU);
 					cultivoU = terrenoU.buscarCultivo(tipo);
 					int sizeComboBoxCultivos = iExaminarCultivo.comboBoxCultivos.getItems().size();
 					for (int j = 0; j < sizeComboBoxCultivos; j++) {
@@ -655,6 +656,11 @@ public class Principal {
 						 }
 					}
 					
+				}catch(NoAgronomoToExterminarException excep) {
+					Alert alertaAgronomo = new Alert(AlertType.ERROR);
+					alertaAgronomo.setHeaderText(excep.getMessage());
+					alertaAgronomo.setContentText(excep.getMensaje());
+					alertaAgronomo.show();
 				}catch(NullPointerException excep) {
 					Alert noDato = new Alert(AlertType.ERROR);
 					noDato.setHeaderText("¡Debe seleccionar un cultivo!");
@@ -796,5 +802,4 @@ public class Principal {
 			}
 		}
 	}
-
 }
