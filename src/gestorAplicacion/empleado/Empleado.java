@@ -65,7 +65,7 @@ public abstract class Empleado implements Serializable {
 	/**
 	 * Metodo general para que un Empleado renuncie
 	 */
-	public abstract void renunciar();
+	public abstract String renunciar();
 
 	/**
 	 * Metodo que establece el nombre de un empleado

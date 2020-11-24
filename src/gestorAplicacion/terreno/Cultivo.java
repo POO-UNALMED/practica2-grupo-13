@@ -128,7 +128,7 @@ public class Cultivo implements Serializable {
 			Cultivo.crearFresa(tamañoDeseado, terreno);
 			return ("Se ha creado exitosamente");
 		} else {
-			return ("Este cultivo ya estaba creado en este terreno o este tipo no es valido");
+			return ("Este cultivo ya estaba creado en este terreno");
 		}
 
 	}

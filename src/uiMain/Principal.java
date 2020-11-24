@@ -79,6 +79,7 @@ public class Principal {
 	
 	ComboBox comboBoxAddTerreno;
 	ComboBox comboBoxAddTerrenoC;
+	public static int amenazasFallidas = 0;
 	public Scene crearPrincipal() {
 		VBox vBoxRoot = new VBox();
 		Label nombrePrograma = new Label("Cultivatron");
@@ -222,11 +223,45 @@ public class Principal {
 		vBox0.setTop(barraPrincipal);
 		vBox0.setMargin(barraPrincipal, new Insets(15));
 		return principal;
+		
+	
 
+	}
+	private static void renunciaAleatoria() {
+		String campesinoRenuncia = new Campesino().renunciar();
+		String agronomoRenuncia = new Agronomo().renunciar();
+		if(!campesinoRenuncia.equals("No renuncia")) {
+			Alert alertaRenuncia = new Alert(AlertType.WARNING);
+			alertaRenuncia.setHeaderText(campesinoRenuncia);
+			alertaRenuncia.setContentText("Ha renunciado");
+			alertaRenuncia.show();
+		}
+		if(!agronomoRenuncia.equals("No renuncia")) {
+			Alert alertaRenuncia = new Alert(AlertType.WARNING);
+			alertaRenuncia.setHeaderText(agronomoRenuncia);
+			alertaRenuncia.setContentText("Ha renunciado");
+			alertaRenuncia.show();
+		}	
+	}
+	private static void controlAmenazas() {
+		Amenaza amenaza = new Amenaza();
+		if (amenaza.esMomentoDeAmenazar() && amenaza.atacarCultivo()) {
+			Alert alertaAmenaza = new Alert(AlertType.WARNING);
+			alertaAmenaza.setHeaderText("La amenaza: " + amenaza.getTipo() + " esta atacando al cultivo " + amenaza.getCultivo().getTipoCultivo()
+					+ " en el terreno con id " + amenaza.getCultivo().getTerreno().getId() + "\n");
+			alertaAmenaza.show();
+		} else {
+			amenazasFallidas++;
+		}
+		
 	}
 	class HandlerMenu implements EventHandler<ActionEvent>{
 		@SuppressWarnings("unchecked")
 		public void handle(ActionEvent e) {
+			
+			controlAmenazas();
+			renunciaAleatoria();
+			
 			Object control=e.getSource();
 			if(control instanceof MenuItem){
 					if(control.equals(agronomo1)){						
@@ -452,7 +487,10 @@ public class Principal {
 						int sueldo = Integer.parseInt(iContratarAgronomo.contratarAgronomo.getValue(1));
 						int cedula = Integer.parseInt(iContratarAgronomo.contratarAgronomo.getValue(2));
 						Agronomo agro = new Agronomo(iContratarAgronomo.contratarAgronomo.getValue(0), sueldo, cedula, terrenoSeleccionadoAgronomo);
-						System.out.println(agro);
+						Alert contratoAgronomo = new Alert(AlertType.INFORMATION);
+						contratoAgronomo.setHeaderText(agro.toString());
+						contratoAgronomo.setContentText("Ha sido contratado");
+						contratoAgronomo.show();		
 					}catch(NumberFormatException excep) {
 						Alert alertaDato= new Alert(AlertType.ERROR);
 						alertaDato.setHeaderText("Se ha ingresado un tipo de dato no valido");
@@ -468,6 +506,10 @@ public class Principal {
 					Alert alertaDato = new Alert(AlertType.ERROR);
 					alertaDato.setHeaderText("Ha dejado un campo vacio");
 					alertaDato.show();
+				}catch(NullPointerException excep) {
+					Alert alertaDato = new Alert(AlertType.ERROR);
+					alertaDato.setHeaderText("Se ha ingresado un tipo de dato no valido");
+					alertaDato.show();
 				}
 			}
 			else if (iContratarAgronomo!=null && control.equals(iContratarAgronomo.borrarAgronomo)) {
@@ -475,8 +517,11 @@ public class Principal {
 			}else if(iDespedirAgronomo!=null && control.equals(iDespedirAgronomo.aceptarDespedirAgronomo)) {
 				Agronomo  agronomoOut = Agronomo.getAgronomo(Integer.parseInt(cedulaAgronomo));
 				agronomoOut.renunciar(Agronomo.getAgronomos().indexOf(agronomoOut));
-			    iDespedirAgronomo.comboBoxCedulaA.getItems().remove(cedulaAgronomo);
-			
+			    iDespedirAgronomo.comboBoxCedulaA.getItems().remove(cedulaAgronomo);			
+				Alert despidoAgronomo = new Alert(AlertType.INFORMATION);
+				despidoAgronomo.setHeaderText(agronomoOut.toString());
+				despidoAgronomo.setContentText("Ha sido despedido");
+				despidoAgronomo.show();
 			}
 		}
 	}
@@ -489,6 +534,10 @@ public class Principal {
 					int sueldo = Integer.parseInt(iContratarCampesino.contratarCampesino.getValue(1));
 					int cedula = Integer.parseInt(iContratarCampesino.contratarCampesino.getValue(2));
 					Campesino campe = new Campesino(iContratarCampesino.contratarCampesino.getValue(0), sueldo, cedula, terrenoSeleccionadoCampesino);
+					Alert contratoCampesino = new Alert(AlertType.INFORMATION);
+					contratoCampesino.setHeaderText(campe.toString());
+					contratoCampesino.setContentText("Ha sido contratado");
+					contratoCampesino.show();
 				}catch(NumberFormatException excep) {
 					Alert alertaDato= new Alert(AlertType.ERROR);
 					alertaDato.setHeaderText("Se ha ingresado un tipo de dato no valido");
@@ -505,6 +554,10 @@ public class Principal {
 					campesinoDespedido = Campesino.buscarCampesino(terrenoCampesino,Integer.parseInt(cedulaSeleccionada));
 					campesinoDespedido.renunciar2(terrenoCampesino, campesinoDespedido);
 					iDespedirCampesino.comboBoxCampesinos.getItems().remove(cedulaSeleccionada);
+					Alert despidoCampesino = new Alert(AlertType.INFORMATION);
+					despidoCampesino.setHeaderText(campesinoDespedido.toString());
+					despidoCampesino.setContentText("Ha sido despedido");
+					despidoCampesino.show();
 				}catch(NumberFormatException excep) {
 					Alert alertaDato= new Alert(AlertType.ERROR);
 					alertaDato.setHeaderText("Se ha ingresado un tipo de dato no valido");
@@ -523,6 +576,9 @@ public class Principal {
 						iFertilizarIrrigar.terrenosCombo.getItems().remove(0);
 					}
 					iFertilizarIrrigar.terrenosCombo.getItems().addAll(Terreno.mostrarTerrenosGUI());
+					Alert fertilizar = new Alert(AlertType.INFORMATION);
+					fertilizar.setHeaderText("El terreno ha sido fertilizado");
+					fertilizar.show();
 				}catch(NoHayCampesinoException excep) {
 					int sizeComboBoxTerrenos = iFertilizarIrrigar.terrenosCombo.getItems().size();
 					for (int j = 0; j < sizeComboBoxTerrenos; j++) {
@@ -566,7 +622,6 @@ public class Principal {
 					}
 					terrenoU = Terreno.buscarTerreno(terreno);
 					cultivoU = terrenoU.buscarCultivo(tipo);
-					System.out.println(terrenoU.getCultivos());
 					int sizeComboBoxCultivos = iExaminarCultivo.comboBoxCultivos.getItems().size();
 					for (int j = 0; j < sizeComboBoxCultivos; j++) {
 						iExaminarCultivo.comboBoxCultivos.getItems().remove(0);
@@ -619,12 +674,21 @@ public class Principal {
 				       	tipoCultivos.setHeaderText("Cultivos Permitidos"); 
 				      	tipoCultivos.setContentText("Seleccione un cultivo que es permitido"); 
 				      	Optional<ButtonType> result = tipoCultivos.showAndWait();
-						 if (result.isPresent() && result.get() == ButtonType.OK) {//NO FUNCIONA EL BOTON (CANCELAR Y AUN ASI GUARDA)
+				      	if (result.isPresent() && ButtonType.OK.getText().equals("Aceptar")){ 
 							String tipoSeleccionado = (String) tipoCultivos.getSelectedItem();
 								// Se puede usar la variable resultado para verificar si se creó (devuelve "se ha creado exitosamente" en el caso afirmativo)
 							String resultado = (Cultivo.crearCultivo(tipoSeleccionado, tamano, terrenoUsuario));
-							System.out.println(resultado);
+							if(resultado.equals("Se ha creado exitosamente")) {
+								Alert crearCultivo= new Alert(AlertType.INFORMATION);
+								crearCultivo.setHeaderText("El cultivo se ha creado exitosamente");
+								crearCultivo.show();
+							}else {
+								 Alert crearCultivo = new Alert(AlertType.INFORMATION);
+							     crearCultivo.setHeaderText("Este cultivo ya estaba creado en este terreno");
+					             crearCultivo.show();
+							} 
 						 }else {
+							 
 						 }
 					}else {
 						Alert alertaCultivos = new Alert(AlertType.ERROR);
@@ -670,12 +734,19 @@ public class Principal {
 						ChoiceDialog tipoCultivos = new ChoiceDialog(terrenoUsuario.getTipos().get(0),terrenoUsuario.getTipos());				
 				       	tipoCultivos.setHeaderText("Cultivos"); 
 				      	tipoCultivos.setContentText("Seleccione un cultivo para recolectar"); 
-				      	tipoCultivos.showAndWait(); 
-				      	String tipoSeleccionado = (String) tipoCultivos.getSelectedItem();
-				      	Cultivo cultivoRecolectar = terrenoUsuario.buscarCultivo(tipoSeleccionado);
-				      	cultivoRecolectar.verificacionAmenaza();
-				      	Campesino recolector = terrenoUsuario.getCampesinos().peek(); //Verificación de que haya campesinos, si no pailas 
-				      	recolector.recolectar(cultivoRecolectar);
+				      	Optional<ButtonType> result = tipoCultivos.showAndWait();
+				      	if (result.isPresent() && ButtonType.OK.getText().equals("Aceptar")) {
+							    String tipoSeleccionado = (String) tipoCultivos.getSelectedItem();
+						      	Cultivo cultivoRecolectar = terrenoUsuario.buscarCultivo(tipoSeleccionado);
+						      	cultivoRecolectar.verificacionAmenaza();
+						      	Campesino recolector = terrenoUsuario.getCampesinos().peek(); //Verificación de que haya campesinos, si no pailas 
+						      	recolector.recolectar(cultivoRecolectar);
+						      	Alert recolectarCultivo = new Alert(AlertType.INFORMATION);
+						      	recolectarCultivo.setHeaderText("Cultivo recolectado");
+						      	recolectarCultivo.show();
+						 }else {
+							 
+						 }
 					}
 				}catch(NoHayCampesinoException excep) {
 					Alert alertaCampesino = new Alert(AlertType.ERROR);
@@ -707,7 +778,9 @@ public class Principal {
 					Terreno.verificacionIdTerrenos(idTerreno);
 					int tamanoTerreno = Integer.parseInt(iAddTerreno.AddTerreno.getValue(1));
 					Terreno terrenoCreado = new Terreno(idTerreno, tamanoTerreno);
-					System.out.println(terrenoCreado.toString());
+					Alert crearTerreno = new Alert(AlertType.INFORMATION);
+					crearTerreno.setHeaderText(terrenoCreado.toString());
+					crearTerreno.show();
 				}catch(IdTerrenoException excep) {
 					Alert alertaID = new Alert(AlertType.ERROR);
 					alertaID.setHeaderText(excep.getMessage());

@@ -90,14 +90,23 @@ public class Agronomo extends Empleado implements Serializable {
 	 * representa un indice para seleccionar un empleado aleatorio que renuncia si x
 	 * es menor a 0.15
 	 */
-	public void renunciar() {
+	public String renunciar() {
+		boolean renuncia = false;
+		String agronomo = "";
 		double x = Math.random();
 		int y = (int) Math.random() * agronomos.size();
 		if ((x < 0.15) && (agronomos.size() > 0)) {
+			renuncia = true;
+			agronomo = agronomos.get(y).toString();
 			System.out.println(agronomos.get(y));
-			System.out.println("Ha renunciado.");
+			System.out.println("Ha renunciado");			
 			agronomos.get(y).getTerreno().setAgronomo(null);
 			agronomos.remove(y);
+		}
+		if(renuncia) {
+			return agronomo;
+		}else {
+			return "No renuncia";
 		}
 	}
 
