@@ -18,10 +18,11 @@ import javafx.event.EventHandler;
 
 public class Inicio extends Application {
 
-	Label bienvenida = new Label("  Bienvenidos a Cultivatron, tu simulador de cultivos preferido !!  ");
+	Label bienvenida = new Label("¡¡  Bienvenidos a Cultivatron, tu simulador de cultivos preferido  !!  ");
 	BorderPane p4 = new BorderPane();
 	GridPane p6 = new GridPane();
-	TextArea Hdescripcion = new TextArea("El es Jose, nacio el 20 de diciembre del 2000 en Itagui. Alias Cachucha. Integrante de los Pokemones");
+	TextArea Hdescripcion = new TextArea("Mi nombre es José David Rueda, tengo 19 años, nací el 20 de diciembre del 2000. Estudio ingeniería de sistemas, estoy cursando "
+			+ "el cuarto semestre y mi sueño es ser un maestro Pokemon");
 	TextArea Sdescripcion;
 	Image cultivos1;
 	Image cultivos2;
@@ -218,7 +219,8 @@ public class Inicio extends Application {
 				}
 				// Controla el orden en el cambio de las descripciones
 				if (contH == 1) {
-					Hdescripcion.setText("El es Jose, nacio el 20 de diciembre del 2000 en Itagui. Alias Cachucha. Integrante de los Pokemones");
+					Hdescripcion.setText("Mi nombre es José David Rueda, tengo 19 años, nací el 20 de diciembre del 2000. Estudio ingeniería de sistemas, estoy cursando " + 
+										 "el cuarto semestre y mi sueño es ser un maestro Pokemon");
 					
 					
 					Image jose1 = new Image(getClass().getResourceAsStream("./imagenes/jose1.jpg"));
@@ -241,7 +243,7 @@ public class Inicio extends Application {
 					ifotoHojaVida4.setPreserveRatio(true);
 					
 				} else if (contH == 2) {
-					Hdescripcion.setText("El es Michael, alias Splinter.  Integrante de los Pokemones");
+					Hdescripcion.setText("Soy Jan Michale Muñoz Botero, estudiante de ingeniería de sistemas, tengo 18 años, nací el 17 de febrero de 2002 y actualmente estoy en mi cuarto semestre");
 					
 					
 					Image michael1 = new Image(getClass().getResourceAsStream("./imagenes/michael1.jpg"));
@@ -265,7 +267,7 @@ public class Inicio extends Application {
 					
 					
 				} else if (contH == 3) {
-					Hdescripcion.setText("El es Sergio, alias el putas. Integrante de los Pokemones");
+					Hdescripcion.setText("Saludos, soy Sergio Alejandro Bermúdez Gómez, nací el 28 de octubre del 2000. Soy estudiante de ingeniería de sistemas.");
 					
 					Image sergio1 = new Image(getClass().getResourceAsStream("./imagenes/sergio1.jpg"));
 					Image sergio2 = new Image(getClass().getResourceAsStream("./imagenes/sergio2.jpg"));
@@ -288,7 +290,7 @@ public class Inicio extends Application {
 					
 				} else if (contH == 4) {
 				
-					Hdescripcion.setText("El es Bolkar, alias Snorlax. Integrante de los Pokemones");
+					Hdescripcion.setText("¡Hola! Soy Bolkar Leimar Ocampo Montoya, estudiante de ingeniería de sistemas y actualmente me encuentro cursando mi cuarto semestre. Nací el 27 de septiembre del 2000.");
 					
 					Image bolkar1 = new Image(getClass().getResourceAsStream("./imagenes/bolkar1.jpg"));
 					Image bolkar2 = new Image(getClass().getResourceAsStream("./imagenes/bolkar2.jpg"));
@@ -311,7 +313,7 @@ public class Inicio extends Application {
 					
 				}
 				else if (contH == 5) {
-					Hdescripcion.setText("El es Santiago, dejemoslo quieto");
+					Hdescripcion.setText("Saludos, soy Santiago Castro Tabares, estudiante de ingeniería de sistemas y actualmente me encuentro cursando mi cuarto semestre.");
 					
 					Image santiago1 = new Image(getClass().getResourceAsStream("./imagenes/santiago1.jpg"));
 					Image santiago2 = new Image(getClass().getResourceAsStream("./imagenes/santiago2.jpg"));
