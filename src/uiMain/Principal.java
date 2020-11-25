@@ -728,7 +728,7 @@ public class Principal {
 						tipoCultivos.setHeaderText("Cultivos Permitidos");
 						tipoCultivos.setContentText("Seleccione un cultivo que es permitido");
 						Optional<ButtonType> result = tipoCultivos.showAndWait();
-						if (result.isPresent() && ButtonType.OK.getText().equals("Aceptar")) {
+						if (result.isPresent() && ButtonType.OK.getText().equals("Aceptar") || ButtonType.OK.getText().equals("OK")) {
 							String tipoSeleccionado = (String) tipoCultivos.getSelectedItem();
 							// Se puede usar la variable resultado para verificar si se creó (devuelve "se
 							// ha creado exitosamente" en el caso afirmativo)
@@ -790,7 +790,7 @@ public class Principal {
 						tipoCultivos.setHeaderText("Cultivos");
 						tipoCultivos.setContentText("Seleccione un cultivo para recolectar");
 						Optional<ButtonType> result = tipoCultivos.showAndWait();
-						if (result.isPresent() && ButtonType.OK.getText().equals("Aceptar")) {
+						if (result.isPresent() && ButtonType.OK.getText().equals("Aceptar") || ButtonType.OK.getText().equals("OK")) {
 							String tipoSeleccionado = (String) tipoCultivos.getSelectedItem();
 							Cultivo cultivoRecolectar = terrenoUsuario.buscarCultivo(tipoSeleccionado);
 							cultivoRecolectar.verificacionAmenaza();

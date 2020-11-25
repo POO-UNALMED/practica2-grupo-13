@@ -99,11 +99,11 @@ public class Inicio extends Application {
 		 * Variables que guardan cada una de las cinco resource que se ubican en el pane
 		 */
 		/** P4 */
-		cultivos1 = new Image(getClass().getResourceAsStream("outout/resources/cultivos1.jpg"));
-		cultivos2 = new Image(getClass().getResourceAsStream("out/resources/cultivos2.jpg"));
-		cultivos3 = new Image(getClass().getResourceAsStream("out/resources/cultivos3.jpg"));
-		cultivos4 = new Image(getClass().getResourceAsStream("out/resources/cultivos4.jpg"));
-		cultivos5 = new Image(getClass().getResourceAsStream("out/resources/cultivos5.jpg"));
+		cultivos1 = new Image(getClass().getResourceAsStream("/resources/cultivos1.jpg"));
+		cultivos2 = new Image(getClass().getResourceAsStream("/resources/cultivos2.jpg"));
+		cultivos3 = new Image(getClass().getResourceAsStream("/resources/cultivos3.jpg"));
+		cultivos4 = new Image(getClass().getResourceAsStream("/resources/cultivos4.jpg"));
+		cultivos5 = new Image(getClass().getResourceAsStream("/resources/cultivos5.jpg"));
 		icultivos1 = new ImageView(cultivos1);
 		icultivos2 = new ImageView(cultivos2);
 		icultivos3 = new ImageView(cultivos3);
@@ -131,10 +131,10 @@ public class Inicio extends Application {
 		 * Variables que guardan cada una de las resource de los integrantes del grupo
 		 * que se ubican en el P6
 		 */
-		Image jose1 = new Image(getClass().getResourceAsStream("out/resources/jose1.jpg"));
-		Image jose2 = new Image(getClass().getResourceAsStream("out/resources/jose2.jpg"));
-		Image jose3 = new Image(getClass().getResourceAsStream("out/resources/jose3.jpg"));
-		Image jose4 = new Image(getClass().getResourceAsStream("out/resources/jose4.jpg"));
+		Image jose1 = new Image(getClass().getResourceAsStream("/resources/jose1.jpg"));
+		Image jose2 = new Image(getClass().getResourceAsStream("/resources/jose2.jpg"));
+		Image jose3 = new Image(getClass().getResourceAsStream("/resources/jose3.jpg"));
+		Image jose4 = new Image(getClass().getResourceAsStream("/resources/jose4.jpg"));
 		ifotoHojaVida1.setImage(jose1);
 		ifotoHojaVida2.setImage(jose2);
 		ifotoHojaVida3.setImage(jose3);
@@ -251,10 +251,10 @@ public class Inicio extends Application {
 									+ "el cuarto semestre, he vivido toda mi vida en Medellin, en el barrio Belen, me gusta el futbol, los videojuegos" +
 									" y la musica.");
 
-					Image jose1 = new Image(getClass().getResourceAsStream("out/resources/jose1.jpg"));
-					Image jose2 = new Image(getClass().getResourceAsStream("out/resources/jose2.jpg"));
-					Image jose3 = new Image(getClass().getResourceAsStream("out/resources/jose3.jpg"));
-					Image jose4 = new Image(getClass().getResourceAsStream("out/resources/jose4.jpg"));
+					Image jose1 = new Image(getClass().getResourceAsStream("/resources/jose1.jpg"));
+					Image jose2 = new Image(getClass().getResourceAsStream("/resources/jose2.jpg"));
+					Image jose3 = new Image(getClass().getResourceAsStream("/resources/jose3.jpg"));
+					Image jose4 = new Image(getClass().getResourceAsStream("/resources/jose4.jpg"));
 
 					ifotoHojaVida1.setImage(jose1);
 					ifotoHojaVida2.setImage(jose2);
@@ -274,10 +274,10 @@ public class Inicio extends Application {
 					Hdescripcion.setText(
 							"Soy Jan Michael Muñoz Botero, estudiante de ingeniería de sistemas, tengo 18 años, nací el 17 de febrero de 2002 y actualmente estoy en mi cuarto semestre");
 
-					Image michael1 = new Image(getClass().getResourceAsStream("out/resources/michael1.jpg"));
-					Image michael2 = new Image(getClass().getResourceAsStream("out/resources/michael2.jpg"));
-					Image michael3 = new Image(getClass().getResourceAsStream("out/resources/michael3.jpg"));
-					Image michael4 = new Image(getClass().getResourceAsStream("out/resources/michael4.jpg"));
+					Image michael1 = new Image(getClass().getResourceAsStream("/resources/michael1.jpg"));
+					Image michael2 = new Image(getClass().getResourceAsStream("/resources/michael2.jpg"));
+					Image michael3 = new Image(getClass().getResourceAsStream("/resources/michael3.jpg"));
+					Image michael4 = new Image(getClass().getResourceAsStream("/resources/michael4.jpg"));
 
 					ifotoHojaVida1.setImage(michael1);
 					ifotoHojaVida2.setImage(michael2);
@@ -299,10 +299,10 @@ public class Inicio extends Application {
 							+ "Le gusta el fútbol y el Counter Strike. Su lugar de nacimiento es Apartado, Antioquia (Uraba) pero crecio en Caldas, pasando de vereda en vereda"
 							+ " casi toda su vida la ha pasado en el campo");
 
-					Image sergio1 = new Image(getClass().getResourceAsStream("out/resources/sergio1.jpg"));
-					Image sergio2 = new Image(getClass().getResourceAsStream("out/resources/sergio2.jpg"));
-					Image sergio3 = new Image(getClass().getResourceAsStream("out/resources/sergio3.jpg"));
-					Image sergio4 = new Image(getClass().getResourceAsStream("out/resources/sergio4jpg.jpg"));
+					Image sergio1 = new Image(getClass().getResourceAsStream("/resources/sergio1.jpg"));
+					Image sergio2 = new Image(getClass().getResourceAsStream("/resources/sergio2.jpg"));
+					Image sergio3 = new Image(getClass().getResourceAsStream("/resources/sergio3.jpg"));
+					Image sergio4 = new Image(getClass().getResourceAsStream("/resources/sergio4jpg.jpg"));
 
 					ifotoHojaVida1.setImage(sergio1);
 					ifotoHojaVida2.setImage(sergio2);
@@ -324,10 +324,10 @@ public class Inicio extends Application {
 							"¡Hola! Soy Bolkar Leimar Ocampo Montoya, estudiante de ingeniería de sistemas y actualmente me encuentro cursando mi cuarto semestre. Nací el 27 de septiembre del 2000."
 							+ "Soy aficionado a los videojuegos, son mi pasatiempo favorito");
 
-					Image bolkar1 = new Image(getClass().getResourceAsStream("out/resources/bolkar1.jpg"));
-					Image bolkar2 = new Image(getClass().getResourceAsStream("out/resources/bolkar2.jpg"));
-					Image bolkar3 = new Image(getClass().getResourceAsStream("out/resources/bolkar3.jpg"));
-					Image bolkar4 = new Image(getClass().getResourceAsStream("out/resources/bolkar4.jpg"));
+					Image bolkar1 = new Image(getClass().getResourceAsStream("/resources/bolkar1.jpg"));
+					Image bolkar2 = new Image(getClass().getResourceAsStream("/resources/bolkar2.jpg"));
+					Image bolkar3 = new Image(getClass().getResourceAsStream("/resources/bolkar3.jpg"));
+					Image bolkar4 = new Image(getClass().getResourceAsStream("/resources/bolkar4.jpg"));
 
 					ifotoHojaVida1.setImage(bolkar1);
 					ifotoHojaVida2.setImage(bolkar2);
@@ -348,10 +348,10 @@ public class Inicio extends Application {
 							"Saludos, soy Santiago Castro Tabares, estudiante de ingeniería de sistemas y actualmente me encuentro cursando mi cuarto semestre. vivo en el municipio de la Ceja Antiquia \n"
 									+ "\nApasionado por el saber");
 
-					Image santiago1 = new Image(getClass().getResourceAsStream("out/resources/santiago1.jpg"));
-					Image santiago2 = new Image(getClass().getResourceAsStream("out/resources/santiago2.jpg"));
-					Image santiago3 = new Image(getClass().getResourceAsStream("out/resources/santiago3.jpg"));
-					Image santiago4 = new Image(getClass().getResourceAsStream("out/resources/santiago4.jpg"));
+					Image santiago1 = new Image(getClass().getResourceAsStream("/resources/santiago1.jpg"));
+					Image santiago2 = new Image(getClass().getResourceAsStream("/resources/santiago2.jpg"));
+					Image santiago3 = new Image(getClass().getResourceAsStream("/resources/santiago3.jpg"));
+					Image santiago4 = new Image(getClass().getResourceAsStream("/resources/santiago4.jpg"));
 
 					ifotoHojaVida1.setImage(santiago1);
 					ifotoHojaVida2.setImage(santiago2);
