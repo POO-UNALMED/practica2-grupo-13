@@ -31,7 +31,8 @@ public class Inicio extends Application {
 	Label bienvenida = new Label("¡¡  Bienvenidos a Cultivatron, tu simulador de cultivos preferido  !!  ");
 	TextArea Hdescripcion = new TextArea(
 			"Mi nombre es José David Rueda, tengo 19 años, nací el 20 de diciembre del 2000. Estudio ingeniería de sistemas, estoy cursando "
-					+ "el cuarto semestre y mi sueño es ser un maestro Pokemon");
+					+ "el cuarto semestre, he vivido toda mi vida en Medellin, en el barrio Belen, me gusta el futbol, los videojuegos" +
+					" y la musica.");
 	TextArea Sdescripcion;
 	/** Imagenes de los cultivos pertenecientes al dominio */
 	Image cultivos1;
@@ -247,7 +248,8 @@ public class Inicio extends Application {
 				if (contH == 1) {
 					Hdescripcion.setText(
 							"Mi nombre es José David Rueda, tengo 19 años, nací el 20 de diciembre del 2000. Estudio ingeniería de sistemas, estoy cursando "
-									+ "el cuarto semestre y mi sueño es ser un maestro Pokemon");
+									+ "el cuarto semestre, he vivido toda mi vida en Medellin, en el barrio Belen, me gusta el futbol, los videojuegos" +
+									" y la musica.");
 
 					Image jose1 = new Image(getClass().getResourceAsStream("./imagenes/jose1.jpg"));
 					Image jose2 = new Image(getClass().getResourceAsStream("./imagenes/jose2.jpg"));
@@ -270,7 +272,7 @@ public class Inicio extends Application {
 
 				} else if (contH == 2) {
 					Hdescripcion.setText(
-							"Soy Jan Michale Muñoz Botero, estudiante de ingeniería de sistemas, tengo 18 años, nací el 17 de febrero de 2002 y actualmente estoy en mi cuarto semestre");
+							"Soy Jan Michael Muñoz Botero, estudiante de ingeniería de sistemas, tengo 18 años, nací el 17 de febrero de 2002 y actualmente estoy en mi cuarto semestre");
 
 					Image michael1 = new Image(getClass().getResourceAsStream("./imagenes/michael1.jpg"));
 					Image michael2 = new Image(getClass().getResourceAsStream("./imagenes/michael2.jpg"));
@@ -295,7 +297,7 @@ public class Inicio extends Application {
 					Hdescripcion.setText(
 							"El es Sergio Alejandro Bermudez Gomez, nacio el 29 de octubre del 2000. Es estudiante de ingenieria de sistemas e informatica."
 							+ "Le gusta el fútbol y el Counter Strike. Su lugar de nacimiento es Apartado, Antioquia (Uraba) pero crecio en Caldas, pasando de vereda en vereda"
-							+ "casi toda su vida la ha pasado en el campo");
+							+ " casi toda su vida la ha pasado en el campo");
 
 					Image sergio1 = new Image(getClass().getResourceAsStream("./imagenes/sergio1.jpg"));
 					Image sergio2 = new Image(getClass().getResourceAsStream("./imagenes/sergio2.jpg"));
