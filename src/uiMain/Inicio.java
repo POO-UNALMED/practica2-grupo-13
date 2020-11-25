@@ -293,7 +293,9 @@ public class Inicio extends Application {
 
 				} else if (contH == 3) {
 					Hdescripcion.setText(
-							"Saludos, soy Sergio Alejandro Bermúdez Gómez, nací el 28 de octubre del 2000. Soy estudiante de ingeniería de sistemas.");
+							"El es Sergio Alejandro Bermudez Gomez, nacio el 29 de octubre del 2000. Es estudiante de ingenieria de sistemas e informatica."
+							+ "Le gusta el fútbol y el Counter Strike. Su lugar de nacimiento es Apartado, Antioquia (Uraba) pero crecio en Caldas, pasando de vereda en vereda"
+							+ "casi toda su vida la ha pasado en el campo");
 
 					Image sergio1 = new Image(getClass().getResourceAsStream("./imagenes/sergio1.jpg"));
 					Image sergio2 = new Image(getClass().getResourceAsStream("./imagenes/sergio2.jpg"));
@@ -317,7 +319,8 @@ public class Inicio extends Application {
 				} else if (contH == 4) {
 
 					Hdescripcion.setText(
-							"¡Hola! Soy Bolkar Leimar Ocampo Montoya, estudiante de ingeniería de sistemas y actualmente me encuentro cursando mi cuarto semestre. Nací el 27 de septiembre del 2000.");
+							"¡Hola! Soy Bolkar Leimar Ocampo Montoya, estudiante de ingeniería de sistemas y actualmente me encuentro cursando mi cuarto semestre. Nací el 27 de septiembre del 2000."
+							+ "Soy aficionado a los videojuegos, son mi pasatiempo favorito");
 
 					Image bolkar1 = new Image(getClass().getResourceAsStream("./imagenes/bolkar1.jpg"));
 					Image bolkar2 = new Image(getClass().getResourceAsStream("./imagenes/bolkar2.jpg"));
