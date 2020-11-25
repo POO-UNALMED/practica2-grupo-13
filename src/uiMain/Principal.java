@@ -1,4 +1,4 @@
-package uiMain;
+package uiMain; // package
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
