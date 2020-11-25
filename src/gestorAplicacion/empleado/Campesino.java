@@ -56,16 +56,11 @@ public class Campesino extends Empleado implements Serializable{
 		}
 	}
 	/**
-	 * 
-	 * @param opcionElegida
-	 * @param opcionElegida2
+	 * Metodo que remueve el campesino que se encuentra en el terreno trabajando
+	 * @param terrrenoRenuncia El terreno al cual pertenece el campesino que se va a despedir
+	 * @param campsinoDespedido El campesino que se va a despedir
 	 */
-	//delete soon
-	public void renunciar(int opcionElegida, int opcionElegida2) {
-		Terreno.getTerrenos().get(opcionElegida).getCampesinos().remove(opcionElegida2);
-	}
-	
-	public void renunciar2(Terreno terrrenoRenuncia, Campesino campsinoDespedido) {
+	public void renunciar(Terreno terrrenoRenuncia, Campesino campsinoDespedido) {
 		terrrenoRenuncia.getCampesinos().remove(campsinoDespedido);
 	}
 	/**
@@ -118,7 +113,7 @@ public class Campesino extends Empleado implements Serializable{
 		this.getTerreno().getTipos().remove(cultivo.getTipoCultivo());
 		tempCultivos = Cultivo.getCultivos();
 		int indicet = tempCultivos.indexOf(cultivo);
-
+		//Se elimina el cultivo recolectado
 		try {
 			for (Cultivo temp : Cultivo.getCultivos()) {
 				if ((temp.getTerreno().getId().equals(cultivo.getTerreno().getId())) && temp.getTipoCultivo().equals(cultivo.getTipoCultivo()) ){
@@ -137,7 +132,12 @@ public class Campesino extends Empleado implements Serializable{
 	public void fertilizar(Terreno terreno) {
 		terreno.fertilizarTerreno();
 	}
-	
+	/**
+	 * Metodo que busca un campesino por terreno y cedula
+	 * @param terreno parametro que representa el terreno donde se encuentra el campesino
+	 * @param cedula parametro que representa la cedula del campesino que se va a buscar
+	 * @return la instancia del campesino que coincide con los parametros de busqueda
+	 */
 	public static Campesino buscarCampesino(Terreno terreno,int cedula) {
 		Iterator<Campesino> campesino = terreno.getCampesinos().iterator();
 		Campesino cExistente = null;

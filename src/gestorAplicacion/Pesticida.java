@@ -10,9 +10,11 @@ import gestorAplicacion.terreno.*;
  *
  */
 public class Pesticida implements Serializable{
-	//Atributos de la clase
+	/**Tipo de pesticida: Insecticida, Herbicida, Fungicida*/
 	private String tipo;
+	/**Color asociado al tipo de pesticida: Rojo(Insecticida), Verde(Herbicida), Blanco(Fungicida)*/
 	private String color;
+	/**Amenaza que va exterminar la instancia de pesticida creada*/
 	private Amenaza amenaza;
 	/**
 	 * Constructor para crear una instancia de tipo Pesticida que recibe la instancia de Amenaza 

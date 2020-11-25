@@ -21,13 +21,21 @@ import javafx.scene.text.FontWeight;
  *
  */
 public class BuildAddTerreno {
+	/** Representa el tipo de consulta visible*/
 	Label consulta = new Label();
+	/** Representa la descripcion de la consulta consulta visible*/
 	Label descripcionConsulta = new Label();
+	/** Contenedor de todos los elementos que posee la vista de Add Terreno*/ 
 	VBox vBoxAddTerreno = new VBox();
+	/** Panel de llenado de datos {@link FieldPanel}*/
 	FieldPanel AddTerreno;
 	Button aceptarAddTerreno;
 	Button borrarAddTerreno;
 	
+	/**
+	 * Metodo que construye toda la vista necesaria para anadir un terreno al sistema
+	 * @return VBox con todo el contenido de la ventana
+	 */
 	public VBox vBoxBase() {
 		consulta.setPadding(new Insets(25));
 		descripcionConsulta.setPadding(new Insets(25));

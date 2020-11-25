@@ -139,8 +139,10 @@ public class Agronomo extends Empleado implements Serializable {
 	public static LinkedList<Agronomo> getAgronomos() {
 		return agronomos;
 	}
-	
-	
+	/**
+	 * Metodo que crea una lista de String que contiene cada una de las cedulas de los agronomos contratados
+	 * @return LinkedList con las cedulas de cada uno de los agronomos
+	 */
 	public static LinkedList<String> mostrarAgronomosGUI() {
 		LinkedList<String> Agronomos = new LinkedList<String>();
 		for (int i = 0; i < agronomos.size(); i++) {
@@ -148,7 +150,11 @@ public class Agronomo extends Empleado implements Serializable {
 		}
 		return (Agronomos);
 	}
-	
+	/**
+	 * Metodo que busca un agronomo por cedula
+	 * @param cedula, corresponde a la cedula del agrnomo que se quiere encontrar
+	 * @return Instancia que tiene la cedula pasada por parametro
+	 */
 	public static Agronomo getAgronomo(int cedula) {
 		Iterator<Agronomo> agronomo = agronomos.iterator();
 		Agronomo aExistente = null;

@@ -1,9 +1,9 @@
 package manejoErrores;
+
 /**
  * 
- * Clase definida para maneja errores relacionados
- * con loas clases Empleado, Campesino y Agronomo, 
- * clases que represetan al personal de trabajo presente
+ * Clase definida para maneja errores relacionados con loas clases Empleado,
+ * Campesino y Agronomo, clases que represetan al personal de trabajo presente
  * en el programa
  *
  */
@@ -13,5 +13,5 @@ public class PersonasException extends ErrorAplicacion {
 	public PersonasException() {
 		super();
 	}
-	
+
 }

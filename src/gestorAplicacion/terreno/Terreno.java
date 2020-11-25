@@ -1,4 +1,5 @@
 package gestorAplicacion.terreno;
+
 import manejoErrores.*;
 import gestorAplicacion.empleado.*;
 import java.io.Serializable;
@@ -224,39 +225,97 @@ public class Terreno implements Serializable {
 	public static LinkedList<Terreno> getTerrenos() {
 		return terrenosTotales;
 	}
+
+	/**
+	 * Verifica si hay al menos un terreno creado
+	 * 
+	 * @throws NoHayTerrenosException cuando no hay ningun terreno creado
+	 */
 	public static void verificacionTerrenos() throws NoHayTerrenosException {
-		if(terrenosTotales.isEmpty()) {
+		if (terrenosTotales.isEmpty()) {
 			throw new NoHayTerrenosException("No hay terrenos, por favor, asigne uno");
 		}
 	}
+
+	/**
+	 * Verifica si hay un terreno ya creado con el id ingresado
+	 * 
+	 * @param id parametro que representa el id que fue ingresado por el usuario
+	 * @throws IdTerrenoException cuando el terreno con el id ya esta creado
+	 */
 	public static void verificacionIdTerrenos(String id) throws IdTerrenoException {
-		if(buscarTerreno(id) != null) {
+		if (buscarTerreno(id) != null) {
 			throw new IdTerrenoException("Ya existe un terreno con este ID");
 		}
 	}
-	public static void verificacionContratarAgronomo(Terreno terreno) throws NoHayAgronomoException{
-		if(terreno.agronomo != null) {
+
+	/**
+	 * Verifica si en el terreno ya trabaja un agronmo (uno solo por terreno)
+	 * 
+	 * @param terreno parametro que representa el terreno al cual se esta intentando
+	 *                ingresar un agronomo
+	 * @throws NoHayAgronomoException cuando en el terreno ya trabaja un agronomo
+	 */
+	public static void verificacionContratarAgronomo(Terreno terreno) throws NoHayAgronomoException {
+		if (terreno.agronomo != null) {
 			throw new NoHayAgronomoException("Ya tiene un agronomo vinculado a este terreno");
 		}
 	}
-	public static void verificacionCampesino(int index) throws NoHayCampesinoException{
-		if(terrenosTotales.get(index).campesinos.size() == 0) {
+
+	/**
+	 * Verifica si en el terreno tiene campesinos asociados
+	 * 
+	 * @param index representa el id del terreno sobre el cual se hace la consulta
+	 * @throws NoHayCampesinoException cuando el terreno no tiene campesinos
+	 *                                 asociados
+	 */
+	public static void verificacionCampesino(int index) throws NoHayCampesinoException {
+		if (terrenosTotales.get(index).campesinos.size() == 0) {
 			throw new NoHayCampesinoException("No tiene un campesino contratado para realizar la labor");
 		}
 	}
-	public static void verificacionCampesino(Terreno terreno) throws NoHayCampesinoException{
-		if(terreno.campesinos.isEmpty()) {
+
+	/**
+	 * Verifica si en el terreno tiene campesinos asociados
+	 * 
+	 * @param terreno parametro que representa la instancia del terreno sobre el
+	 *                cual se hace la consulta
+	 * @throws NoHayCampesinoException cuando el terreno no tiene campesinos
+	 *                                 asociados(usado cuando se despedira un
+	 *                                 campesino)
+	 */
+	public static void verificacionCampesino(Terreno terreno) throws NoHayCampesinoException {
+		if (terreno.campesinos.isEmpty()) {
 			throw new NoHayCampesinoException("No tiene campesinos contratados para despedir");
 		}
 	}
+
+	/**
+	 * verifica si el terreno posee un tamano pasado por parametro
+	 * 
+	 * @param tamano representa el tamano solicitado
+	 * @throws TamanoExcedidoException cuando el terreno tiene menos tamano que el
+	 *                                 solicitado
+	 */
 	public void verificarTamano(int tamano) throws TamanoExcedidoException {
-		if(this.tamanoDisponible < tamano) {
-			throw new TamanoExcedidoException("El tamaño ha sido excedido por: " + (tamano-this.tamanoDisponible) + " hectareas");
+		if (this.tamanoDisponible < tamano) {
+			throw new TamanoExcedidoException(
+					"El tamaño ha sido excedido por: " + (tamano - this.tamanoDisponible) + " hectareas");
 		}
 	}
-	public static void verificacionAgronomoExterminar(Terreno terreno) throws NoAgronomoToExterminarException{
-		if(terreno.getAgronomo() == null) {
-			throw new NoAgronomoToExterminarException("No tiene un agronomo contratado para realizar la labor de examinación de cultivos o exterminacion de amenazas");
+
+	/**
+	 * Verifica si el terreno posee un agronomo para que pueda exterminar una
+	 * amenaza
+	 * 
+	 * @param terreno parmetro que representa el terreno sobre el cual se hace la
+	 *                consulta
+	 * @throws NoAgronomoToExterminarException cuando el terreno no posee agronomo
+	 */
+	public static void verificacionAgronomoExterminar(Terreno terreno) throws NoAgronomoToExterminarException {
+		if (terreno.getAgronomo() == null) {
+			throw new NoAgronomoToExterminarException(
+					"No tiene un agronomo contratado para realizar la labor de examinación de cultivos o exterminacion de amenazas");
 		}
 	}
 
@@ -279,6 +338,13 @@ public class Terreno implements Serializable {
 		return tExistente;
 	}
 
+	/**
+	 * Metodo que busca un cultivo segun su tipo
+	 * 
+	 * @param tipo parametro que representa el tipo del cultivo que se quiere buscar
+	 * @return la instancia del cultivo que se econtro, si no es encontrada retorna
+	 *         null
+	 */
 	public Cultivo buscarCultivo(String tipo) {
 		Iterator<Cultivo> cultivo = this.getCultivos().iterator();
 		Cultivo cExistente = null;
@@ -414,15 +480,29 @@ public class Terreno implements Serializable {
 				+ (Math.round(this.fosforoDisponible * 100.0) / 100.0) + "\n" + "Nivel de irrigacion: "
 				+ (Math.round(this.irrigacionActual * 100.0) / 100.0);
 	}
+
+	/**
+	 * Metodo que crea una lista de String que contiene cada uno de los ids de los
+	 * terrenos que han sido creados
+	 * 
+	 * @return ArrayList con los ids de los terenos creados
+	 */
 	public static ArrayList<String> mostrarTerrenosGUI() {
-		ArrayList<String>terrenosId=new ArrayList<String>();
+		ArrayList<String> terrenosId = new ArrayList<String>();
 		for (Integer i = 0; i < terrenosTotales.size(); i++) {
-			  terrenosId.add(terrenosTotales.get(i).getId());
+			terrenosId.add(terrenosTotales.get(i).getId());
 		}
 		return (terrenosId);
 	}
-	
-	public ArrayList<String> getCedulasCampesinos(){
+
+	/**
+	 * Metodo que crea una lista de String que contiene cada una de las cedulas de
+	 * los campesinos que se encuentran en un terreno
+	 * 
+	 * @return ArrayList con las cedulas de los campesinos que se encuentran en el
+	 *         terreno
+	 */
+	public ArrayList<String> getCedulasCampesinos() {
 		Iterator<Campesino> campesino = this.getCampesinos().iterator();
 		ArrayList<String> cedulasCampesinos = new ArrayList<String>();
 		while (campesino.hasNext()) {

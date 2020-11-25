@@ -16,20 +16,24 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-/** 
- * Esta clase define la ventana de inicio del programa con sus respectivos componentes.
- * Contiene el Stage y la escena inicial de la ejecución, será la encargada de dar la 
- * bienvenida al usuario cuando se ponga en marcha el aplicativo.
+/**
+ * Esta clase define la ventana de inicio del programa con sus respectivos
+ * componentes. Contiene el Stage y la escena inicial de la ejecución, será la
+ * encargada de dar la bienvenida al usuario cuando se ponga en marcha el
+ * aplicativo.
  *
  */
 public class Inicio extends Application {
-
-	Label bienvenida = new Label("¡¡  Bienvenidos a Cultivatron, tu simulador de cultivos preferido  !!  ");
+	/** Paneles de la vista */
 	BorderPane p4 = new BorderPane();
 	GridPane p6 = new GridPane();
-	TextArea Hdescripcion = new TextArea("Mi nombre es José David Rueda, tengo 19 años, nací el 20 de diciembre del 2000. Estudio ingeniería de sistemas, estoy cursando "
-			+ "el cuarto semestre y mi sueño es ser un maestro Pokemon");
+
+	Label bienvenida = new Label("¡¡  Bienvenidos a Cultivatron, tu simulador de cultivos preferido  !!  ");
+	TextArea Hdescripcion = new TextArea(
+			"Mi nombre es José David Rueda, tengo 19 años, nací el 20 de diciembre del 2000. Estudio ingeniería de sistemas, estoy cursando "
+					+ "el cuarto semestre y mi sueño es ser un maestro Pokemon");
 	TextArea Sdescripcion;
+	/** Imagenes de los cultivos pertenecientes al dominio */
 	Image cultivos1;
 	Image cultivos2;
 	Image cultivos3;
@@ -40,6 +44,7 @@ public class Inicio extends Application {
 	ImageView icultivos3;
 	ImageView icultivos4;
 	ImageView icultivos5;
+	/** Imagenes de las hojas de vida de cada integrante */
 	ImageView ifotoHojaVida1 = new ImageView();
 	ImageView ifotoHojaVida2 = new ImageView();
 	ImageView ifotoHojaVida3 = new ImageView();
@@ -47,11 +52,17 @@ public class Inicio extends Application {
 	Button sigVentana;
 	Stage windowInicio;
 	Scene inicio;
-	Principal ventanaPrincipal = new Principal(); /** Instancia que enlanza a la ventana de inicio con la ventana principal */
-	Inicio iniAux = this; /** 
-	                       * atributo que nos permite hacer enlace con la ventana principal del usiario 
-                           */
-	
+	/**
+	 * atributo que representa la ventana principal donde se accede a todas las
+	 * consultas {@link Principal}
+	 */
+	Principal ventanaPrincipal = new Principal();
+	/**
+	 * Instancia que enlanza a la ventana de inicio con la ventana principal
+	 * atributo que nos permite hacer enlace con la ventana principal del usiario
+	 */
+	Inicio iniAux = this;
+
 	public void start(Stage primaryStage) {
 		this.windowInicio = primaryStage;
 
@@ -65,7 +76,7 @@ public class Inicio extends Application {
 		FlowPane p3 = new FlowPane();
 		FlowPane p5 = new FlowPane();
 		sigVentana = new Button("Pasar ventana");
-		
+
 		/** Menu principal */
 		MenuBar menuPrincipal = new MenuBar();
 		Menu barraPrincipal = new Menu("Inicio");
@@ -76,14 +87,16 @@ public class Inicio extends Application {
 		barraPrincipal.getItems().addAll(salir, separador, descripcion);
 		bienvenida.setAlignment(Pos.CENTER);
 		bienvenida.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
-		
+
 		salirHandlerClass salirH = new salirHandlerClass();
 		salir.setOnAction(salirH);
-		
+
 		root.getChildren().add(menuPrincipal);
 		root.getChildren().add(contenedor);
 
-		/** Variables que guardan cada una de las cinco imagenes que se ubican en el pane */
+		/**
+		 * Variables que guardan cada una de las cinco imagenes que se ubican en el pane
+		 */
 		/** P4 */
 		cultivos1 = new Image(getClass().getResourceAsStream("./imagenes/cultivos1.jpg"));
 		cultivos2 = new Image(getClass().getResourceAsStream("./imagenes/cultivos2.jpg"));
@@ -102,7 +115,7 @@ public class Inicio extends Application {
 		icultivos3.setOnMouseExited(mouseHandler);
 		icultivos4.setOnMouseExited(mouseHandler);
 		icultivos5.setOnMouseExited(mouseHandler);
-		/** Modifica el tamano la imagen*/
+		/** Modifica el tamano la imagen */
 		icultivos1.setFitHeight(220);
 		icultivos1.setPreserveRatio(true);
 		icultivos2.setFitHeight(220);
@@ -121,12 +134,12 @@ public class Inicio extends Application {
 		Image jose2 = new Image(getClass().getResourceAsStream("./imagenes/jose2.jpg"));
 		Image jose3 = new Image(getClass().getResourceAsStream("./imagenes/jose3.jpg"));
 		Image jose4 = new Image(getClass().getResourceAsStream("./imagenes/jose4.jpg"));
-        ifotoHojaVida1.setImage(jose1);
-        ifotoHojaVida2.setImage(jose2);
-        ifotoHojaVida3.setImage(jose3);
-        ifotoHojaVida4.setImage(jose4);
+		ifotoHojaVida1.setImage(jose1);
+		ifotoHojaVida2.setImage(jose2);
+		ifotoHojaVida3.setImage(jose3);
+		ifotoHojaVida4.setImage(jose4);
 
-		/**Modifica el tamano la imagen */
+		/** Modifica el tamano la imagen */
 		ifotoHojaVida1.setFitHeight(100);
 		ifotoHojaVida1.setPreserveRatio(true);
 		ifotoHojaVida2.setFitHeight(100);
@@ -180,28 +193,33 @@ public class Inicio extends Application {
 		inicio = new Scene(root, 1240, 580);
 		primaryStage.setScene(inicio);
 		primaryStage.show();
-		
+
 		/** Botón que lleva a la ventana principal del usuario */
 		SigVentanaHandlerClass sigVentanaHandler = new SigVentanaHandlerClass();
 		sigVentana.setOnAction(sigVentanaHandler);
-		
+
 		/** Pane P5 */
 		p5.getChildren().add(Hdescripcion);
 		Hdescripcion.setOnMouseClicked(mouseHandler);
-		Hdescripcion.setEditable(false); /**No se edita la descripción */
-		Hdescripcion.setWrapText(true); /**Acoplar texto al FlowPane */
-		p2.setPadding(new Insets(15,15,15,15));
-		
+		Hdescripcion.setEditable(false); /** No se edita la descripción */
+		Hdescripcion.setWrapText(true); /** Acoplar texto al FlowPane */
+		p2.setPadding(new Insets(15, 15, 15, 15));
+
 	}
 
-	EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() { 
+	/**
+	 * Handler para los enventos del raton
+	 */
+	EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
+		/** Usados para el cambio de imagenes */
 		int cont = 2;
 		int contH = 2;
+
 		@Override
 		public void handle(MouseEvent mouseEvent) {
-			if((mouseEvent.getEventType().toString()).equals("MOUSE_EXITED")) {
+			if ((mouseEvent.getEventType().toString()).equals("MOUSE_EXITED")) {
 				if (cont == 6) {
-					cont = 1; 
+					cont = 1;
 				}
 				/** Controla el orden en el cambio de las imagenes */
 				if (cont == 1) {
@@ -221,28 +239,27 @@ public class Inicio extends Application {
 					p4.setTop(icultivos5);
 				}
 				cont++;
-			}
-			else if((mouseEvent.getEventType().toString()).equals("MOUSE_CLICKED")) {
+			} else if ((mouseEvent.getEventType().toString()).equals("MOUSE_CLICKED")) {
 				if (contH == 6) {
 					contH = 1;
 				}
 				/** Controla el orden en el cambio de las descripciones */
 				if (contH == 1) {
-					Hdescripcion.setText("Mi nombre es José David Rueda, tengo 19 años, nací el 20 de diciembre del 2000. Estudio ingeniería de sistemas, estoy cursando " + 
-										 "el cuarto semestre y mi sueño es ser un maestro Pokemon");
-					
-					
+					Hdescripcion.setText(
+							"Mi nombre es José David Rueda, tengo 19 años, nací el 20 de diciembre del 2000. Estudio ingeniería de sistemas, estoy cursando "
+									+ "el cuarto semestre y mi sueño es ser un maestro Pokemon");
+
 					Image jose1 = new Image(getClass().getResourceAsStream("./imagenes/jose1.jpg"));
 					Image jose2 = new Image(getClass().getResourceAsStream("./imagenes/jose2.jpg"));
 					Image jose3 = new Image(getClass().getResourceAsStream("./imagenes/jose3.jpg"));
 					Image jose4 = new Image(getClass().getResourceAsStream("./imagenes/jose4.jpg"));
-					
+
 					ifotoHojaVida1.setImage(jose1);
-			        ifotoHojaVida2.setImage(jose2);
-			        ifotoHojaVida3.setImage(jose3);
-			        ifotoHojaVida4.setImage(jose4);
-					
-				    ifotoHojaVida1.setFitHeight(100);
+					ifotoHojaVida2.setImage(jose2);
+					ifotoHojaVida3.setImage(jose3);
+					ifotoHojaVida4.setImage(jose4);
+
+					ifotoHojaVida1.setFitHeight(100);
 					ifotoHojaVida1.setPreserveRatio(true);
 					ifotoHojaVida2.setFitHeight(100);
 					ifotoHojaVida2.setPreserveRatio(true);
@@ -250,22 +267,22 @@ public class Inicio extends Application {
 					ifotoHojaVida3.setPreserveRatio(true);
 					ifotoHojaVida4.setFitHeight(100);
 					ifotoHojaVida4.setPreserveRatio(true);
-					
+
 				} else if (contH == 2) {
-					Hdescripcion.setText("Soy Jan Michale Muñoz Botero, estudiante de ingeniería de sistemas, tengo 18 años, nací el 17 de febrero de 2002 y actualmente estoy en mi cuarto semestre");
-					
-					
+					Hdescripcion.setText(
+							"Soy Jan Michale Muñoz Botero, estudiante de ingeniería de sistemas, tengo 18 años, nací el 17 de febrero de 2002 y actualmente estoy en mi cuarto semestre");
+
 					Image michael1 = new Image(getClass().getResourceAsStream("./imagenes/michael1.jpg"));
 					Image michael2 = new Image(getClass().getResourceAsStream("./imagenes/michael2.jpg"));
 					Image michael3 = new Image(getClass().getResourceAsStream("./imagenes/michael3.jpg"));
 					Image michael4 = new Image(getClass().getResourceAsStream("./imagenes/michael4.jpg"));
-					
+
 					ifotoHojaVida1.setImage(michael1);
-			        ifotoHojaVida2.setImage(michael2);
-			        ifotoHojaVida3.setImage(michael3);
-			        ifotoHojaVida4.setImage(michael4);
-			        
-				    ifotoHojaVida1.setFitHeight(100);
+					ifotoHojaVida2.setImage(michael2);
+					ifotoHojaVida3.setImage(michael3);
+					ifotoHojaVida4.setImage(michael4);
+
+					ifotoHojaVida1.setFitHeight(100);
 					ifotoHojaVida1.setPreserveRatio(true);
 					ifotoHojaVida2.setFitHeight(100);
 					ifotoHojaVida2.setPreserveRatio(true);
@@ -273,22 +290,22 @@ public class Inicio extends Application {
 					ifotoHojaVida3.setPreserveRatio(true);
 					ifotoHojaVida4.setFitHeight(100);
 					ifotoHojaVida4.setPreserveRatio(true);
-					
-					
+
 				} else if (contH == 3) {
-					Hdescripcion.setText("Saludos, soy Sergio Alejandro Bermúdez Gómez, nací el 28 de octubre del 2000. Soy estudiante de ingeniería de sistemas.");
-					
+					Hdescripcion.setText(
+							"Saludos, soy Sergio Alejandro Bermúdez Gómez, nací el 28 de octubre del 2000. Soy estudiante de ingeniería de sistemas.");
+
 					Image sergio1 = new Image(getClass().getResourceAsStream("./imagenes/sergio1.jpg"));
 					Image sergio2 = new Image(getClass().getResourceAsStream("./imagenes/sergio2.jpg"));
 					Image sergio3 = new Image(getClass().getResourceAsStream("./imagenes/sergio3.jpg"));
 					Image sergio4 = new Image(getClass().getResourceAsStream("./imagenes/sergio4jpg.jpg"));
-					
+
 					ifotoHojaVida1.setImage(sergio1);
-			        ifotoHojaVida2.setImage(sergio2);
-			        ifotoHojaVida3.setImage(sergio3);
-			        ifotoHojaVida4.setImage(sergio4);
-			        
-				    ifotoHojaVida1.setFitHeight(100);
+					ifotoHojaVida2.setImage(sergio2);
+					ifotoHojaVida3.setImage(sergio3);
+					ifotoHojaVida4.setImage(sergio4);
+
+					ifotoHojaVida1.setFitHeight(100);
 					ifotoHojaVida1.setPreserveRatio(true);
 					ifotoHojaVida2.setFitHeight(100);
 					ifotoHojaVida2.setPreserveRatio(true);
@@ -296,22 +313,23 @@ public class Inicio extends Application {
 					ifotoHojaVida3.setPreserveRatio(true);
 					ifotoHojaVida4.setFitHeight(100);
 					ifotoHojaVida4.setPreserveRatio(true);
-					
+
 				} else if (contH == 4) {
-				
-					Hdescripcion.setText("¡Hola! Soy Bolkar Leimar Ocampo Montoya, estudiante de ingeniería de sistemas y actualmente me encuentro cursando mi cuarto semestre. Nací el 27 de septiembre del 2000.");
-					
+
+					Hdescripcion.setText(
+							"¡Hola! Soy Bolkar Leimar Ocampo Montoya, estudiante de ingeniería de sistemas y actualmente me encuentro cursando mi cuarto semestre. Nací el 27 de septiembre del 2000.");
+
 					Image bolkar1 = new Image(getClass().getResourceAsStream("./imagenes/bolkar1.jpg"));
 					Image bolkar2 = new Image(getClass().getResourceAsStream("./imagenes/bolkar2.jpg"));
 					Image bolkar3 = new Image(getClass().getResourceAsStream("./imagenes/bolkar3.jpg"));
 					Image bolkar4 = new Image(getClass().getResourceAsStream("./imagenes/bolkar4.jpg"));
-					
+
 					ifotoHojaVida1.setImage(bolkar1);
-			        ifotoHojaVida2.setImage(bolkar2);
-			        ifotoHojaVida3.setImage(bolkar3);
-			        ifotoHojaVida4.setImage(bolkar4);
-			        
-				    ifotoHojaVida1.setFitHeight(100);
+					ifotoHojaVida2.setImage(bolkar2);
+					ifotoHojaVida3.setImage(bolkar3);
+					ifotoHojaVida4.setImage(bolkar4);
+
+					ifotoHojaVida1.setFitHeight(100);
 					ifotoHojaVida1.setPreserveRatio(true);
 					ifotoHojaVida2.setFitHeight(100);
 					ifotoHojaVida2.setPreserveRatio(true);
@@ -319,22 +337,23 @@ public class Inicio extends Application {
 					ifotoHojaVida3.setPreserveRatio(true);
 					ifotoHojaVida4.setFitHeight(100);
 					ifotoHojaVida4.setPreserveRatio(true);
-					
-				}
-				else if (contH == 5) {
-					Hdescripcion.setText("Saludos, soy Santiago Castro Tabares, estudiante de ingeniería de sistemas y actualmente me encuentro cursando mi cuarto semestre.");
-					
+
+				} else if (contH == 5) {
+					Hdescripcion.setText(
+							"Saludos, soy Santiago Castro Tabares, estudiante de ingeniería de sistemas y actualmente me encuentro cursando mi cuarto semestre. vivo en el municipio de la Ceja Antiquia \n"
+									+ "\nApasionado por el saber");
+
 					Image santiago1 = new Image(getClass().getResourceAsStream("./imagenes/santiago1.jpg"));
 					Image santiago2 = new Image(getClass().getResourceAsStream("./imagenes/santiago2.jpg"));
 					Image santiago3 = new Image(getClass().getResourceAsStream("./imagenes/santiago3.jpg"));
 					Image santiago4 = new Image(getClass().getResourceAsStream("./imagenes/santiago4.jpg"));
-					
+
 					ifotoHojaVida1.setImage(santiago1);
-			        ifotoHojaVida2.setImage(santiago2);
-			        ifotoHojaVida3.setImage(santiago3);
-			        ifotoHojaVida4.setImage(santiago4);
-			        
-				    ifotoHojaVida1.setFitHeight(100);
+					ifotoHojaVida2.setImage(santiago2);
+					ifotoHojaVida3.setImage(santiago3);
+					ifotoHojaVida4.setImage(santiago4);
+
+					ifotoHojaVida1.setFitHeight(100);
 					ifotoHojaVida1.setPreserveRatio(true);
 					ifotoHojaVida2.setFitHeight(100);
 					ifotoHojaVida2.setPreserveRatio(true);
@@ -342,43 +361,44 @@ public class Inicio extends Application {
 					ifotoHojaVida3.setPreserveRatio(true);
 					ifotoHojaVida4.setFitHeight(100);
 					ifotoHojaVida4.setPreserveRatio(true);
-					
+
 				}
 				contH++;
 			}
 		}
 
 	};
-	
+
 	/** Clase que permite salir de la ventana de inicio */
 
-	class salirHandlerClass implements EventHandler<ActionEvent>{
+	class salirHandlerClass implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent e) {
 			SerializacionG.Save();
 			Platform.exit();
 			System.exit(0);
 		}
 	}
-	
+
 	/** Clase que genera un nuevo texto con la descripcion del proyecto */
-	class SdescripcionHandlerClass implements EventHandler<ActionEvent>{
+	class SdescripcionHandlerClass implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent e) {
-			Sdescripcion = new TextArea("El programa tiene la capacidad de simular cómo se comportan algunos tipos de cultivos en ciertos terrenos, siendo atacados por plagas, maleza u hongos; y estos a su vez son exterminados por su respectivo tipo de pesticida. Existen empleados que se derivan en campesinos y administradores; siendo los primeros los trabajadores que siembran y recolectan los cultivos; y a su vez, los encargados de usar los pesticidas. Los administradores se encargan de contratar, despedir y dirigir a los campesinos para realizar las labores en los cultivos, también son los que investigan el tipo de amenaza bajo la que se encuentra la cosecha");
+			Sdescripcion = new TextArea(
+					"El programa tiene la capacidad de simular cómo se comportan algunos tipos de cultivos en ciertos terrenos, siendo atacados por plagas, maleza u hongos; y estos a su vez son exterminados por su respectivo tipo de pesticida. Existen empleados que se derivan en campesinos y administradores; siendo los primeros los trabajadores que siembran y recolectan los cultivos; y a su vez, los encargados de usar los pesticidas. Los administradores se encargan de contratar, despedir y dirigir a los campesinos para realizar las labores en los cultivos, también son los que investigan el tipo de amenaza bajo la que se encuentra la cosecha");
 			Sdescripcion.setWrapText(true);
 			Sdescripcion.setEditable(false);
 			p4.setCenter(Sdescripcion);
-			p4.setMargin(Sdescripcion, new Insets(13,13,13,13));
+			p4.setMargin(Sdescripcion, new Insets(13, 13, 13, 13));
 		}
 	}
-	
+
 	/** Clase que permite cambiar de ventana, yendo a la ventana principal */
-	class SigVentanaHandlerClass implements EventHandler<ActionEvent>{
+	class SigVentanaHandlerClass implements EventHandler<ActionEvent> {
 		public void handle(ActionEvent e) {
 			ventanaPrincipal.linkInicio = iniAux;
 			windowInicio.setScene(ventanaPrincipal.crearPrincipal());
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		SerializacionC.Load();
 		launch(args);

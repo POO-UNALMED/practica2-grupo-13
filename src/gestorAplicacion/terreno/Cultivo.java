@@ -382,17 +382,37 @@ public class Cultivo implements Serializable {
 	public static LinkedList<Cultivo> getCultivos() {
 		return (cultivos);
 	}
+
+	/**
+	 * Verica si al menos un cultivo creado
+	 * 
+	 * @throws NoHayCultivoException Cuando no existe un cultivo creado en el
+	 *                               sistema
+	 */
 	public static void verificacionCultivos() throws NoHayCultivoException {
-		if(cultivos.isEmpty()) {
+		if (cultivos.isEmpty()) {
 			throw new NoHayCultivoException("No tiene cultivos, por favor, cultive al menos uno");
 		}
 	}
-	public void verificacionAmenaza() throws CultivoAmenazaException{
-		if(this.amenaza != null) {
-			throw new CultivoAmenazaException("El cultivo se encuentra bajo una amenaza, por favor, extermine para cosechar el cultivo");
+
+	/**
+	 * Verifica si el cultivo esta siendo atacado o posee una amenaza
+	 * 
+	 * @throws CultivoAmenazaException cuando el cultivo tiene una amenaza
+	 */
+	public void verificacionAmenaza() throws CultivoAmenazaException {
+		if (this.amenaza != null) {
+			throw new CultivoAmenazaException(
+					"El cultivo se encuentra bajo una amenaza, por favor, extermine para cosechar el cultivo");
 		}
 	}
 
+	/**
+	 * Obtiene el terreno asociado
+	 * 
+	 * @return paramatro que representa la instancia del terreno en el que se
+	 *         encuentra el cultivo
+	 */
 	public Terreno getTerreno() {
 		return (this.terreno);
 	}
@@ -446,11 +466,17 @@ public class Cultivo implements Serializable {
 	public boolean tieneTamano() {
 		return this.getTamano() > 0;
 	}
-	
+
+	/**
+	 * Metodo que crea una lista de String que contiene cada una de las cedulas de
+	 * los campesinos contratados
+	 * 
+	 * @return ArrayList con las cedulas de cada uno de los campesinos
+	 */
 	public static ArrayList<String> mostrarCultivosGUI() {
-		ArrayList<String>cultivosId = new ArrayList<String>();
+		ArrayList<String> cultivosId = new ArrayList<String>();
 		for (Integer i = 0; i < cultivos.size(); i++) {
-			  cultivosId.add(cultivos.get(i).tipoCultivo + "-" + cultivos.get(i).getTerreno().getId());
+			cultivosId.add(cultivos.get(i).tipoCultivo + "-" + cultivos.get(i).getTerreno().getId());
 		}
 		return (cultivosId);
 	}

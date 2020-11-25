@@ -22,10 +22,13 @@ import javafx.scene.text.FontWeight;
  *
  */
 public class BuildDespedirCampesino {
+	/** Representa el tipo de consulta visible */
 	Label consulta = new Label();
+	/** Representa la descripcion de la consulta consulta visible */
 	Label descripcionConsulta = new Label();
 	Label tituloCriterios;
 	Label tituloValores;
+	/** Contenedor de todos los elementos que posee la vista */
 	VBox vBoxDespedirCampesino = new VBox();
 	GridPane formulario = new GridPane();
 	ComboBox comboBoxTerrenos;
